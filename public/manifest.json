@@ -1,0 +1,15 @@
+{
+  "name": "LunarStack",
+  "short_name": "LunarStack",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#c850c0",
+  "background_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

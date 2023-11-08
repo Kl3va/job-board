@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Allow: /api/og/*
+
+# Host
+Host: https://www.auditlabs.co
+
+# Sitemaps
+Sitemap: https://www.auditlabs.co/sitemap.xml
+
+

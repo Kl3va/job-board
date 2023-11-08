@@ -1,0 +1,29 @@
+/* Clinton Font */
+@font-face {
+  font-family: 'Clinton';
+  src: url('../../public/fonts/Clinton/ClintonExtraBold.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Clinton';
+  src: url('../../public/fonts/Clinton/ClintonBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Clinton';
+  src: url('../../public/fonts/Clinton/ClintonSemibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Quantify Font */
+@font-face {
+  font-family: 'Quantify';
+  src: url('../../public/fonts/Quantify/QuantifyBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
