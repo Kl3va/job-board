@@ -14,10 +14,9 @@ export const HeaderContainer = styled.header`
   max-width: 100%;
   position: sticky;
   top: 0;
-  background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(13.5px);
   -webkit-backdrop-filter: blur(13.5px);
-  border-bottom: 0.2rem solid var(--color-border-100);
+  border-bottom: 1px solid var(--color-border-100);
   z-index: 1000;
 
   a {
@@ -27,37 +26,28 @@ export const HeaderContainer = styled.header`
 
 export const HeaderInner = styled.div`
   min-height: 5rem;
-  margin: var(--center-container);
-  max-width: 1400px;
-  padding: 0 1rem;
+  width: min(90%, var(--max-container));
+  margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `
 
 export const HeaderLogoContainer = styled.div`
-  color: var(--color-font-100);
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   font-family: var(--font-pry-100);
 
-  a {
-    color: var(--color-font-100);
-    font-size: 1.5rem;
-    font-weight: 800;
-    font-family: var(--font-pry-100);
-    max-width: 4.5rem;
-    display: block;
-    line-height: 1;
-
-    &:hover {
-      color: var(--color-font-100);
-    }
+  span {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    color: var(--color-font-200);
   }
 
-  @media screen and (max-width: 988px) {
-    margin-right: 0rem;
-  }
+  // @media screen and (max-width: 988px) {
+  //   margin-right: 0rem;
+  // }
 `
 
 export const HeaderNav = styled.nav`

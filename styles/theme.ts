@@ -37,7 +37,7 @@ export const lightTheme = {
   shadow100: '0px 0px 20px rgba(0,0,0,0.08)',
   shadow200: '0px 10px 40px rgba(0, 0, 0, 0.15)',
   shadow300: '0px 10px 20px rgba(0, 0, 0, 0.15)',
-  border100: 'hsl(0, 0%, 95%)',
+  border100: '#D0D5DD',
   scrollBar100: 'rgba(0, 0, 0, 0.1)',
 }
 

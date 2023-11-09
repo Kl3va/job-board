@@ -33,7 +33,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <link rel='icon' type='image/ico' sizes='32x32' href='/favicon.png' />
+          <link rel='icon' type='image/ico' sizes='32x32' href='/job-hut.ico' />
           <meta name='theme-color' content='#000000' />
           <meta name='twitter:card' content='summary' key='twcard' />
           <meta name='twitter:creator' content={''} key='twhandle' />
@@ -43,7 +43,11 @@ export default class MyDocument extends Document {
             content='public/images/open-graphs/home-og-image.png'
             key='ogimage'
           />
-          <meta property='og:site_name' content={'job-board'} key='ogsitename' />
+          <meta
+            property='og:site_name'
+            content={'job-board'}
+            key='ogsitename'
+          />
           <meta property='og:image:width' content='1200' />
           <meta property='og:image:height' content='630' />
           <link rel='apple-touch-icon' href='/favicon.png' />

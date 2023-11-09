@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { AnimatePresence } from 'framer-motion'
@@ -9,51 +10,23 @@ import {
   HeaderNav,
   HeaderNavList,
   MobileNav,
-  ConnectBtn,
   MenuList,
   SubMenu,
 } from './HeaderStyles'
 import type { HeaderDataTypes } from 'types/menuTypes'
 import { mobileNavVariant } from 'styles/animations/variants/mobileNavVariant'
 import { useBreakPointUp } from 'hooks/useBreakPoint'
-import { ClickAwayListener } from '@mui/material'
-import { useWeb3Modal } from '@web3modal/react'
-import { useAccount } from 'wagmi'
 
 interface HeaderTypes {
   data: HeaderDataTypes
 }
 
 const Header = ({ data }: HeaderTypes) => {
-  const {
-    address,
-    isConnected: walletIsConnected,
-    isDisconnected: walletIsDisconnected,
-    isReconnecting: walletIsReconnecting,
-    isConnecting: walletIsConnecting,
-  } = useAccount()
-
-  const walletAddress = address
-
   const [mobileNavToggle, setMobileNavToggle] = useState(false)
 
-  const [IsUserConnected, setIsUserConnectede] = useState(false)
-
-  const { menu } = data
+  const { menu, logo } = data
   const router = useRouter()
   const { pathname } = router
-
-  const [connectToggle, setConnectToggle] = useState(false)
-  const strTrunc = `${walletAddress?.slice(0, 4)}...${walletAddress?.slice(-4)}`
-  const { open } = useWeb3Modal()
-
-  const openWalletConnectionModal = async () => {
-    await open()
-  }
-
-  const handleConnect = () => {
-    setConnectToggle(!connectToggle)
-  }
 
   useEffect(() => {
     if (mobileNavToggle) {
@@ -75,7 +48,12 @@ const Header = ({ data }: HeaderTypes) => {
     <HeaderContainer>
       <HeaderInner>
         <HeaderLogoContainer>
-          <Link href='/'>NFT FASH</Link>
+          <Link href={logo.link}>
+            <span>
+              <Image src={logo.image} alt='logo' />
+              {logo.title}
+            </span>
+          </Link>
         </HeaderLogoContainer>
         <HeaderNav>
           <MobileNav>
@@ -87,17 +65,6 @@ const Header = ({ data }: HeaderTypes) => {
               )}
             </button>
           </MobileNav>
-          <ConnectBtn onClick={openWalletConnectionModal}>
-            {walletIsConnected ? (
-              <div>
-                <p>{strTrunc}</p>
-                <span></span>
-                <span></span>
-              </div>
-            ) : (
-              'Connect Wallet'
-            )}
-          </ConnectBtn>
 
           <AnimatePresence>
             <HeaderNavList
@@ -114,7 +81,6 @@ const Header = ({ data }: HeaderTypes) => {
                   <MenuList
                     key={item.id}
                     isActive={pathname === item.link}
-                    isDemoConnected={IsUserConnected}
                     specialTitle={item.title}
                   >
                     <div className='list_container'>
