@@ -18,10 +18,8 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
         --color-font-500: ${(props) => props.theme.font500};
         --color-font-600: ${(props) => props.theme.font600};
         --color-border-100: ${(props) => props.theme.border100};
-        --font-pry-100: 'Montserrat', sans-serif;
-        --font-pry-200: 'Poppins', sans-serif;
-        --font-pry-300: 'Inter', sans-serif;
-        --max-container: 87.5rem;
+        --font-pry-100: 'Inter', sans-serif;
+        --max-container: 76rem;
         --center-container: 0 auto;
         --border-radius: 0.5rem;
         --transition: all 0.5s;
@@ -101,9 +99,9 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
 
     body {
         font-family: var(--font-pry-100);
-        font-weight: 700;
+        font-weight: 400;
         background-color: var(--color-bg-100);
-        color: var(--color-font-200);
+        color: var(--color-font-100);
         overflow-y: auto;
         overflow-x: hidden;
         min-height: 100vh;
@@ -116,12 +114,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       color: var(--color-font-100);
       font-weight: 400;
       transition: var(--transition);
-      font-family: var(--font-pry-100);
-
-      &:hover {
-        transition: var(--transition);
-        color: var(--color-accent-100);
-      }
+      font-family: inherit;
     }
 
     p {
@@ -133,46 +126,30 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
 
 
 
-    h1, h2 {
-       text-transform: capitalize;
-       font-family: var(--font-pry-100);
+    h1, h2, h3 {
+       text-transform: uppercase;
+       color: var(--color-font-200);
     }
 
     h1 {
-      color: var(--color-font-100);
-      font-size: 2.2rem;
-      line-height: 3rem;
-      font-weight: 700;
+      font-size: clamp(1.7rem, calc(2.5vw + 0.5rem), 3rem)
+      line-height: 1rem;
+      font-weight: 500;
       
-      
-
       @media ${QUERIES.tabletMini} {
-        font-size: 3rem;
-        line-height: 4rem;
+        line-height: 2rem;
       }
 
       @media ${QUERIES.desktop} {
-        font-size: 3.5rem;
-        line-height: 4.5rem;
+        line-height: 3.75rem;
       }
     }
 
     h2 {
-      color: var(--color-font-100);
-      font-size: 1.5rem;
-      line-height: 2rem;
-      font-weight: 600;
-      font-family: var(--font-pry-100);
-
-      @media ${QUERIES.tabletMini} {
-        font-size: 1.7rem;
-        line-height: 2.2rem;
-      }
-
-      @media ${QUERIES.desktop} {
-        font-size: 2rem;
-        line-height: 2.5rem;
-      }
+      
+      font-size: 2.25rem;
+      line-height: 2.75rem;
+      letter-spacing: -0.045rem;
     }
 
     i:hover {

@@ -1,35 +1,35 @@
 export interface ThemeTypes {
-  bg100: string;
-  bg200: string;
-  bg300: string;
-  accent100: string;
-  accent200: string;
-  accent300: string;
-  accent400: string;
-  font100: string;
-  font200: string;
-  font300: string;
-  font400: string;
-  font500: string;
-  font600: string;
-  shadow100: string;
-  shadow200: string;
-  shadow300: string;
-  border100: string;
-  scrollBar100: string;
+  bg100: string
+  bg200: string
+  bg300: string
+  accent100: string
+  accent200: string
+  accent300: string
+  accent400: string
+  font100: string
+  font200: string
+  font300: string
+  font400: string
+  font500: string
+  font600: string
+  shadow100: string
+  shadow200: string
+  shadow300: string
+  border100: string
+  scrollBar100: string
 }
 
 export const lightTheme = {
-  bg100: 'hsl(0, 0%, 100%)',
-  bg200: 'hsl(0, 0%, 98%)',
+  bg100: '#F9FAFB',
+  bg200: '#F5F8FF',
   bg300: 'hsl(216, 100%, 18%)',
   bg400: 'hsl(0, 0%, 100%)',
   bg500: 'hsl(0, 0%, 90%)',
-  accent100: '#356DF3',
+  accent100: '#444CE7',
   accent200: 'hsl(200, 91%, 95%)',
   accent300: 'rgb(242, 242, 242, 0.3)',
-  font100: 'hsla(218, 80%, 2%, 1)',
-  font200: 'hsla(218, 80%, 2%, 0.8)',
+  font100: '#667085',
+  font200: '#101828',
   font300: 'hsl(219, 16%, 61%)',
   font400: 'rgba(0, 0, 0, 0.6)',
   font500: 'hsl(0, 0%, 100%)',
@@ -39,7 +39,7 @@ export const lightTheme = {
   shadow300: '0px 10px 20px rgba(0, 0, 0, 0.15)',
   border100: 'hsl(0, 0%, 95%)',
   scrollBar100: 'rgba(0, 0, 0, 0.1)',
-};
+}
 
 // Added the initial styling
 export const darkTheme = {
@@ -61,4 +61,4 @@ export const darkTheme = {
   shadow300: '0 -2px 10px rgb(242, 242, 242, 0.05)',
   border100: 'rgb(242, 242, 242, 0.03)',
   scrollBar100: 'hsl(0, 0%, 15%)',
-};
+}
