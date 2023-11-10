@@ -22,7 +22,7 @@ export interface ThemeTypes {
 export const lightTheme = {
   bg100: '#F9FAFB',
   bg200: '#F5F8FF',
-  bg300: 'hsl(216, 100%, 18%)',
+  bg300: '#eef4ff',
   bg400: 'hsl(0, 0%, 100%)',
   bg500: 'hsl(0, 0%, 90%)',
   accent100: '#444CE7',
@@ -30,7 +30,7 @@ export const lightTheme = {
   accent300: 'rgb(242, 242, 242, 0.3)',
   font100: '#667085',
   font200: '#101828',
-  font300: 'hsl(219, 16%, 61%)',
+  font300: '#3538CD',
   font400: 'rgba(0, 0, 0, 0.6)',
   font500: 'hsl(0, 0%, 100%)',
   font600: 'hsla(218, 80%, 2%, 0.5)',

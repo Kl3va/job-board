@@ -10,7 +10,7 @@ import {
 } from 'components/global/ServiceFaq/ServiceFaqStyles'
 import { faqToggleVariant } from 'styles/animations/variants/faqToggleVariant'
 import { AnimatePresence } from 'framer-motion'
-import { faqData } from 'data/home/homeData'
+import { faqData } from 'data/home/faq'
 
 const ServiceFaq = () => {
   const [activeFaqIndex, setActiveFaqIndex] = useState<null | number>(null)
@@ -28,6 +28,7 @@ const ServiceFaq = () => {
       <FaqContainer>
         <FaqMainHeader>
           <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about the product and billing</p>
         </FaqMainHeader>
         <FaqWrap>
           {faqData.map((faq, index) => {
@@ -40,9 +41,9 @@ const ServiceFaq = () => {
                   <div>
                     <span>
                       {activeFaqIndex === index ? (
-                        <i className='fa-solid fa-angle-up'></i>
+                        <i className='fa-regular fa-circle-minus'></i>
                       ) : (
-                        <i className='fa-solid fa-angle-down'></i>
+                        <i className='fa-regular fa-circle-plus'></i>
                       )}
                     </span>
                   </div>

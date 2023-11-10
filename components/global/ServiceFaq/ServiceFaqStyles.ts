@@ -7,39 +7,33 @@ interface ServiceFaqStylesTypes {
 }
 
 export const FaqSection = styled.section`
-  margin-block: 10rem;
+  margin-block: 4rem;
 
   @media ${QUERIES.tablet} {
-    margin-block: 10rem 15rem;
+    margin-block: 6rem;
   }
 `
 
 export const FaqContainer = styled.div`
   margin: var(--center-container);
-  width: min(89.61%, var(--max-container));
-  font-family: var(--font-pry-100);
+  width: min(89.61%, 48rem);
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-
-  @media ${QUERIES.tablet} {
-    flex-direction: row;
-    gap: 7.5rem;
-  }
+  gap: 4rem;
 `
 
 export const FaqMainHeader = styled.div`
+  display: grid;
+  gap: 1.25rem;
+
   h2 {
     text-align: center;
-    text-transform: capitalize;
-    font-size: 2rem;
-    line-height: 1;
+    line-height: 2rem;
+  }
 
-    @media ${QUERIES.tablet} {
-      text-align: left;
-      font-size: 2.8rem;
-    }
+  p {
+    text-align: center;
   }
 `
 
@@ -48,16 +42,16 @@ export const FaqWrap = styled.ul`
   min-height: 16.25rem;
 
   display: grid;
-  gap: 1.56rem;
 `
 
 export const FaqItem = styled.li`
-  border-radius: 1.25rem;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 1rem;
+  // border-radius: 1.25rem;
+  // background: rgba(255, 255, 255, 0.08);
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--color-border-100);
 
   @media ${QUERIES.mobile} {
-    padding: 2rem 2.5rem;
+    padding-block: 2rem;
   }
 `
 
@@ -70,12 +64,8 @@ export const FaqHeader = styled.div`
 
   h3 {
     text-transform: lowercase;
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 400;
-
-    @media ${QUERIES.mobile} {
-      font-size: 1.5rem;
-    }
 
     &:first-letter {
       text-transform: capitalize;
@@ -89,9 +79,9 @@ export const FaqHeader = styled.div`
   }
 
   i {
-    background-color: var(--color-font-100);
-    background-image: var(--color-font-100);
-    -webkit-text-fill-color: var(--color-font-100);
+    background-color: var(--color-accent-100);
+    background-image: var(--color-accent-100);
+    -webkit-text-fill-color: var(--color-accent-100);
     -webkit-background-clip: text;
     transform: translateY(2px);
   }

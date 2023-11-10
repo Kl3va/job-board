@@ -127,17 +127,18 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
 
 
     h1, h2, h3 {
-       text-transform: uppercase;
+       text-transform: capitalize;
        color: var(--color-font-200);
     }
 
     h1 {
-      font-size: clamp(1.7rem, calc(2.5vw + 0.5rem), 3rem)
-      line-height: 1rem;
+      font-size: clamp(2rem, calc(2.5vw + .5rem), 3rem);
+     //font-size: 3rem;
+      line-height: 2.3rem;
       font-weight: 500;
       
       @media ${QUERIES.tabletMini} {
-        line-height: 2rem;
+        line-height: 3rem;
       }
 
       @media ${QUERIES.desktop} {
@@ -147,9 +148,14 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
 
     h2 {
       
-      font-size: 2.25rem;
-      line-height: 2.75rem;
+      font-size: 1.7rem;
+      font-weight: 600;
+      line-height: 2rem;
       letter-spacing: -0.045rem;
+
+      @media ${QUERIES.desktop} {
+        line-height: 2.25rem;
+      }
     }
 
     i:hover {
