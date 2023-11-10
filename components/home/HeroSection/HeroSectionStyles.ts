@@ -27,6 +27,8 @@ export const HeroContainer = styled.div`
   width: min(90%, var(--max-container));
   margin-inline: auto;
   text-align: center;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid var(--color-border-100);
 
   display: grid;
   justify-items: center;
@@ -59,6 +61,7 @@ export const HeroBtnWrapper = styled.div`
 
 export const HeroCompanyText = styled.p`
   margin-bottom: 2.6rem;
+  font-size: 1rem;
 `
 
 export const LogoContainer = styled.div`

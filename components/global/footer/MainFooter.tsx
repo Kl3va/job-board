@@ -3,6 +3,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { menuData } from 'data/home/menuData'
 
+import { HomeFooter } from './MainFooterStyles'
+import { HeaderLogoContainer } from '../header/HeaderStyles'
+
 type Props = {}
 
 const MainFooter = (props: Props) => {
@@ -10,17 +13,17 @@ const MainFooter = (props: Props) => {
 
   return (
     <footer>
-      <div>
-        <div>
+      <HomeFooter>
+        <HeaderLogoContainer>
           <Link href={logo.link}>
             <span>
               <Image src={logo.image} alt='logo' />
               {logo.title}
             </span>
           </Link>
-        </div>
+        </HeaderLogoContainer>
         <span>© 2023 JobHub All rights reserved.</span>
-      </div>
+      </HomeFooter>
     </footer>
   )
 }

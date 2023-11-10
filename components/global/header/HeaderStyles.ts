@@ -44,10 +44,6 @@ export const HeaderLogoContainer = styled.div`
     align-items: center;
     color: var(--color-font-200);
   }
-
-  // @media screen and (max-width: 988px) {
-  //   margin-right: 0rem;
-  // }
 `
 
 export const HeaderNav = styled.nav`

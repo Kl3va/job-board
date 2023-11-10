@@ -119,7 +119,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
 
     p {
       color: var(--color-font-100);
-      font-size: 1rem;
+      font-size: 1.25rem;
       line-height: 1.5rem;
       font-weight: 400;
     }
@@ -153,8 +153,9 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       line-height: 2rem;
       letter-spacing: -0.045rem;
 
-      @media ${QUERIES.desktop} {
+      @media ${QUERIES.tablet} {
         line-height: 2.25rem;
+        font-size: 2.25rem;
       }
     }
 

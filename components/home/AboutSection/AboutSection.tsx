@@ -2,6 +2,13 @@ import React from 'react'
 import { aboutData } from 'data/home/aboutData'
 import Image from 'next/image'
 
+//Styling(Styled-components)
+import {
+  AboutMainSection,
+  AboutContainer,
+  AboutServices,
+} from './AboutSectionStyles'
+
 type AboutSectionProps = typeof aboutData
 
 const AboutSection = ({
@@ -10,11 +17,11 @@ const AboutSection = ({
   services,
 }: AboutSectionProps) => {
   return (
-    <section>
-      <div>
-        <p>{aboutText}</p>
+    <AboutMainSection>
+      <AboutContainer>
+        <h3>{aboutText}</h3>
         <h2>{aboutHeading}</h2>
-        <div>
+        <AboutServices>
           {services.map((service, index) => {
             return (
               <div key={index}>
@@ -24,9 +31,9 @@ const AboutSection = ({
               </div>
             )
           })}
-        </div>
-      </div>
-    </section>
+        </AboutServices>
+      </AboutContainer>
+    </AboutMainSection>
   )
 }
 

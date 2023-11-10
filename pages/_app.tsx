@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { GlobalStyles } from 'styles/globalStyles'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme } from 'styles/theme'
-import Footer from 'components/global/footer/Footer'
+// import Footer from 'components/global/footer/Footer'
 import Header from 'components/global/header/Header'
 import ScrollTop from 'components/global/scrollTop/ScrollTop'
 

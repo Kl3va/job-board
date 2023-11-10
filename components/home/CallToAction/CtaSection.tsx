@@ -1,10 +1,11 @@
 import React from 'react'
 import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
+import { CtaMainSection, CtaContainer } from './CtaSectionStyles'
 
 const CTASection = () => {
   return (
-    <section>
-      <div>
+    <CtaMainSection>
+      <CtaContainer>
         <h2> Let's make the connection that counts!</h2>
         <p>
           Join Us today and unlock endless possibilities for your career or your
@@ -16,8 +17,8 @@ const CTASection = () => {
           bgColor='var(--color-accent-100)'
           textColor='var(--color-bg-100)'
         />
-      </div>
-    </section>
+      </CtaContainer>
+    </CtaMainSection>
   )
 }
 

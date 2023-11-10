@@ -97,5 +97,6 @@ export const FaqBody = styled(motion.div)<ServiceFaqStylesTypes>`
 
   p {
     padding-block: 0.125rem;
+    font-size: 1rem;
   }
 `
