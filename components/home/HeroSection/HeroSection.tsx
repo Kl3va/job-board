@@ -35,7 +35,7 @@ const HeroSection = ({
             icon='fa-regular fa-circle-play'
           />
           <CustomLinkBtn
-            href='/create-account'
+            href='/sign-up'
             text='Sign Up'
             bgColor='var(--color-accent-100)'
             textColor='var(--color-bg-100)'

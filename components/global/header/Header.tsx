@@ -94,9 +94,9 @@ const Header = ({ data }: HeaderTypes) => {
                 )
               })}
               <HeaderBtnsContainer>
-                <CustomLinkBtn href='/log-in' text='Log In' />
+                <CustomLinkBtn href='/login' text='Log In' />
                 <CustomLinkBtn
-                  href='/create-account'
+                  href='/sign-up'
                   text='Sign Up'
                   bgColor='var(--color-accent-100)'
                   textColor='var(--color-bg-100)'

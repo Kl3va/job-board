@@ -12,7 +12,7 @@ const CTASection = () => {
           organization's growth.
         </p>
         <CustomLinkBtn
-          href='/create-account'
+          href='/sign-up'
           text='Sign Up'
           bgColor='var(--color-accent-100)'
           textColor='var(--color-bg-100)'
