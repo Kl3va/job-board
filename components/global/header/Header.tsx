@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { AnimatePresence } from 'framer-motion'
+
+import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
+
 import {
   HeaderContainer,
   HeaderInner,
@@ -11,6 +14,7 @@ import {
   HeaderNavList,
   MobileNav,
   MenuList,
+  HeaderBtnsContainer,
   SubMenu,
 } from './HeaderStyles'
 import type { HeaderDataTypes } from 'types/menuTypes'
@@ -70,7 +74,7 @@ const Header = ({ data }: HeaderTypes) => {
             <HeaderNavList
               mobileNavToggle={mobileNavToggle}
               onClick={() => setMobileNavToggle(false)}
-              variants={mobileNavVariant(switchNavWidth ? '500px' : '100vw')}
+              variants={mobileNavVariant(switchNavWidth ? '70vw' : '100vw')}
               initial='hidden'
               animate={showNavMenu || mobileNavToggle ? 'show' : 'hidden'}
               exit='exit'
@@ -89,6 +93,15 @@ const Header = ({ data }: HeaderTypes) => {
                   </MenuList>
                 )
               })}
+              <HeaderBtnsContainer>
+                <CustomLinkBtn href='/log-in' text='Log In' />
+                <CustomLinkBtn
+                  href='/create-account'
+                  text='Sign Up'
+                  bgColor='var(--color-accent-100)'
+                  textColor='var(--color-bg-100)'
+                />
+              </HeaderBtnsContainer>
             </HeaderNavList>
           </AnimatePresence>
         </HeaderNav>

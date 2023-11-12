@@ -75,7 +75,7 @@ export const MobileNav = styled.div`
     }
   }
 
-  @media screen and (max-width: 988px) {
+  @media screen and (max-width: 800px) {
     display: flex;
     justify-content: flex-end;
   }
@@ -86,7 +86,7 @@ export const HeaderNavList = styled(motion.ul)<HeaderStylesTypes>`
   align-items: center;
   gap: 2rem;
 
-  @media screen and (max-width: 988px) {
+  @media screen and (max-width: 800px) {
     display: flex;
     background-color: var(--color-bg-100);
     position: absolute;
@@ -108,6 +108,11 @@ export const HeaderNavList = styled(motion.ul)<HeaderStylesTypes>`
     a {
       font-size: 1.5rem;
       font-weight: 800;
+    }
+
+    div {
+      flex-direction: column;
+      margin-left: 0;
     }
   }
 
@@ -185,7 +190,7 @@ export const SubMenu = styled.ul<HeaderStylesTypes>`
     border-bottom: 0.1rem solid var(--color-border-100);
   }
 
-  @media screen and (max-width: 988px) {
+  @media screen and (max-width: 800px) {
     position: inherit;
     transform: translateY(0rem);
     border-radius: 0rem;
@@ -288,7 +293,7 @@ export const HeaderNavMenu = styled.li<HeaderStylesTypes>`
         `}
     }
 
-    @media screen and (max-width: 988px) {
+    @media screen and (max-width: 800px) {
       display: block;
     }
   }
@@ -299,7 +304,7 @@ export const HeaderNavMenu = styled.li<HeaderStylesTypes>`
       margin-right: 0rem;
     `}
 
-  @media screen and (max-width: 988px) {
+  @media screen and (max-width: 800px) {
     margin-right: 0rem;
     border-bottom: none;
     padding: 1rem;
@@ -326,7 +331,7 @@ export const HeaderOptions = styled.div`
   justify-content: flex-end;
   width: 7.5rem;
 
-  @media screen and (max-width: 988px) {
+  @media screen and (max-width: 800px) {
     display: none;
   }
 
@@ -359,7 +364,7 @@ export const HeaderOptions = styled.div`
 export const MobileTheme = styled.div`
   display: none;
 
-  @media screen and (max-width: 988px) {
+  @media screen and (max-width: 800px) {
     display: flex;
     padding: 1rem;
     height: 52.5px;
@@ -398,7 +403,14 @@ export const LinkWrapper = styled.div`
   display: block;
   margin-left: auto;
 
-  @media screen and (max-width: 988px) {
+  @media screen and (max-width: 800px) {
     margin: 1rem auto;
   }
+`
+
+export const HeaderBtnsContainer = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  margin-left: auto;
+  align-items: center;
 `
