@@ -197,3 +197,22 @@ export const HiddenHeader = styled.h1`
 export const Main = styled.main`
   min-height: 100vh;
 `
+
+export const CustomBtn = styled.button`
+  display: flex;
+  font-size: 1rem;
+  padding-block: 0.5rem;
+  max-width: 100%;
+  justify-content: center;
+  transition: var(--transition);
+  cursor: pointer;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  color: var(--color-bg-100);
+  background: var(--color-accent-100);
+
+  &:hover {
+    opacity: 0.8;
+  }
+`
