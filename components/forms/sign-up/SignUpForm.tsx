@@ -14,7 +14,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 //LOGO IMAGE
-import logo from 'public/images/job-hub.png'
+import logo from 'public/images/Contentlogo-home.png'
 
 const SignUpForm = () => {
   const [user, setUser] = useState({
@@ -54,11 +54,9 @@ const SignUpForm = () => {
   return (
     <SignUpContainer>
       <HeaderWrapper>
-        <span>
-          <Link href={'/'}>
-            <Image src={logo} alt='logo' width={50} height={50} />
-          </Link>
-        </span>
+        <Link href={'/'}>
+          <Image src={logo} alt='logo' width={50} height={50} />
+        </Link>
 
         <h1>Create an account</h1>
       </HeaderWrapper>

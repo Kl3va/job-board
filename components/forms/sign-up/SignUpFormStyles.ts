@@ -20,12 +20,6 @@ export const SignUpContainer = styled.div`
     }
   }
 
-  label {
-    font-size: 0.875rem;
-    color: var(--color-font-400);
-    font-weight: 500;
-  }
-
   button {
     width: 100%;
     margin-top: 1.68rem;
@@ -36,22 +30,18 @@ export const SignUpContainer = styled.div`
     gap: 0.84rem;
   }
 
-  p {
-    line-height: 1;
-    font-size: 0.8rem;
-    color: red;
-  }
-
   span {
     font-size: 0.87825rem;
 
     a {
       color: var(--color-accent-100);
+      cursor: pointer;
+      font-size: inherit;
     }
   }
 
   @media ${QUERIES.tablet} {
-    margin-top: 9.8rem;
+    margin-top: 7.8rem;
   }
 `
 
@@ -63,11 +53,30 @@ export const HeaderWrapper = styled.div`
     width: 3.12rem;
     justify-self: center;
   }
+
+  p {
+    text-align: center;
+    font-size: 1.00375rem;
+    font-weight: 400;
+    line-height: 1.50563rem;
+  }
 `
 
 export const InputWrapper = styled.div`
   display: grid;
   gap: 0.3rem;
+
+  p {
+    line-height: 1;
+    font-size: 0.8rem;
+    color: red;
+  }
+
+  label {
+    font-size: 0.875rem;
+    color: var(--color-font-400);
+    font-weight: 500;
+  }
 `
 
 export const InputType = styled.input<{ isTouched: boolean; isUser: boolean }>`
