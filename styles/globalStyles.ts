@@ -159,7 +159,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       }
     }
 
-    i:hover {
+    i {
       background-color: var(--color-accent-100);
       background-image: var(--color-accent-100);
       -webkit-text-fill-color: transparent;

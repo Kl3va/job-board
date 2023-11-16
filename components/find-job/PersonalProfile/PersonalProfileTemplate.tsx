@@ -1,8 +1,27 @@
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { personalProfileData } from 'data/profile'
 
+import profileBg from 'public/images/personal-profile-bg.png'
+
+//COMPONENTS
 import StepTwoForm from './Step/StepTwoP/StepTwoP'
 import StepOneForm from './Step/StepOneP/StepOneP'
+
+//STYLED-COMPONENTS
+import {
+  MainPersonalProfile,
+  PersonalProgressContainer,
+  PersonalProfileFormContainer,
+  PersonalProfileFormSection,
+  StepperWrapper,
+  StepSection,
+  StepIndicator,
+  StepsWrapper,
+  SteppersContainer,
+  PersonalProfileBg,
+  PersonalProfileLine,
+} from './PersonalProfileStyles'
 
 type Props = {}
 
@@ -18,55 +37,43 @@ const PersonalProfileTemplate = (props: Props) => {
   }
 
   return (
-    <main>
-      <section>
-        <div>
-          <div>
-            <h1>{heading}</h1>
-            <div>
-              {steps.map(({ text }, index) => {
-                return (
-                  <div key={index}>
-                    <div>
-                      <div
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          borderRadius: '50%',
-                          backgroundColor:
-                            index < currentStep ? 'green' : 'gray', // Change color based on step completion
-                          margin: '0 5px',
-                        }}
-                      >
-                        {index + 1}
-                      </div>
-                      <h2>{text}</h2>
-                    </div>
-                    {index < totalSteps - 1 && (
-                      <div
-                        style={{
-                          margin: '0 2px',
-                          width: '2px',
-                          height: '60px',
-                          backgroundColor: 'red',
-                        }}
-                      ></div>
+    <MainPersonalProfile>
+      <StepSection>
+        <StepperWrapper>
+          <h1>{heading}</h1>
+          <PersonalProgressContainer>
+            {steps.map(({ text }, index) => {
+              return (
+                <StepsWrapper key={index}>
+                  <SteppersContainer>
+                    <StepIndicator index={index} currentStep={currentStep}>
+                      {index + 1}
+                    </StepIndicator>
+                    <h2>{text}</h2>
+                    {index < currentStep - 1 && (
+                      <i className='fa-solid fa-check'></i>
                     )}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div>
+                  </SteppersContainer>
+                  {index < totalSteps - 1 && (
+                    <PersonalProfileLine></PersonalProfileLine>
+                  )}
+                </StepsWrapper>
+              )
+            })}
+          </PersonalProgressContainer>
+          <PersonalProfileBg>
+            <Image src={profileBg} alt='profile-bg' />
+          </PersonalProfileBg>
+        </StepperWrapper>
+      </StepSection>
+      <PersonalProfileFormSection>
+        <PersonalProfileFormContainer>
           {/* Render different form components based on the currentStep */}
           {currentStep === 1 && <StepOneForm onNextStep={handleNextStep} />}
           {currentStep === 2 && <StepTwoForm onNextStep={handleNextStep} />}
-        </div>
-      </section>
-    </main>
+        </PersonalProfileFormContainer>
+      </PersonalProfileFormSection>
+    </MainPersonalProfile>
   )
 }
 
