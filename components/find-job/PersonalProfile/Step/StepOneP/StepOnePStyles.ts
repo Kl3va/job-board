@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { QUERIES } from 'styles/mediaQueries'
 
 export const StepFormContainer = styled.form`
   width: min(90%, 26.87rem);
@@ -20,9 +19,6 @@ export const StepFormContainer = styled.form`
     border-radius: 0.42rem;
     border: 0.84px solid var(--color-accent-200);
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-  }
-
-  select {
     background: var(--color-bg-100);
   }
 
@@ -37,7 +33,7 @@ export const StepFormContainer = styled.form`
   }
 
   button {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
 `
 

@@ -27,6 +27,7 @@ export const PersonalProfileFormContainer = styled.div`
 
   @media ${QUERIES.tablet} {
     min-height: 100vh;
+    margin-top: 1rem;
   }
 `
 

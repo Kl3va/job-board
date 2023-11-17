@@ -36,6 +36,11 @@ const PersonalProfileTemplate = (props: Props) => {
     setCurrentStep(currentStep + 1)
   }
 
+  // Function to handle moving to the prev step
+  const handlePrevStep = () => {
+    setCurrentStep(currentStep - 1)
+  }
+
   return (
     <MainPersonalProfile>
       <StepSection>
@@ -70,7 +75,11 @@ const PersonalProfileTemplate = (props: Props) => {
         <PersonalProfileFormContainer>
           {/* Render different form components based on the currentStep */}
           {currentStep === 1 && <StepOneForm onNextStep={handleNextStep} />}
-          {currentStep === 2 && <StepTwoForm onNextStep={handleNextStep} />}
+          {currentStep === 2 && (
+            <StepTwoForm
+              onPrevStep={handlePrevStep}
+            />
+          )}
         </PersonalProfileFormContainer>
       </PersonalProfileFormSection>
     </MainPersonalProfile>
