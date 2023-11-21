@@ -126,7 +126,6 @@ export const MenuList = styled.li<HeaderStylesTypes>`
   transition: var(--transition);
   display: flex;
   gap: 0.3rem;
-  display: flex;
   flex-direction: column;
   justify-content: center;
 

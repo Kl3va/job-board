@@ -2,6 +2,8 @@ export interface ThemeTypes {
   bg100: string
   bg200: string
   bg300: string
+  bg400: string
+  bg500: string
   accent100: string
   accent200: string
   accent300: string
@@ -23,16 +25,17 @@ export const lightTheme = {
   bg100: '#F9FAFB',
   bg200: '#F5F8FF',
   bg300: '#eef4ff',
-  bg400: 'hsl(0, 0%, 100%)',
-  bg500: 'hsl(0, 0%, 90%)',
+  bg400: '#000000',
+  bg500: '#FCFCFD',
   accent100: '#444CE7',
   accent200: '#eaecf0',
-  accent300: 'rgb(242, 242, 242, 0.3)',
+  accent300: '#f8f9fc',
+  accent400: '#4E5BA6',
   font100: '#667085',
   font200: '#101828',
   font300: '#3538CD',
   font400: '#344054',
-  font500: 'hsl(0, 0%, 100%)',
+  font500: '#475467',
   font600: 'hsla(218, 80%, 2%, 0.5)',
   shadow100: '0px 0px 20px rgba(0,0,0,0.08)',
   shadow200: '0px 10px 40px rgba(0, 0, 0, 0.15)',
