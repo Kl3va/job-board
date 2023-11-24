@@ -92,15 +92,15 @@ export const JobSearchIconWrapper = styled.div`
       left: 0.5rem;
     }
   }
+`
 
-  input {
-    padding-inline: 2.5rem 0;
-    font-size: 1rem;
-    width: 100%;
+export const JobSearchInputSearch = styled.input`
+  padding-inline: 2.5rem 0;
+  font-size: 1rem;
+  width: 100%;
 
-    @media screen and (max-width: 450px) {
-      font-size: 0.7rem;
-      padding-left: 1.5rem;
-    }
+  @media screen and (max-width: 450px) {
+    font-size: 0.7rem;
+    padding-left: 1.5rem;
   }
 `

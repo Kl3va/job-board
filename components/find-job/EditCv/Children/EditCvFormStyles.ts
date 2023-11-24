@@ -1,10 +1,8 @@
 import styled from 'styled-components'
 
-export const StepFormContainer = styled.form`
-  width: min(90%, 26.87rem);
-
+export const EditCvFormComponent = styled.form`
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
 
   input,
   select,
@@ -22,18 +20,7 @@ export const StepFormContainer = styled.form`
     font-weight: 500;
   }
 
-  button {
-    margin-top: 1.5rem;
+  & > :last-child {
+    margin-top: 1rem;
   }
-`
-
-export const StepInputWrapper = styled.div`
-  display: grid;
-  gap: 0.3rem;
-`
-
-export const StepSelectContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
 `

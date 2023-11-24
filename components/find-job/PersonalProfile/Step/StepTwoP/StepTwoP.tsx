@@ -88,7 +88,12 @@ const StepTwoForm = ({ onPrevStep }: Props) => {
       </StepInputWrapper>
 
       <UploaderBtnWrapper>
-        <CustomBtn type='submit' onClick={onPrevStep}>
+        <CustomBtn
+          type='submit'
+          onClick={onPrevStep}
+          bgColor='var(--color-bg-100)'
+          textColor='var(--color-font-400)'
+        >
           Back
         </CustomBtn>
         <CustomBtn type='submit' onClick={handleProceedToPage}>

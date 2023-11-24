@@ -3,9 +3,7 @@ import AllJobs from '../AllJobs/AllJobs'
 import FilteringBtns from '../FilteringBtns/FilteringBtns'
 
 //Styled-components
-import {
-  FindJobHomeMain,
-} from './FindJobHomeStyles'
+import { FindJobHomeMain } from '../FindJobHome/FindJobHomeStyles'
 
 //TYPES
 import { JobDataTypes } from 'types/jobTypes'
@@ -14,7 +12,7 @@ interface FindJobHomeProps {
   jobData: JobDataTypes[]
 }
 
-const FindJobHomeTemplate = ({ jobData }: FindJobHomeProps) => {
+const SavedJobsTemplate = ({ jobData }: FindJobHomeProps) => {
   return (
     <FindJobHomeMain>
       <FilteringBtns />
@@ -25,4 +23,4 @@ const FindJobHomeTemplate = ({ jobData }: FindJobHomeProps) => {
   )
 }
 
-export default FindJobHomeTemplate
+export default SavedJobsTemplate

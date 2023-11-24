@@ -18,6 +18,7 @@ export interface ThemeTypes {
   shadow200: string
   shadow300: string
   border100: string
+  border200: string
   scrollBar100: string
 }
 
@@ -41,6 +42,7 @@ export const lightTheme = {
   shadow200: '0px 10px 40px rgba(0, 0, 0, 0.15)',
   shadow300: '0px 10px 20px rgba(0, 0, 0, 0.15)',
   border100: '#D0D5DD',
+  border200: '#f2f4f7',
   scrollBar100: 'rgba(0, 0, 0, 0.1)',
 }
 

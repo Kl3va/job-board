@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
         --color-font-500: ${(props) => props.theme.font500};
         --color-font-600: ${(props) => props.theme.font600};
         --color-border-100: ${(props) => props.theme.border100};
+        --color-border-200: ${(props) => props.theme.border200};
         --font-pry-100: 'Inter', sans-serif;
         --max-container: 76rem;
         --center-container: 0 auto;
@@ -126,6 +127,16 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       font-weight: 400;
     }
 
+    label {
+    font-size: 0.875rem;
+    color: var(--color-font-400);
+    font-weight: 500;
+  }
+
+   textarea {
+    resize: none;
+  }
+
 
 
     h1, h2, h3 {
@@ -207,7 +218,10 @@ export const Main = styled.main`
   min-height: 100vh;
 `
 
-export const CustomBtn = styled.button`
+export const CustomBtn = styled.button<{
+  textColor?: string
+  bgColor?: string
+}>`
   display: flex;
   font-size: 1rem;
   padding-block: 0.5rem;
@@ -217,9 +231,11 @@ export const CustomBtn = styled.button`
   cursor: pointer;
   gap: 0.5rem;
   border-radius: 0.5rem;
-  border: none;
-  color: var(--color-bg-100);
-  background: var(--color-accent-100);
+  border: ${(props) =>
+    props.textColor ? '1px solid var(--color-border-100)' : 'none'};
+  //color: var(--color-bg-100);
+  color: ${(props) => props.textColor || 'var(--color-bg-100)'};
+  background: ${(props) => props.bgColor || 'var(--color-accent-100)'};
 
   &:hover {
     opacity: 0.8;

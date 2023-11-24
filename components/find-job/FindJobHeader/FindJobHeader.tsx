@@ -15,6 +15,7 @@ import {
   JobHeaderProfile,
   JobHeaderSearchWrapper,
   JobSearchIconWrapper,
+  JobSearchInputSearch,
 } from './FindJobHeaderStyles'
 
 type FindJobNavProps = typeof findJobNavData
@@ -39,7 +40,10 @@ const FindJobHeader = ({ logo, navLinks, profile }: FindJobNavProps) => {
           <JobHeaderLists>
             {navLinks.map((link, index) => {
               return (
-                <JobHeaderLink key={index} isActive={pathname === link.url}>
+                <JobHeaderLink
+                  key={index}
+                  isActive={pathname.startsWith(link.url)}
+                >
                   <Link href={link.url}>{link.title}</Link>
                 </JobHeaderLink>
               )
@@ -48,7 +52,7 @@ const FindJobHeader = ({ logo, navLinks, profile }: FindJobNavProps) => {
         </JobHeaderNav>
         <JobHeaderSearchWrapper>
           <JobSearchIconWrapper>
-            <input
+            <JobSearchInputSearch
               type='search'
               name=''
               id=''
