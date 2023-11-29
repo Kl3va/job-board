@@ -1,15 +1,16 @@
 import React from 'react'
 import ChangePassword from './Children/ChangePassword/ChangePassword'
 import DeleteAccount from './Children/DeleteAccount/DeleteAccount'
+import { ProfileSettingsContainer } from '../ProfileSettings/ProfileSettingsTemplate'
 
 type Props = {}
 
 const SecuritySettingsTemplate = (props: Props) => {
   return (
-    <div>
+    <ProfileSettingsContainer>
       <ChangePassword />
       <DeleteAccount />
-    </div>
+    </ProfileSettingsContainer>
   )
 }
 

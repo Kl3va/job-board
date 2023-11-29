@@ -1,9 +1,14 @@
 import React from 'react'
 import { CustomBtn } from 'styles/globalStyles'
-import { jobFilterData } from 'data/post-job/jobFilterData'
+import { jobFilterData } from 'data/find-job/jobFilterData'
 
-//Styled-Components 
-import { FilterBtn, FilterBtnLists, FilterContainer, FilterSection } from './FilteringBtnsStyle'
+//Styled-Components
+import {
+  FilterBtn,
+  FilterBtnLists,
+  FilterContainer,
+  FilterSection,
+} from './FilteringBtnsStyle'
 
 type Props = {}
 

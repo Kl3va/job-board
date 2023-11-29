@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { jobDetailData } from 'data/post-job/jobDetailData'
+import { jobDetailData } from 'data/find-job/jobDetailData'
 
 //Styled-component
 import {

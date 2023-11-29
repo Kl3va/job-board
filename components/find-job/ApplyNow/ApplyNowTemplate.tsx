@@ -1,7 +1,7 @@
 import React from 'react'
 
 //DATA
-import { applyNowContentData } from 'data/post-job/applyNowContentData'
+import { applyNowContentData } from 'data/find-job/applyNowContentData'
 
 //COMPONENTS
 import ApplyNowContents from './Children/ApplyNowContents'

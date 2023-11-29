@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactNode } from 'react'
 import FindJobHeader from '../FindJobHeader/FindJobHeader'
-import { findJobNavData } from 'data/post-job/headerNavData'
+import { findJobNavData } from 'data/find-job/headerNavData'
 
 interface FindJobLayoutProps {
   children: ReactNode

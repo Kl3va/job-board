@@ -83,6 +83,7 @@ export const PersonalInfoSettingsBtnWrapper = styled.div`
   display: flex;
   gap: 0.75rem;
   justify-content: flex-end;
+  padding-block: 1rem;
 
   button {
     width: 4rem;

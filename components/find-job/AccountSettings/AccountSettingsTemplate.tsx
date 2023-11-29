@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 //Data
-import { tabsData } from 'data/post-job/settingsHeaderData'
+import { tabsData } from 'data/find-job/settingsHeaderData'
 
 //Components
 import ProfileSettingsTemplate from './Children/ProfileSettings/ProfileSettingsTemplate'

@@ -78,11 +78,6 @@ const LoginForm = () => {
             placeholder='Enter your email'
             isTouched={touched.email}
             isUser={!user.email}
-            // className={`${
-            //   touched.email && !user.email
-            //     ? 'inputEmpty'
-            //     : `${styles.input__text}`
-            // }`}
             onChange={handleChange}
             onBlur={() => setTouched({ ...touched, email: true })}
             value={user.email}
@@ -102,11 +97,6 @@ const LoginForm = () => {
             placeholder='Enter a password'
             isTouched={touched.password}
             isUser={!user.password}
-            // className={`${
-            //   touched.password && !user.password
-            //     ? 'inputEmpty'
-            //     : `${styles.input__text}`
-            // }`}
             onChange={handleChange}
             onBlur={() => setTouched({ ...touched, password: true })}
             value={user.password}
@@ -123,7 +113,6 @@ const LoginForm = () => {
               type='checkbox'
               name='checkbox'
               id='checkbox'
-              // className={styles.checked}
               checked={isChecked}
               onChange={() => setIsChecked(!isChecked)}
             />

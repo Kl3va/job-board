@@ -1,5 +1,5 @@
 import React from 'react'
-import { applyNowContentData } from 'data/post-job/applyNowContentData'
+import { applyNowContentData } from 'data/find-job/applyNowContentData'
 
 //Styled-components
 import {

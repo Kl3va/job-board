@@ -3,7 +3,7 @@ import FindJobLayout from 'components/find-job/FindJobLayout/FindJobLayout'
 import SavedJobsTemplate from 'components/find-job/SavedJobs/SavedJobsTemplate'
 
 //Data
-import { jobsData } from 'data/post-job/jobsData'
+import { jobsData } from 'data/find-job/jobsData'
 
 type Props = {}
 

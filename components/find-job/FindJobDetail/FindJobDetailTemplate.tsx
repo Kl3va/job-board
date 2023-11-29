@@ -2,8 +2,8 @@ import React from 'react'
 //import BreadCrumbs from 'components/global/breadcrumbs/BreadCrumbs'
 
 //Data
-import { jobDetailData } from 'data/post-job/jobDetailData'
-import { similarJobsData } from 'data/post-job/similarJobsData'
+import { jobDetailData } from 'data/find-job/jobDetailData'
+import { similarJobsData } from 'data/find-job/similarJobsData'
 
 //Components
 import FindJobDetailMain from './Children/FindJobDetailMain'

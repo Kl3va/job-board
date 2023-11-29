@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { applyNowContentData } from 'data/post-job/applyNowContentData'
+import { applyNowContentData } from 'data/find-job/applyNowContentData'
 
 //Reusable Styled-components
 import { MultiBtnsWrapper } from '../ApplyNow/Children/ApplyNowContentStyles'

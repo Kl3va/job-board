@@ -9,7 +9,6 @@ import {
   InputType,
 } from './SignUpFormStyles'
 
-// import styles from 'components/contact.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -70,11 +69,6 @@ const SignUpForm = () => {
             placeholder='Enter your Full name'
             isTouched={touched.fullName}
             isUser={!user.fullName}
-            // className={`${
-            //   touched.fullName && !user.fullName
-            //     ? 'inputEmpty'
-            //     : `${styles.input__text}`
-            // }`}
             onChange={handleChange}
             onBlur={() => setTouched({ ...touched, fullName: true })}
             value={user.fullName}
@@ -94,11 +88,6 @@ const SignUpForm = () => {
             placeholder='Enter your email'
             isTouched={touched.email}
             isUser={!user.email}
-            // className={`${
-            //   touched.email && !user.email
-            //     ? 'inputEmpty'
-            //     : `${styles.input__text}`
-            // }`}
             onChange={handleChange}
             onBlur={() => setTouched({ ...touched, email: true })}
             value={user.email}
@@ -118,11 +107,6 @@ const SignUpForm = () => {
             placeholder='Enter a password'
             isTouched={touched.password}
             isUser={!user.password}
-            // className={`${
-            //   touched.password && !user.password
-            //     ? 'inputEmpty'
-            //     : `${styles.input__text}`
-            // }`}
             onChange={handleChange}
             onBlur={() => setTouched({ ...touched, password: true })}
             value={user.password}

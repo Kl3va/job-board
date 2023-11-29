@@ -2,25 +2,34 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { findJobNavData } from 'data/find-job/headerNavData'
+import { postJobNavData } from 'data/post-job/postJobHeaderData'
 
 //Styled-Components
 import { HeaderLogoContainer } from 'components/global/header/HeaderStyles'
 import { HeaderContainer } from 'components/global/header/HeaderStyles'
+// import {
+//   JobHeaderInner,
+//   JobHeaderNav,
+//   JobHeaderLists,
+//   JobHeaderLink,
+//   JobHeaderProfile,
+//   JobHeaderSearchWrapper,
+//   JobSearchIconWrapper,
+//   JobSearchInputSearch,
+// } from './FindJobHeaderStyles'
+
 import {
   JobHeaderInner,
   JobHeaderNav,
-  JobHeaderLists,
   JobHeaderLink,
+  JobHeaderLists,
   JobHeaderProfile,
   JobHeaderSearchWrapper,
-  JobSearchIconWrapper,
-  JobSearchInputSearch,
-} from './FindJobHeaderStyles'
+} from 'components/find-job/FindJobHeader/FindJobHeaderStyles'
 
-type FindJobNavProps = typeof findJobNavData
+type PostJobNavProps = typeof postJobNavData
 
-const FindJobHeader = ({ logo, navLinks, profile }: FindJobNavProps) => {
+const PostJobHeader = ({ logo, navLinks, profile }: PostJobNavProps) => {
   const router = useRouter()
   const { pathname } = router
 
@@ -51,7 +60,7 @@ const FindJobHeader = ({ logo, navLinks, profile }: FindJobNavProps) => {
           </JobHeaderLists>
         </JobHeaderNav>
         <JobHeaderSearchWrapper>
-          <JobSearchIconWrapper>
+          {/* <JobSearchIconWrapper>
             <JobSearchInputSearch
               type='search'
               name=''
@@ -59,7 +68,7 @@ const FindJobHeader = ({ logo, navLinks, profile }: FindJobNavProps) => {
               placeholder='Search by job-role'
             />
             <i className='fa-solid fa-magnifying-glass'></i>
-          </JobSearchIconWrapper>
+          </JobSearchIconWrapper> */}
           <JobHeaderProfile>
             <Image src={profile.image} alt='profile-image' />
             <p>{profile.names}</p>
@@ -73,4 +82,4 @@ const FindJobHeader = ({ logo, navLinks, profile }: FindJobNavProps) => {
   )
 }
 
-export default FindJobHeader
+export default PostJobHeader

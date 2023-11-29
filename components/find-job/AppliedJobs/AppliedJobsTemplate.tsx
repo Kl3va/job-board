@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import AllJobs from '../AllJobs/AllJobs'
 
 //Data
-import { jobsData } from 'data/post-job/jobsData'
+import { jobsData } from 'data/find-job/jobsData'
 
 //Reusable Styled-component
 import { FindJobHomeMain } from '../FindJobHome/FindJobHomeStyles'
 import { JobSearchIconWrapper } from '../FindJobHeader/FindJobHeaderStyles'
 
-const AppliedJobsInput = styled.input`
+export const AppliedJobsInput = styled.input`
   width: min(100%, 20rem);
   padding-inline: 2.5rem 0;
   font-size: 1rem;
