@@ -11,3 +11,13 @@ export const personalProfileData = {
     },
   ],
 }
+
+export const companyProfileData = {
+  heading: 'Take few steps to complete company profile.',
+  steps: [
+    {
+      text: `Fill in company's information`,
+      id: '1',
+    },
+  ],
+}

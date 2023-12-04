@@ -1,4 +1,7 @@
 import React from 'react'
+import JobHomeNoJobs from './Children/JobHomeNoJobs'
+import AllJobs from 'components/find-job/AllJobs/AllJobs'
+import { jobsData } from 'data/find-job/jobsData'
 
 //Reusable Styled-components
 import { FindJobHomeMain } from 'components/find-job/FindJobHome/FindJobHomeStyles'
@@ -11,7 +14,6 @@ import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
 import {
   JobHomeHeaderContainer,
   JobHomeHeaderBtnWrapper,
-  JobHomeNoJobContainer,
 } from './PostJobHomeStyles'
 
 type Props = {}
@@ -52,22 +54,8 @@ const PostJobsHomeTemplate = (props: Props) => {
         </JobHomeHeaderContainer>
       </section>
       <section>
-        <JobHomeNoJobContainer>
-          <span>
-            <i className='fa-solid fa-magnifying-glass'></i>
-          </span>
-          <h3>No job post found</h3>
-          <p>You have no posted job yet</p>
-          <div>
-            <CustomLinkBtn
-              href='/post-job/home/job-post'
-              text='Post a Job'
-              icon='fa-solid fa-plus'
-              bgColor='var(--color-accent-100)'
-              textColor='var(--color-bg-100)'
-            />
-          </div>
-        </JobHomeNoJobContainer>
+        {/* <JobHomeNoJobs /> */}
+        <AllJobs jobData={jobsData} />
       </section>
     </FindJobHomeMain>
   )

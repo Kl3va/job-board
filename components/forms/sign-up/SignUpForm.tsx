@@ -15,8 +15,14 @@ import Link from 'next/link'
 //LOGO IMAGE
 import logo from 'public/images/Contentlogo-home.png'
 
+export interface JobSeekerSignUpTypes {
+  fullName: string
+  email: string
+  password: string
+}
+
 const SignUpForm = () => {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<JobSeekerSignUpTypes>({
     fullName: '',
     email: '',
     password: '',
