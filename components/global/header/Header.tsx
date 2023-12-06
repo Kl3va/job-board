@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { AnimatePresence } from 'framer-motion'
 
 import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
+import SignUpBtn from '../buttons/SignUpBtn'
 
 import {
   HeaderContainer,
@@ -45,7 +46,7 @@ const Header = ({ data }: HeaderTypes) => {
   })
 
   const { breakPoint: showNavMenu } = useBreakPointUp({
-    breakMark: 992,
+    breakMark: 800,
   })
 
   return (
@@ -95,12 +96,7 @@ const Header = ({ data }: HeaderTypes) => {
               })}
               <HeaderBtnsContainer>
                 <CustomLinkBtn href='/login' text='Log In' />
-                <CustomLinkBtn
-                  href='/sign-up'
-                  text='Sign Up'
-                  bgColor='var(--color-accent-100)'
-                  textColor='var(--color-bg-100)'
-                />
+                <SignUpBtn />
               </HeaderBtnsContainer>
             </HeaderNavList>
           </AnimatePresence>

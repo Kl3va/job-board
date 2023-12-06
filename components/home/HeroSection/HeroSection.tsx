@@ -13,6 +13,7 @@ import {
   LogosWrapper,
 } from './HeroSectionStyles'
 import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
+import SignUpBtn from 'components/global/buttons/SignUpBtn'
 
 type HeroSectionProps = typeof heroData
 
@@ -34,15 +35,10 @@ const HeroSection = ({
             text='Demo'
             icon='fa-regular fa-circle-play'
           />
-          <CustomLinkBtn
-            href='/sign-up'
-            text='Sign Up'
-            bgColor='var(--color-accent-100)'
-            textColor='var(--color-bg-100)'
-          />
+          <SignUpBtn />
         </HeroBtnWrapper>
         <HeroCompanyText>{companyText}</HeroCompanyText>
-        <LogoContainer>
+        {/* <LogoContainer>
           <LogosWrapper>
             {companyLogos.map((logo, index) => {
               return (
@@ -52,7 +48,7 @@ const HeroSection = ({
               )
             })}
           </LogosWrapper>
-        </LogoContainer>
+        </LogoContainer> */}
       </HeroContainer>
     </HeroMainSection>
   )

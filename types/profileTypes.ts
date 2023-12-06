@@ -4,7 +4,7 @@ export interface CreateEmployerProfileTypes {
   aboutCompany: string
   companyAddress: string
   companyWebsite: string
-  companySize: number
+  companySize: number | string
 }
 
 export interface EmployerProfileCreationResponse {

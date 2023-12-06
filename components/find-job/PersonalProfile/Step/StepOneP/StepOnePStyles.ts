@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { QUERIES } from 'styles/mediaQueries'
 
 export const StepFormContainer = styled.form`
   width: min(90%, 26.87rem);
@@ -36,4 +37,14 @@ export const StepSelectContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+`
+
+export const StepDoubleInputWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media ${QUERIES.desktop} {
+    grid-template-columns: 1fr 1fr;
+  }
 `

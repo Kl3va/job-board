@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 
 //Employer Interface
 interface Employer {
@@ -32,10 +32,13 @@ type User = Employer | JobSeeker
 export interface AuthContextType {
   isClicked: boolean
   handleCardClick: () => void
+  resetToken: (value: string) => void
+  activePopup: string | null
+  handleActivePopup: (value: string | null) => void
+  handleSetUserType: (value: 'employer' | 'jobseeker') => void
   user: User | null
+  userType: 'jobseeker' | 'employer' | null
   token: string | null
-  setUser: React.Dispatch<React.SetStateAction<User | null>> // Define setUser
-  setToken: React.Dispatch<React.SetStateAction<string | null>> // Define setToken
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -56,14 +59,49 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isClicked, setIsClicked] = useState(false)
   const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
+  const [activePopup, setActivePopup] = useState<string | null>(null)
+  const [userType, setUserType] = useState<'jobseeker' | 'employer' | null>(
+    null
+  )
 
   const handleCardClick = (): void => {
     setIsClicked(!isClicked)
   }
 
+  const handleActivePopup = (value: string | null): void => {
+    setActivePopup(value)
+  }
+
+  const resetToken = (value: string): void => {
+    setToken(value)
+  }
+
+  const handleSetUserType = (value: 'jobseeker' | 'employer'): void => {
+    setUserType(value)
+  }
+
+  useEffect(() => {
+    // Check if the user token exists in local storage
+    const storedToken = localStorage.getItem('userToken')
+
+    if (storedToken) {
+      setToken(storedToken)
+    }
+  }, [])
+
   return (
     <AuthContext.Provider
-      value={{ isClicked, handleCardClick, user, token, setToken, setUser }}
+      value={{
+        isClicked,
+        handleCardClick,
+        resetToken,
+        handleSetUserType,
+        userType,
+        user,
+        token,
+        activePopup,
+        handleActivePopup,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,4 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
+import { useRouter } from 'next/router'
+import { SignInRequest } from 'api-requests/authentication'
+import { useAuth } from 'hooks/useAuthProvider'
 
 //Styled components
 import { CustomBtn } from 'styles/globalStyles'
@@ -22,6 +25,9 @@ import Link from 'next/link'
 import logo from 'public/images/Contentlogo-home.png'
 
 const LoginForm = () => {
+  const router = useRouter()
+  const { resetToken, handleSetUserType } = useAuth()
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -43,18 +49,39 @@ const LoginForm = () => {
   }
 
   //Form for handling the submission
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (user.email && user.password) {
-      setUser({
-        email: '',
-        password: '',
-      })
-      setTouched({
-        email: false,
-        password: false,
-      })
-      setIsChecked(false)
+      try {
+        const data = await SignInRequest(user)
+        console.log('SignIn successful!', data)
+
+        setUser({
+          email: '',
+          password: '',
+        })
+        setTouched({
+          email: false,
+          password: false,
+        })
+        setIsChecked(false)
+
+        //Store all values
+        resetToken(data?.data?.token)
+        handleSetUserType(data?.data?.userType)
+        localStorage.setItem('userToken', data?.data?.token)
+
+        // Redirect logic based on userType
+        if (data?.data?.userType === 'jobseeker') {
+          router.push('/apply-for-job/personal-profile') // Redirect to jobSeekerProfileSetUp
+        } else if (data?.data?.userType === 'employer') {
+          router.push('/post-job/personal-profile') // Redirect to employeeProfileSetUp
+        }
+
+        console.log(data?.data?.userType)
+      } catch (error) {
+        console.error('Signin error:', error)
+      }
     }
   }
 
@@ -124,7 +151,7 @@ const LoginForm = () => {
         <CustomBtn type='submit'>Sign in</CustomBtn>
       </form>
       <span>
-        Don't have an account? <Link href={'/sign-up'}>Sign up</Link>
+        Don't have an account? <Link href={'/jobseeker-signup'}>Sign up</Link>
       </span>
     </SignUpContainer>
   )

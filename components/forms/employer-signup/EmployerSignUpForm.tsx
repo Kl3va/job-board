@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { EmployerSignUpRequest } from 'api-requests/authentication'
+import { useRouter } from 'next/router'
 
 //Styled components
 import { CustomBtn } from 'styles/globalStyles'
@@ -24,6 +25,8 @@ export interface CompanySignUpTypes {
 }
 
 const EmployerSignUpForm = () => {
+  const router = useRouter()
+
   const [user, setUser] = useState<CompanySignUpTypes>({
     companyName: '',
     companyRepresentative: '',
@@ -63,8 +66,16 @@ const EmployerSignUpForm = () => {
         // Call the handleSignUp function from your API passing user data
         const signUpResponse = await EmployerSignUpRequest(userData)
 
-        // Handle successful signup response here
+        //Handle successful signup response here
         console.log('Signup successful!', signUpResponse)
+
+        //Move to login page
+        router.push('/login')
+
+        // if (signUpResponse.error) {
+        //   // Handle the error here
+        //   console.error(signUpResponse.error)
+        // }
 
         // Reset form fields and touched state
         setUser({
@@ -81,7 +92,7 @@ const EmployerSignUpForm = () => {
           password: false,
         })
       } catch (error: any) {
-        console.error('Signup error:', error.message)
+        console.error('Signup error:', error)
         // Handle signup errors, show error messages, etc.
       }
     }

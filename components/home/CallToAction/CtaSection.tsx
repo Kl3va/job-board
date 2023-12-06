@@ -1,6 +1,6 @@
 import React from 'react'
-import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
 import { CtaMainSection, CtaContainer } from './CtaSectionStyles'
+import SignUpBtn from 'components/global/buttons/SignUpBtn'
 
 const CTASection = () => {
   return (
@@ -11,12 +11,7 @@ const CTASection = () => {
           Join Us today and unlock endless possibilities for your career or your
           organization's growth.
         </p>
-        <CustomLinkBtn
-          href='/sign-up'
-          text='Sign Up'
-          bgColor='var(--color-accent-100)'
-          textColor='var(--color-bg-100)'
-        />
+        <SignUpBtn/>
       </CtaContainer>
     </CtaMainSection>
   )

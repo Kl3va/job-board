@@ -1,4 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
+import { JobSeekerSignUpRequest } from 'api-requests/authentication'
+import { useRouter } from 'next/router'
 
 //Styled components
 import { CustomBtn } from 'styles/globalStyles'
@@ -22,6 +24,9 @@ export interface JobSeekerSignUpTypes {
 }
 
 const SignUpForm = () => {
+  const router = useRouter()
+  
+
   const [user, setUser] = useState<JobSeekerSignUpTypes>({
     fullName: '',
     email: '',
@@ -40,19 +45,30 @@ const SignUpForm = () => {
     setUser({ ...user, [name]: value })
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (user.fullName && user.email && user.password) {
-      setUser({
-        fullName: '',
-        email: '',
-        password: '',
-      })
-      setTouched({
-        fullName: false,
-        email: false,
-        password: false,
-      })
+      try {
+        // Call the handleSignUp function from your API passing user data
+        const signUpResponse = await JobSeekerSignUpRequest(user)
+
+        //Handle successful signup response here
+        console.log('Signup successful!', signUpResponse)
+        router.push('/login')
+
+        setUser({
+          fullName: '',
+          email: '',
+          password: '',
+        })
+        setTouched({
+          fullName: false,
+          email: false,
+          password: false,
+        })
+      } catch (error) {
+        console.error('Signup error:', error)
+      }
     }
   }
 
