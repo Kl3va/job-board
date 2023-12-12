@@ -62,6 +62,8 @@ export const JobHeaderProfile = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  cursor: pointer;
+  position: relative;
 
   p {
     color: var(--color-bg-400);

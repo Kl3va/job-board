@@ -50,7 +50,7 @@ const CustomLinkBtn = ({
   text,
 }: CustomLinkProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <CustomSpan bgColor={bgColor} textColor={textColor}>
         {icon && <i className={icon}></i>}
         {text}

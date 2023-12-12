@@ -29,7 +29,6 @@ const Home: NextPage = () => {
         <ServiceFaq />
         <CTASection />
         {activePopup === 'route-popup' && <RoutePopup />}
-        {activePopup !== null && <MainBg />}
       </Main>
       <MainFooter />
     </>

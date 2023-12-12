@@ -125,6 +125,10 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       font-size: 1.25rem;
       line-height: 1.5rem;
       font-weight: 400;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
 
     label {

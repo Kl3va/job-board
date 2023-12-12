@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { postJobNavData } from 'data/post-job/postJobHeaderData'
+import { useAuth } from 'hooks/useAuthProvider'
+import EmployerMenu from './EmployerMenu'
 
 //Styled-Components
 import { HeaderLogoContainer } from 'components/global/header/HeaderStyles'
@@ -30,6 +32,7 @@ import {
 type PostJobNavProps = typeof postJobNavData
 
 const PostJobHeader = ({ logo, navLinks, profile }: PostJobNavProps) => {
+  const { user, handleActivePopup } = useAuth()
   const router = useRouter()
   const { pathname } = router
 
@@ -69,12 +72,17 @@ const PostJobHeader = ({ logo, navLinks, profile }: PostJobNavProps) => {
             />
             <i className='fa-solid fa-magnifying-glass'></i>
           </JobSearchIconWrapper> */}
-          <JobHeaderProfile>
+          <JobHeaderProfile onClick={() => handleActivePopup('employer-menu')}>
             <Image src={profile.image} alt='profile-image' />
-            <p>{profile.names}</p>
+
+            {user?.accountUserId?.userType === 'employer' &&
+              'companyRepresentative' in user && (
+                <p>{user.companyRepresentative}</p>
+              )}
             <span>
               <i className='fa-solid fa-chevron-down'></i>
             </span>
+            <EmployerMenu />
           </JobHeaderProfile>
         </JobHeaderSearchWrapper>
       </JobHeaderInner>

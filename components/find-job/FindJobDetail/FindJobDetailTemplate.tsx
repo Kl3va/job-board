@@ -18,9 +18,7 @@ type Props = {}
 const FindJobDetailTemplate = (props: Props) => {
   return (
     <FindJobDetailPageMain>
-      <section>
-        <FindJobDetailMain {...jobDetailData} />
-      </section>
+      <section>{/* <FindJobDetailMain {...jobDetailData} /> */}</section>
       <aside>
         <FindJobDetailApply {...jobDetailData.about_company} />
       </aside>

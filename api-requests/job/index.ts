@@ -107,11 +107,12 @@ export const GetJobByEmployerRequest = async (token: string) => {
       Authorization: `Bearer ${token}`,
     }
 
-    const response = await axios.get<JobListResponse>(
+    const response: AxiosResponse<any> = await axios.get(
       `${baseUrl}/api/v1/jobs/get-jobs-by-employer/`,
       { headers: headers }
     )
     return response.data.data.jobs // Return the data received from the server
+    // return response.data // Return the data received from the server
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to get jobs') // Handle errors
   }

@@ -1,6 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { EmployerSignUpRequest } from 'api-requests/authentication'
 import { useRouter } from 'next/router'
+import { useAuth } from 'hooks/useAuthProvider'
 
 //Styled components
 import { CustomBtn } from 'styles/globalStyles'
@@ -26,6 +27,7 @@ export interface CompanySignUpTypes {
 
 const EmployerSignUpForm = () => {
   const router = useRouter()
+  const { showAlert } = useAuth()
 
   const [user, setUser] = useState<CompanySignUpTypes>({
     companyName: '',
@@ -67,15 +69,10 @@ const EmployerSignUpForm = () => {
         const signUpResponse = await EmployerSignUpRequest(userData)
 
         //Handle successful signup response here
-        console.log('Signup successful!', signUpResponse)
+        showAlert(true, 'SignUp successful!', 'success')
 
         //Move to login page
         router.push('/login')
-
-        // if (signUpResponse.error) {
-        //   // Handle the error here
-        //   console.error(signUpResponse.error)
-        // }
 
         // Reset form fields and touched state
         setUser({
@@ -92,7 +89,7 @@ const EmployerSignUpForm = () => {
           password: false,
         })
       } catch (error: any) {
-        console.error('Signup error:', error)
+        showAlert(true, error.message, 'failure')
         // Handle signup errors, show error messages, etc.
       }
     }

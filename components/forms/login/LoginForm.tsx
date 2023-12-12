@@ -26,7 +26,7 @@ import logo from 'public/images/Contentlogo-home.png'
 
 const LoginForm = () => {
   const router = useRouter()
-  const { resetToken, handleSetUserType } = useAuth()
+  const { resetToken, handleSetUserType, showAlert } = useAuth()
 
   const [user, setUser] = useState({
     email: '',
@@ -54,7 +54,7 @@ const LoginForm = () => {
     if (user.email && user.password) {
       try {
         const data = await SignInRequest(user)
-        console.log('SignIn successful!', data)
+        showAlert(true, 'SignIn successful!', 'success')
 
         setUser({
           email: '',
@@ -70,6 +70,7 @@ const LoginForm = () => {
         resetToken(data?.data?.token)
         handleSetUserType(data?.data?.userType)
         localStorage.setItem('userToken', data?.data?.token)
+        localStorage.setItem('userType', data?.data?.userType)
 
         // Redirect logic based on userType
         if (data?.data?.userType === 'jobseeker') {
@@ -77,10 +78,9 @@ const LoginForm = () => {
         } else if (data?.data?.userType === 'employer') {
           router.push('/post-job/personal-profile') // Redirect to employeeProfileSetUp
         }
-
-        console.log(data?.data?.userType)
-      } catch (error) {
+      } catch (error: any) {
         console.error('Signin error:', error)
+        showAlert(true, error.message, 'failure')
       }
     }
   }

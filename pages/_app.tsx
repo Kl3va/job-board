@@ -7,6 +7,8 @@ import { AuthProvider } from 'hooks/useAuthProvider'
 // import Footer from 'components/global/footer/Footer'
 import Header from 'components/global/header/Header'
 import ScrollTop from 'components/global/scrollTop/ScrollTop'
+import Alert from 'components/global/alert/Alert'
+import MainBg from 'components/global/background/MainBg'
 
 import 'styles/fontawesome-pro/css/all.css'
 
@@ -15,6 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={lightTheme}>
       <AuthProvider>
         <GlobalStyles />
+        <Alert />
+        <MainBg />
+
         {/* <Header data={menuData.header} /> */}
         <Component {...pageProps} />
         {/* <Footer data={menuData.footer} /> */}

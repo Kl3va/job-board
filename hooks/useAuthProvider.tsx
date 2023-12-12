@@ -1,44 +1,27 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { User } from 'types/profileTypes'
+import { useRouter } from 'next/router'
 
-//Employer Interface
-interface Employer {
-  token: string
-  employer: {
-    companyName: string
-    accountUserId: string
-    companyRepresentative: string
-    _id: string
-    createdAt: string
-    updatedAt: string
-    __v: number
-  }
-}
-
-//Job Seeker
-interface JobSeeker {
-  token: string
-  jobSeeker: {
-    accountUserId: string
-    fullName: string
-    _id: string
-    createdAt: string
-    updatedAt: string
-    __v: number
-  }
-}
-
-type User = Employer | JobSeeker
+//Api for fetching user profile
+import {
+  GetJobSeekerProfileRequest,
+  GetEmployerProfileRequest,
+} from 'api-requests/account-user'
 
 export interface AuthContextType {
-  isClicked: boolean
-  handleCardClick: () => void
+  searchValue: string
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>
   resetToken: (value: string) => void
   activePopup: string | null
   handleActivePopup: (value: string | null) => void
   handleSetUserType: (value: 'employer' | 'jobseeker') => void
+  resetUser: (user: User) => void
   user: User | null
   userType: 'jobseeker' | 'employer' | null
   token: string | null
+  alert: { show: boolean; msg: string; type: string }
+  showAlert: (show?: boolean, msg?: string, type?: string) => void
+  handleLogout: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -56,20 +39,23 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isClicked, setIsClicked] = useState(false)
+  const router = useRouter()
+  const [searchValue, setSearchValue] = useState('')
   const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [activePopup, setActivePopup] = useState<string | null>(null)
   const [userType, setUserType] = useState<'jobseeker' | 'employer' | null>(
     null
   )
-
-  const handleCardClick = (): void => {
-    setIsClicked(!isClicked)
-  }
+  const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
 
   const handleActivePopup = (value: string | null): void => {
-    setActivePopup(value)
+    // setActivePopup(value)
+    if (activePopup !== value) {
+      setActivePopup(value)
+    } else {
+      setActivePopup(null)
+    }
   }
 
   const resetToken = (value: string): void => {
@@ -80,27 +66,77 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUserType(value)
   }
 
-  useEffect(() => {
-    // Check if the user token exists in local storage
-    const storedToken = localStorage.getItem('userToken')
+  //Set user object
+  const resetUser = (user: User) => {
+    setUser(user)
+  }
 
-    if (storedToken) {
+  //Show Alert
+  const showAlert = (show = false, msg = '', type = '') => {
+    setAlert({ show, msg, type })
+  }
+
+  //Log user out of the application
+  const handleLogout = () => {
+    //Clear user's auth data from localStorage and context api
+    localStorage.removeItem('userToken')
+    localStorage.removeItem('userType')
+    setToken(null)
+    setUserType(null)
+    showAlert(true, 'Logout Successful!', 'success')
+
+    //route user to the login page
+    router.push('/login')
+  }
+
+  useEffect(() => {
+    // Check if the user token or userType exists in local storage
+    const storedToken = localStorage.getItem('userToken')
+    const storedUserType = localStorage.getItem('userType')
+
+    if (storedToken && storedUserType) {
       setToken(storedToken)
+      setUserType(storedUserType as 'jobseeker' | 'employer')
+
+      // Function to fetch user profile based on userType
+      const fetchUserProfile = async (token: string, type: string) => {
+        try {
+          let userData: User | null = null
+
+          if (type === 'employer') {
+            userData = await GetEmployerProfileRequest(token)
+          } else if (type === 'jobseeker') {
+            userData = await GetJobSeekerProfileRequest(token)
+          }
+
+          if (userData) {
+            setUser(userData) // Set the user data in your context or state
+          }
+        } catch (error) {
+          console.error('Error fetching user profile:', error)
+        }
+      }
+
+      fetchUserProfile(storedToken, storedUserType)
     }
   }, [])
 
   return (
     <AuthContext.Provider
       value={{
-        isClicked,
-        handleCardClick,
+        searchValue,
+        setSearchValue,
         resetToken,
+        resetUser,
         handleSetUserType,
         userType,
         user,
         token,
         activePopup,
         handleActivePopup,
+        alert,
+        showAlert,
+        handleLogout,
       }}
     >
       {children}

@@ -1,6 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 import { jobDetailData } from 'data/find-job/jobDetailData'
+import { SingleJobTypes } from 'types/jobTypes'
+
+//helper
+import { formatDate } from 'helper'
+
+//Default images
+import JobLogo from 'public/images/job-logo.png'
+import dotIcon from 'public/images/dot.png'
 
 //Styled-component
 import {
@@ -13,106 +21,122 @@ import {
   JobRoleCoreList,
 } from './FindJobDetailMainStyles'
 
-type Props = typeof jobDetailData
+// {
+//   employerId: string
+//   jobRole: string
+//   jobSummary: string
+//   employmentType: string
+//   workType: string
+//   pay: number
+//   experienceLevel: string
+//   responsibilities: string
+//   jobRequirements: string[]
+//   coreSkills: string[]
+//   softSkills: string[]
+//   closingDate: string
+//   openPositions: number
+//   _id: string
+//   createdAt: string
+//   updatedAt: string
+//   __v: number
+// }
 
 const FindJobDetailMain = ({
-  job_method,
-  job_picture,
-  job_requirements,
-  job_responsibility,
-  job_role,
-  job_summary,
-  job_type,
-  dot_icon,
-  company,
-  location,
-  date,
-  core_skills,
-  soft_skills,
-  renumeration,
-  experience_level,
-}: Props) => {
+  jobRequirements,
+  jobRole,
+  jobSummary,
+  employmentType,
+  coreSkills,
+  softSkills,
+  closingDate,
+  openPositions,
+  workType,
+  pay,
+  experienceLevel,
+  responsibilities,
+}: SingleJobTypes) => {
   return (
     <FindJobDetailJobRole>
       <JobRoleHeader>
         <div>
-          <Image src={job_picture} alt='job-image' />
+          <Image src={JobLogo} alt='job-image' />
         </div>
         <div>
-          <h3>{job_role}</h3>
-          <p>{`${company}. ${location}`}</p>
+          <h3>{jobRole}</h3>
+          <p>{`Fast. United-Kingdom`}</p>
         </div>
       </JobRoleHeader>
 
-      <p>{date}</p>
+      <p>{formatDate(closingDate)}</p>
 
       <span>
         <i className='fa-regular fa-clock'></i>
-        {job_type}
+        {employmentType}
       </span>
 
       <JobRoleSpecifics>
         <div>
           <div>
-            <Image src={dot_icon} />
+            <Image src={dotIcon} />
           </div>
-          <p>{job_type}</p>
+          <p>{employmentType}</p>
         </div>
         <div>
           <div>
-            <Image src={dot_icon} />
+            <Image src={dotIcon} />
           </div>
-          <p>{experience_level}</p>
+          <p>{experienceLevel}</p>
         </div>
         <div>
           <div>
-            <Image src={dot_icon} />
+            <Image src={dotIcon} />
           </div>
-          <p>{job_method}</p>
+          <p>{workType}</p>
         </div>
       </JobRoleSpecifics>
 
       <JobRoleRenumeration>
-        <h3>{renumeration.title}</h3>
-        <p>{renumeration.amount}</p>
+        <h3>Renumeration</h3>
+        <p>{pay}</p>
       </JobRoleRenumeration>
 
       <JobRoleListContainer>
-        <h3>{job_summary.title}</h3>
-        <p>{job_summary.description}</p>
+        <h3>Job Summary</h3>
+        <p>{jobSummary}</p>
       </JobRoleListContainer>
 
       <JobRoleListContainer>
-        <h3>{job_responsibility.title}</h3>
+        <h3>Job Description/Responsibilities</h3>
         <JobRoleUnorderedList>
-          {job_responsibility.description.map((lists, index) => {
+          {/* {job_responsibility.description.map((lists, index) => {
             return <li key={index}>{lists}</li>
-          })}
+          })} */}
+          <li>{responsibilities}</li>
         </JobRoleUnorderedList>
       </JobRoleListContainer>
 
       <JobRoleListContainer>
-        <h3>{job_requirements.title}</h3>
+        <h3>Job Requirements</h3>
         <JobRoleUnorderedList>
-          {job_requirements.description.map((lists, index) => {
+          {jobRequirements.map((lists, index) => {
             return <li key={index}>{lists}</li>
           })}
         </JobRoleUnorderedList>
       </JobRoleListContainer>
 
       <JobRoleCoreList>
-        <h3>{core_skills.title}</h3>
+        <h3>Core Skills</h3>
         <div>
-          {core_skills.skill_sets.map((skills, index) => {
+          {coreSkills.map((skills, index) => {
             return <span key={index}>{skills}</span>
           })}
         </div>
       </JobRoleCoreList>
 
       <JobRoleListContainer>
-        <h3>{soft_skills.title}</h3>
+        <h3>Soft Skills</h3>
         <JobRoleUnorderedList>
-          {soft_skills.skill_sets.map((lists, index) => {
+          {softSkills.map((lists, index) => {
             return <li key={index}>{lists}</li>
           })}
         </JobRoleUnorderedList>

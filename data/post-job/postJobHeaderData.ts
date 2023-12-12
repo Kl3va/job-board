@@ -19,3 +19,10 @@ export const postJobNavData = {
     },
   ],
 }
+
+export const employerMenuData = [
+  {
+    icon: 'fa-solid fa-arrow-right-from-bracket',
+    title: 'Log out',
+  },
+]

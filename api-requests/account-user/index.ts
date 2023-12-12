@@ -22,12 +22,13 @@ export const CreateEmployerProfileRequest = async (
       Authorization: `Bearer ${token}`,
     }
 
-    const response = await axios.patch<EmployerProfileCreationResponse>(
+    const response: AxiosResponse<any> = await axios.patch(
       `${baseUrl}/api/v1/account-users/employer/create-profile/`,
       userData,
       { headers: headers }
     )
-    return response.data.data.employer // Return the data received from the server
+    // return response.data.data.employer // Return the data received from the server
+    return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to create profile') // Handle errors
   }

@@ -32,8 +32,8 @@ export const InputCheckbox = styled.input`
   margin: 0;
   font: inherit;
   color: var(--color-accent-100);
-  min-width: 1rem;
-  height: 1rem;
+  width: 0.2rem;
+  height: 0.2rem;
   border: 0.15rem solid var(--color-accent-200);
   border-radius: 0.15rem;
   display: block;

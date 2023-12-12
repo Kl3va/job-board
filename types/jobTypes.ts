@@ -31,38 +31,41 @@ export interface JobPostingTypes {
   employmentType: string
   experienceLevel: string
   workType: string
+  pay: number | string
+  responsibilities: string
+  jobRequirements: string[]
+  coreSkills: string[]
+  softSkills: string[]
+  closingDate: string
+  openPositions: number | string
+}
+
+//Single job types
+export interface SingleJobTypes {
+  employerId: string
+  jobRole: string
+  jobSummary: string
+  employmentType: string
+  workType: string
   pay: number
+  experienceLevel: string
   responsibilities: string
   jobRequirements: string[]
   coreSkills: string[]
   softSkills: string[]
   closingDate: string
   openPositions: number
+  _id: string
+  createdAt: string
+  updatedAt: string
+  __v: number
 }
 
 ///Create Job Types
 export interface JobDetailsResponse {
   status: string
   data: {
-    job: {
-      employerId: string
-      jobRole: string
-      jobSummary: string
-      employmentType: string
-      workType: string
-      pay: number
-      experienceLevel: string
-      responsibilities: string
-      jobRequirements: string[]
-      coreSkills: string[]
-      softSkills: string[]
-      closingDate: string
-      openPositions: number
-      _id: string
-      createdAt: string
-      updatedAt: string
-      __v: number
-    }
+    job: SingleJobTypes
   }
 }
 
@@ -70,7 +73,7 @@ export interface JobDetailsResponse {
 export interface JobListResponse {
   status: string
   data: {
-    jobs: JobDetailsResponse[]
+    jobs: SingleJobTypes[]
   }
 }
 

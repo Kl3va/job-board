@@ -1,6 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { JobSeekerSignUpRequest } from 'api-requests/authentication'
 import { useRouter } from 'next/router'
+import { useAuth } from 'hooks/useAuthProvider'
 
 //Styled components
 import { CustomBtn } from 'styles/globalStyles'
@@ -25,7 +26,7 @@ export interface JobSeekerSignUpTypes {
 
 const SignUpForm = () => {
   const router = useRouter()
-  
+  const { showAlert } = useAuth()
 
   const [user, setUser] = useState<JobSeekerSignUpTypes>({
     fullName: '',
@@ -53,7 +54,7 @@ const SignUpForm = () => {
         const signUpResponse = await JobSeekerSignUpRequest(user)
 
         //Handle successful signup response here
-        console.log('Signup successful!', signUpResponse)
+        showAlert(true, 'SignUp successful!', 'success')
         router.push('/login')
 
         setUser({
@@ -66,8 +67,8 @@ const SignUpForm = () => {
           email: false,
           password: false,
         })
-      } catch (error) {
-        console.error('Signup error:', error)
+      } catch (error: any) {
+        showAlert(true, error.message, 'failure')
       }
     }
   }

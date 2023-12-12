@@ -11,6 +11,10 @@ export const FindJobDetailJobRole = styled.div`
   & > p {
     margin-bottom: 1rem;
     font-size: 0.875rem;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   & > span {
@@ -41,6 +45,10 @@ export const JobRoleHeader = styled.div`
 
     p {
       font-size: 0.875rem;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 `
@@ -62,6 +70,10 @@ export const JobRoleSpecifics = styled.div`
       font-size: 0.7rem;
       line-height: 1;
 
+      &::first-letter {
+        text-transform: uppercase;
+      }
+
       @media ${QUERIES.tabletMini} {
         font-size: 0.875rem;
       }
@@ -81,6 +93,10 @@ export const JobRoleRenumeration = styled.div`
   margin-bottom: 1.2rem;
   p {
     font-size: 1rem;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 `
 
@@ -91,6 +107,10 @@ export const JobRoleListContainer = styled.div`
 
   p {
     font-size: 1rem;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 `
 

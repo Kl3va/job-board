@@ -21,7 +21,7 @@ export const EmployerSignUpRequest = async (userData: CompanySignUpTypes) => {
     )
     return response.data // Return the data received from the server
   } catch (error: any) {
-    return error.response?.data?.message || 'Failed' // Handle errors
+    return error.response?.message || 'Failed' // Handle errors
   }
 }
 

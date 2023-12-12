@@ -20,10 +20,19 @@ export const JobWrapper = styled.div`
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 2rem;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   button {
     padding: 0.625rem 1.125rem;
+  }
+
+  & > span {
+    padding: 0.625rem 1.125rem;
+    max-width: 7.8rem;
   }
 `
 export const JobHeader = styled.div`
@@ -31,6 +40,7 @@ export const JobHeader = styled.div`
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
+  position: relative;
 
   & > :nth-child(2) {
     display: flex;
@@ -44,6 +54,10 @@ export const JobHeader = styled.div`
 
     p {
       font-size: 0.875rem;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 
@@ -53,10 +67,10 @@ export const JobHeader = styled.div`
     gap: 0.8rem;
     font-size: 0.7rem;
 
-    @media screen and (min-width: 624px) {
+    @media screen and (min-width: 300px) {
       margin-left: auto;
       gap: 1rem;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     span {
@@ -77,6 +91,10 @@ export const JobAboutContainer = styled.div`
     gap: 0.3rem;
     align-items: center;
     font-size: 1rem;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 `
 
@@ -111,6 +129,10 @@ export const JobAboutSecondary = styled.div`
       p {
         font-size: 0.7rem;
         line-height: 1;
+
+        &::first-letter {
+          text-transform: uppercase;
+        }
 
         @media ${QUERIES.tabletMini} {
           font-size: 0.875rem;

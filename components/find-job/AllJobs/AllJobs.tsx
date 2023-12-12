@@ -35,15 +35,6 @@ const AllJobs = ({ jobData }: AllJobHomeTypes) => {
               <div>
                 <span>
                   <i className={data.action_save.icon}></i>
-                  {data.action_save.label}
-                </span>
-                <span>
-                  <i className={data.action_share.icon}></i>
-                  {data.action_share.label}
-                </span>
-                <span>
-                  <i className={data.action_copy.icon}></i>
-                  {data.action_copy.label}
                 </span>
               </div>
             </JobHeader>

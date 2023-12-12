@@ -5,9 +5,9 @@ import { useAuth } from 'hooks/useAuthProvider'
 export const BackgroundBlur = styled.aside`
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.35);
   z-index: 1000;
   display: block;
 `
@@ -15,10 +15,12 @@ export const BackgroundBlur = styled.aside`
 type Props = {}
 
 const MainBg = (props: Props) => {
-  const { handleActivePopup } = useAuth()
+  const { handleActivePopup, activePopup } = useAuth()
 
   return (
-    <BackgroundBlur onClick={() => handleActivePopup(null)}></BackgroundBlur>
+    activePopup && (
+      <BackgroundBlur onClick={() => handleActivePopup(null)}></BackgroundBlur>
+    )
   )
 }
 

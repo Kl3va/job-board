@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import JobHomeNoJobs from './Children/JobHomeNoJobs'
 import AllJobs from 'components/find-job/AllJobs/AllJobs'
 import { jobsData } from 'data/find-job/jobsData'
+import JobPostAllJobs from '../JobPostAllJobs/JobPostAllJobs'
+
+//Interface
+import { SingleJobTypes } from 'types/jobTypes'
 
 //Reusable Styled-components
 import { FindJobHomeMain } from 'components/find-job/FindJobHome/FindJobHomeStyles'
@@ -16,9 +20,33 @@ import {
   JobHomeHeaderBtnWrapper,
 } from './PostJobHomeStyles'
 
-type Props = {}
+interface Props {
+  jobsData: SingleJobTypes[]
+}
 
-const PostJobsHomeTemplate = (props: Props) => {
+const PostJobsHomeTemplate = ({ jobsData }: Props) => {
+  // const { setSearchValue, searchValue } = useAuth()
+
+  const [filteredJobs, setFilteredJobs] = useState<SingleJobTypes[] | null>(
+    null
+  )
+  const [searchInput, setSearchInput] = useState('')
+
+  useEffect(() => {
+    const filterJobs = () => {
+      if (!searchInput.trim()) {
+        setFilteredJobs(jobsData) // Display all jobs if searchValue is empty
+      } else {
+        const filtered = jobsData.filter((job) =>
+          job.jobRole.toLowerCase().includes(searchInput.toLowerCase())
+        )
+        setFilteredJobs(filtered) // Set filtered jobs
+      }
+    }
+
+    filterJobs()
+  }, [jobsData, searchInput])
+
   return (
     <FindJobHomeMain>
       <section>
@@ -29,6 +57,7 @@ const PostJobsHomeTemplate = (props: Props) => {
               name=''
               id=''
               placeholder='Search'
+              onChange={(e) => setSearchInput(e.target.value)}
             />
             <i className='fa-solid fa-magnifying-glass'></i>
           </JobSearchIconWrapper>
@@ -55,7 +84,16 @@ const PostJobsHomeTemplate = (props: Props) => {
       </section>
       <section>
         {/* <JobHomeNoJobs /> */}
-        <AllJobs jobData={jobsData} />
+        {/* <AllJobs jobData={jobsData} /> */}
+        {/* {jobsData ? <JobPostAllJobs jobsData={jobsData} /> : <JobHomeNoJobs />} */}
+
+        {/* Display JobHomeNoJobs only when filteredJobs is an empty array */}
+        {filteredJobs && filteredJobs.length === 0 && <JobHomeNoJobs />}
+
+        {/* Display JobPostAllJobs when there are filtered jobs */}
+        {filteredJobs && filteredJobs.length > 0 && (
+          <JobPostAllJobs jobsData={filteredJobs} />
+        )}
       </section>
     </FindJobHomeMain>
   )

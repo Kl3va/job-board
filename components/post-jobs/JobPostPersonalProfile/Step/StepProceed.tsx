@@ -18,7 +18,7 @@ import {
 
 const StepCompanyForm = () => {
   const router = useRouter()
-  const { token } = useAuth()
+  const { token, resetUser, showAlert } = useAuth()
 
   const [formData, setFormData] = useState({
     aboutCompany: '',
@@ -52,7 +52,8 @@ const StepCompanyForm = () => {
       try {
         // Send dataToSend (without location) to your API
         const data = await CreateEmployerProfileRequest(dataToSend, token)
-        console.log(data, 'success')
+        showAlert(true, 'Profile Updated!', 'success')
+        resetUser(data.data.employer)
         setFormData({
           aboutCompany: '',
           companyAddress: '',
@@ -63,8 +64,8 @@ const StepCompanyForm = () => {
 
         //Redirect on successful submission
         router.push('/post-job/home')
-      } catch (error) {
-        console.error('Error submitting form:', error)
+      } catch (error: any) {
+        showAlert(true, error.message, 'failure')
       }
     }
   }
