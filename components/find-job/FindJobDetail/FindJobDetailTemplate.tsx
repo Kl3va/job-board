@@ -1,9 +1,6 @@
 import React from 'react'
+import { SingleJobTypes } from 'types/jobTypes'
 //import BreadCrumbs from 'components/global/breadcrumbs/BreadCrumbs'
-
-//Data
-import { jobDetailData } from 'data/find-job/jobDetailData'
-import { similarJobsData } from 'data/find-job/similarJobsData'
 
 //Components
 import FindJobDetailMain from './Children/FindJobDetailMain'
@@ -13,18 +10,22 @@ import FindJobDetailSimilar from './Children/FindJobDetailSimilar'
 //Styled-components
 import { FindJobDetailPageMain } from './FindJobDetailStyles'
 
-type Props = {}
+interface Props {
+  jobDetails: SingleJobTypes
+}
 
-const FindJobDetailTemplate = (props: Props) => {
+const FindJobDetailTemplate = ({ jobDetails }: Props) => {
   return (
     <FindJobDetailPageMain>
-      <section>{/* <FindJobDetailMain {...jobDetailData} /> */}</section>
+      <section>
+        <FindJobDetailMain {...jobDetails} />
+      </section>
       <aside>
-        <FindJobDetailApply {...jobDetailData.about_company} />
+        <FindJobDetailApply jobSummary={jobDetails.jobSummary} />
       </aside>
-      <aside>
+      {/* <aside>
         <FindJobDetailSimilar data={similarJobsData} />
-      </aside>
+      </aside> */}
     </FindJobDetailPageMain>
   )
 }

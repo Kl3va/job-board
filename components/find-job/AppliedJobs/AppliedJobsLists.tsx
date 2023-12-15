@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import Image from 'next/image'
-import { JobDataTypes, SingleJobTypes } from 'types/jobTypes'
+import { JobApplicationTypes } from 'types/jobTypes'
 
 //Reusable Styled-components
 import { CustomBtn } from 'styles/globalStyles'
 import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
+import { StyledBookmark } from '../SavedJobs/SavedJobsLists'
 import { formatDate } from 'helper'
 
 //Default images
@@ -18,13 +20,20 @@ import {
   JobAboutSecondary,
   JobHeader,
   JobWrapper,
-} from './AllJobsStyles'
+} from '../AllJobs/AllJobsStyles'
 
 interface AllJobHomeTypes {
-  jobData: SingleJobTypes[]
+  jobData: JobApplicationTypes[]
 }
 
-const AllJobs = ({ jobData }: AllJobHomeTypes) => {
+const AppliedJobsLists = ({ jobData }: AllJobHomeTypes) => {
+  // const [updatedJobsData, setUpdatedJobsData] = useState<any[]>(jobData)
+
+  // useEffect(() => {
+  //   // Update the component state when jobsData prop changes
+  //   setUpdatedJobsData(jobData)
+  // }, [jobData])
+
   return (
     <JobsContainer>
       {jobData.map((data, id) => {
@@ -35,24 +44,24 @@ const AllJobs = ({ jobData }: AllJobHomeTypes) => {
                 <Image src={JobLogo} alt='job-image' />
               </div>
               <div>
-                <h3>{data.jobRole}</h3>
+                <h3>{data.jobId.jobRole}</h3>
                 <p>{`Wiki. United-Kingdom`}</p>
               </div>
               <div>
-                <span>
-                  <i className='fa-regular fa-bookmark'></i>
-                </span>
+                <StyledBookmark>
+                  <i className='fa-solid fa-circle-check'></i>
+                </StyledBookmark>
               </div>
             </JobHeader>
-            <p>{data.jobSummary}</p>
+            <p>{data.jobId.jobSummary}</p>
             <JobAboutContainer>
               <span>
                 <i className='fa-regular fa-clock'></i>
-                {data.employmentType}
+                {data.jobId.employmentType}
               </span>
               <span>
                 <i className='fa-regular fa-dollar-sign'></i>
-                {data.pay}
+                {data.jobId.pay}
               </span>
             </JobAboutContainer>
             <JobAboutSecondary>
@@ -60,30 +69,29 @@ const AllJobs = ({ jobData }: AllJobHomeTypes) => {
                 <div>
                   <div>
                     <Image src={dotIcon} />
-                    {/* <i className='fa-solid fa-period'></i> */}
                   </div>
-                  <p>{data.employmentType}</p>
+                  <p>{data.jobId.employmentType}</p>
                 </div>
                 <div>
                   <div>
                     <Image src={dotIcon} />
-                    {/* <i className='fa-solid fa-period'></i> */}
                   </div>
-                  <p>{data.experienceLevel}</p>
+                  <p>{data.jobId.experienceLevel}</p>
                 </div>
                 <div>
                   <div>
                     <Image src={dotIcon} />
-                    {/* <i className='fa-solid fa-period'></i> */}
                   </div>
-                  <p>{data.workType}</p>
+                  <p>{data.jobId.workType}</p>
                 </div>
               </div>
-              <span>{formatDate(data.closingDate)}</span>
+              {data.jobId.closingDate && (
+                <span>{formatDate(data.jobId.closingDate)}</span>
+              )}
             </JobAboutSecondary>
             {/* <CustomBtn type='submit'>View post</CustomBtn> */}
             <CustomLinkBtn
-              href={`/apply-for-job/home/${data._id}`}
+              href={`/apply-for-job/home/${data.jobId._id}`}
               text='View Post'
               bgColor='var(--color-accent-100)'
               textColor='var(--color-bg-100)'
@@ -95,4 +103,4 @@ const AllJobs = ({ jobData }: AllJobHomeTypes) => {
   )
 }
 
-export default AllJobs
+export default AppliedJobsLists

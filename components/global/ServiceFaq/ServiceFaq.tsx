@@ -71,6 +71,7 @@ const ServiceFaq = () => {
           })}
         </FaqWrap>
       </FaqContainer>
+      
     </FaqSection>
   )
 }

@@ -23,6 +23,28 @@ import {
   PersonalProfileLine,
 } from './PersonalProfileStyles'
 
+interface StepOneData {
+  phoneNumber: string
+  bio: string
+  dateOfBirth: string
+  gender: string
+  location: string
+}
+
+export interface PersonalformDatatypes {
+  phoneNumber: string
+  bio: string
+  dateOfBirth: string
+  gender: string
+  location: string
+  education: string
+  currentPosition: string
+  experience: string
+  skills: string
+  yearsOfExperience: string
+  cvUrl: string
+}
+
 type Props = {}
 
 const PersonalProfileTemplate = (props: Props) => {
@@ -30,6 +52,25 @@ const PersonalProfileTemplate = (props: Props) => {
   const { steps, heading } = personalProfileData
 
   const [currentStep, setCurrentStep] = useState(1)
+
+  const [formData, setFormData] = useState<PersonalformDatatypes>({
+    phoneNumber: '',
+    bio: '',
+    dateOfBirth: '',
+    gender: '',
+    location: '',
+    education: '',
+    currentPosition: '',
+    experience: '',
+    skills: '',
+    yearsOfExperience: '',
+    cvUrl: '',
+  })
+
+  // Function to update form data
+  const updateFormData = (dataToUpdate: StepOneData) => {
+    setFormData({ ...formData, ...dataToUpdate })
+  }
 
   // Function to handle moving to the next step
   const handleNextStep = () => {
@@ -40,6 +81,8 @@ const PersonalProfileTemplate = (props: Props) => {
   const handlePrevStep = () => {
     setCurrentStep(currentStep - 1)
   }
+
+  console.log(formData)
 
   return (
     <MainPersonalProfile>
@@ -74,11 +117,14 @@ const PersonalProfileTemplate = (props: Props) => {
       <PersonalProfileFormSection>
         <PersonalProfileFormContainer>
           {/* Render different form components based on the currentStep */}
-          {currentStep === 1 && <StepOneForm onNextStep={handleNextStep} />}
-          {currentStep === 2 && (
-            <StepTwoForm
-              onPrevStep={handlePrevStep}
+          {currentStep === 1 && (
+            <StepOneForm
+              onNextStep={handleNextStep}
+              updateFormData={updateFormData}
             />
+          )}
+          {currentStep === 2 && (
+            <StepTwoForm onPrevStep={handlePrevStep} formData={formData} />
           )}
         </PersonalProfileFormContainer>
       </PersonalProfileFormSection>

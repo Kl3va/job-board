@@ -112,7 +112,7 @@ export const GetJobSeekerProfileRequest = async (token: string) => {
       Authorization: `Bearer ${token}`,
     }
 
-    const response = await axios.patch<JobSeekerProfileResponse>(
+    const response = await axios.get<JobSeekerProfileResponse>(
       `${baseUrl}/api/v1/account-users/job-seeker/profile/`,
       { headers: headers }
     )

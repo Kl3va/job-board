@@ -10,6 +10,7 @@ import {
   JobApplicationResponse,
   SavedJobApplicationDetails,
   JobApplicationListResponse,
+  UnsavedJobApiResponse,
 } from 'types/jobTypes'
 
 /////////////JOB API REQUESTS
@@ -146,7 +147,7 @@ export const SavedJobRequest = async (token: string, jobID: string) => {
       Authorization: `Bearer ${token}`,
     }
 
-    const response = await axios.post<SavedJobApplicationDetails>(
+    const response = await axios.post<UnsavedJobApiResponse>(
       `${baseUrl}/api/v1/jobs/save-job/${jobID}`,
       { headers: headers }
     )
@@ -165,13 +166,14 @@ export const UnSavedJobRequest = async (token: string, jobID: string) => {
       Authorization: `Bearer ${token}`,
     }
 
-    const response = await axios.post<SavedJobApplicationDetails>(
+    const response: AxiosResponse<any> = await axios.post(
       `${baseUrl}/api/v1/jobs/unsave-job/${jobID}`,
       { headers: headers }
     )
     return response.data.data.job // Return the data received from the server
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to unsave job') // Handle errors
+    // throw new Error(error.response?.data?.message || 'Failed to unsave job') // Handle errors
+    throw new Error(error.message)
   }
 }
 

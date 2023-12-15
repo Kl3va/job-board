@@ -1,5 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
+import { useAuth } from 'hooks/useAuthProvider'
+import { ApplyToJobRequest } from 'api-requests/job'
 import { applyNowContentData } from 'data/find-job/applyNowContentData'
 
 //Reusable Styled-components
@@ -21,6 +23,19 @@ import {
 type Props = typeof applyNowContentData
 
 const JobHubProfile = ({ profile, header, summary, others }: Props) => {
+  const { activeJobId, token, showAlert } = useAuth()
+
+  const applyToJob = async () => {
+    if (token !== null) {
+      try {
+        const data = await ApplyToJobRequest(token, activeJobId)
+        showAlert(true, 'Job Application Sucessful!', 'success')
+      } catch (error: any) {
+        showAlert(true, error.message, 'failure')
+      }
+    }
+  }
+
   return (
     <JobHubProfileSection>
       <JobHubProfileContainer>
@@ -83,7 +98,9 @@ const JobHubProfile = ({ profile, header, summary, others }: Props) => {
           >
             Cancel
           </CustomBtn>
-          <CustomBtn type='submit'>Apply</CustomBtn>
+          <CustomBtn type='button' onClick={applyToJob}>
+            Apply
+          </CustomBtn>
         </MultiBtnsWrapper>
       </JobHubProfileContainer>
     </JobHubProfileSection>

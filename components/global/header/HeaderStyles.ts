@@ -37,6 +37,7 @@ export const HeaderLogoContainer = styled.div`
   font-size: 1rem;
   font-weight: 600;
   font-family: var(--font-pry-100);
+  cursor: pointer;
 
   span {
     display: flex;

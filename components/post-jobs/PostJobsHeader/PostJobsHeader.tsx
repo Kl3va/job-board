@@ -4,21 +4,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { postJobNavData } from 'data/post-job/postJobHeaderData'
 import { useAuth } from 'hooks/useAuthProvider'
-import EmployerMenu from './EmployerMenu'
+
 
 //Styled-Components
 import { HeaderLogoContainer } from 'components/global/header/HeaderStyles'
 import { HeaderContainer } from 'components/global/header/HeaderStyles'
-// import {
-//   JobHeaderInner,
-//   JobHeaderNav,
-//   JobHeaderLists,
-//   JobHeaderLink,
-//   JobHeaderProfile,
-//   JobHeaderSearchWrapper,
-//   JobSearchIconWrapper,
-//   JobSearchInputSearch,
-// } from './FindJobHeaderStyles'
+
 
 import {
   JobHeaderInner,
@@ -82,7 +73,7 @@ const PostJobHeader = ({ logo, navLinks, profile }: PostJobNavProps) => {
             <span>
               <i className='fa-solid fa-chevron-down'></i>
             </span>
-            <EmployerMenu />
+            
           </JobHeaderProfile>
         </JobHeaderSearchWrapper>
       </JobHeaderInner>

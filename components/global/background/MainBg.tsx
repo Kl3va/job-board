@@ -8,7 +8,7 @@ export const BackgroundBlur = styled.aside`
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.35);
-  z-index: 1000;
+  z-index: 1050;
   display: block;
 `
 

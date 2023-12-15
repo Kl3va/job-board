@@ -7,7 +7,7 @@ export const FindJobHomeMain = styled.main`
   display: grid;
   gap: 1rem;
 
-  & > * {
+  & > section {
     background: var(--color-bg-500);
     // width: min(90%, 64.31rem);
     width: min(90%, 77.5rem);

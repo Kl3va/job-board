@@ -1,7 +1,8 @@
 import React from 'react'
+import { useAuth } from 'hooks/useAuthProvider'
+import { useRouter } from 'next/router'
 import { CustomBtn } from 'styles/globalStyles'
 import styled from 'styled-components'
-
 
 export const FindJobDetailApplyNow = styled.div`
   display: grid;
@@ -35,23 +36,36 @@ export const FindJobDetailApplyNow = styled.div`
 `
 
 interface ApplyJobProps {
-  names: string
-  link: string
-  description: string
+  jobSummary: string
 }
 
-const FindJobDetailApply = ({ names, link, description }: ApplyJobProps) => {
+const FindJobDetailApply = ({ jobSummary }: ApplyJobProps) => {
+  const { setActiveJobId, handleActivePopup, activeJobId } = useAuth()
+  const router = useRouter()
+  const { jobID } = router.query
+
+  const handleJobApply = () => {
+    handleActivePopup('apply-popup')
+    if (typeof jobID === 'string') {
+      setActiveJobId(jobID)
+    } else {
+      // Handle the case where jobID is undefined or not a string
+      console.error('Invalid jobID:', jobID)
+    }
+  }
+  console.log(activeJobId)
+
   return (
     <FindJobDetailApplyNow>
       <div>
-        <h3>{`About: ${names}`}</h3>
-        <a href={link}>
+        <h3>{`About: Wiki`}</h3>
+        <a href='#'>
           <i className='fa-regular fa-arrow-up-right-from-square'></i>
           Website
         </a>
       </div>
-      <p>{description}</p>
-      <CustomBtn>Apply Now</CustomBtn>
+      <p>{jobSummary}</p>
+      <CustomBtn onClick={handleJobApply}>Apply Now</CustomBtn>
       <CustomBtn>Save Job</CustomBtn>
     </FindJobDetailApplyNow>
   )

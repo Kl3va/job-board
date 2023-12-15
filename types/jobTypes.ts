@@ -96,7 +96,7 @@ export interface JobApplicationResponse {
 
 ///Saved Job types
 
-interface JobApplicationTypes {
+export interface JobApplicationTypes {
   _id: string
   jobSeekerId: {
     _id: string
@@ -151,6 +151,22 @@ export interface SavedJobApplicationDetails {
   status: string
   data: {
     job: JobApplicationTypes
+  }
+}
+
+export interface UnsavedJobApiResponse {
+  status: string
+  data: {
+    job: {
+      jobSeekerId: string
+      jobId: string
+      applied: boolean
+      saved: boolean
+      _id: string
+      createdAt: string
+      updatedAt: string
+      __v: number
+    }
   }
 }
 

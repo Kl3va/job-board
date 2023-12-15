@@ -27,3 +27,26 @@ export const findJobNavData = {
     },
   ],
 }
+
+export const jobseekerMenuData = [
+  {
+    icon: 'fa-regular fa-window-maximize',
+    url: '/apply-for-job/applied-jobs',
+    title: 'Applied Jobs',
+  },
+  {
+    icon: 'fa-regular fa-floppy-disk',
+    url: '/apply-for-job/saved-jobs',
+    title: 'Saved Jobs',
+  },
+  {
+    icon: 'fa-regular fa-gear',
+    url: '/apply-for-job/home/account-settings',
+    title: 'Account Settings',
+  },
+  {
+    icon: 'fa-light fa-user-group',
+    url: '/apply-for-job/home/account-settings/profile-preview',
+    title: 'Career Profile',
+  },
+]

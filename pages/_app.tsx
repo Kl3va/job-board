@@ -9,6 +9,8 @@ import Header from 'components/global/header/Header'
 import ScrollTop from 'components/global/scrollTop/ScrollTop'
 import Alert from 'components/global/alert/Alert'
 import MainBg from 'components/global/background/MainBg'
+import JobseekerMenu from 'components/find-job/FindJobHeader/JobseekerMenu'
+import EmployerMenu from 'components/post-jobs/PostJobsHeader/EmployerMenu'
 
 import 'styles/fontawesome-pro/css/all.css'
 
@@ -19,6 +21,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GlobalStyles />
         <Alert />
         <MainBg />
+        <JobseekerMenu />
+        <EmployerMenu />
 
         {/* <Header data={menuData.header} /> */}
         <Component {...pageProps} />

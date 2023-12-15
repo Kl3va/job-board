@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { useAuth } from 'hooks/useAuthProvider'
 
 const EmployerMenuBar = styled.aside`
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
+  position: fixed;
+  top: 4.5rem;
+  right: 10vw;
   cursor: pointer;
 
   width: min(100%, 15rem);

@@ -52,17 +52,17 @@ interface JobSeekerProfile {
   createdAt: string
   updatedAt: string
   __v: number
-  bio: string
-  currentPosition: string
-  cvUrl: string
-  dateOfBirth: string
-  education: string
-  experience: string
-  gender: string
-  location: string
-  phoneNumber: string
-  skills: string
-  yearsOfExperience: number
+  bio?: string
+  currentPosition?: string
+  cvUrl?: string
+  dateOfBirth?: string
+  education?: string
+  experience?: string
+  gender?: string
+  location?: string
+  phoneNumber?: string
+  skills?: string
+  yearsOfExperience?: number
 }
 
 interface EmployerProfile {
@@ -77,8 +77,6 @@ interface EmployerProfile {
   companySize: number
   companyWebsite: string
 }
-
-
 
 // Now, 'User' can represent either a job seeker or an employer profile.
 export type User = JobSeekerProfile | EmployerProfile

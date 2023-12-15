@@ -10,6 +10,10 @@ import {
 
 export interface AuthContextType {
   searchValue: string
+  cvOption: number
+  activeJobId: string
+  setActiveJobId: React.Dispatch<React.SetStateAction<string>>
+  setcvOption: React.Dispatch<React.SetStateAction<number>>
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
   resetToken: (value: string) => void
   activePopup: string | null
@@ -41,6 +45,8 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const router = useRouter()
   const [searchValue, setSearchValue] = useState('')
+  const [cvOption, setcvOption] = useState(0)
+  const [activeJobId, setActiveJobId] = useState('')
   const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [activePopup, setActivePopup] = useState<string | null>(null)
@@ -125,6 +131,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider
       value={{
         searchValue,
+        cvOption,
+        activeJobId,
+        setActiveJobId,
+        setcvOption,
         setSearchValue,
         resetToken,
         resetUser,

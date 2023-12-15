@@ -1,16 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import FindJobLayout from 'components/find-job/FindJobLayout/FindJobLayout'
 import FindJobHomeTemplate from 'components/find-job/FindJobHome/FindJobHome'
+import { GetJobBySeekerRequest } from 'api-requests/job'
 
-//Data
-import { jobsData } from 'data/find-job/jobsData'
+//Types
+
+import { SingleJobTypes } from 'types/jobTypes'
 
 type Props = {}
 
 const ApplyJobHome = (props: Props) => {
+  const [jobsData, setJobsData] = useState<SingleJobTypes[] | null>(null)
+
+  //SingleJobTypes[]
+
+  useEffect(() => {
+    const token = localStorage.getItem('userToken')
+
+    if (token) {
+      GetJobBySeekerRequest(token)
+        .then((data) => {
+          setJobsData(data)
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error)
+        })
+    }
+  }, [])
+
   return (
     <FindJobLayout>
-      <FindJobHomeTemplate jobData={jobsData} />
+      {jobsData !== null ? (
+        <FindJobHomeTemplate jobData={jobsData} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </FindJobLayout>
   )
 }

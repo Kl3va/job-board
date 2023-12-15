@@ -12,11 +12,48 @@ export const ImageUploadWrapper = styled.div`
   border: 1px solid var(--color-accent-200);
   // background: var(--White, #fff);
 `
+export const PdfWrapper = styled.div`
+  // height: 4.5rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-accent-100);
+  border-radius: 0.5rem;
+
+  display: flex;
+  gap: 1rem;
+
+  h3 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  p {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  & > :first-child {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: 1.75rem;
+    border: 4px solid var(--color-bg-200);
+    background: var(--color-bg-300);
+  }
+
+  & > :last-child {
+    margin-left: auto;
+    cursor: pointer;
+  }
+`
 
 export const UploaderContent = styled.div`
   display: grid;
   justify-items: center;
   gap: 1rem;
+  cursor: pointer;
 
   & > span {
     width: 2.5rem;
