@@ -8,10 +8,17 @@ import {
   GetEmployerProfileRequest,
 } from 'api-requests/account-user'
 
+interface FiltersType {
+  [key: string]: string[]
+}
+
 export interface AuthContextType {
   searchValue: string
   cvOption: number
   activeJobId: string
+  filters: FiltersType
+  setFilters: React.Dispatch<React.SetStateAction<FiltersType>>
+  handleFilterChange: (filterType: string, value: string) => void
   setActiveJobId: React.Dispatch<React.SetStateAction<string>>
   setcvOption: React.Dispatch<React.SetStateAction<number>>
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
@@ -54,6 +61,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     null
   )
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
+
+  const [filters, setFilters] = useState<FiltersType>({
+    workType: [],
+    employmentType: [],
+    pay: [],
+    experienceLevel: [],
+    // Initialize other filters
+  })
+
+  const handleFilterChange = (filterType: string, value: string) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterType]: prevFilters[filterType].includes(value)
+        ? prevFilters[filterType].filter((filter) => filter !== value)
+        : [...prevFilters[filterType], value],
+    }))
+  }
 
   const handleActivePopup = (value: string | null): void => {
     // setActivePopup(value)
@@ -133,6 +157,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         searchValue,
         cvOption,
         activeJobId,
+        filters,
+        setFilters,
+        handleFilterChange,
         setActiveJobId,
         setcvOption,
         setSearchValue,

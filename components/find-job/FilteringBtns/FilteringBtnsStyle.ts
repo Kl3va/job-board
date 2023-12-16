@@ -42,6 +42,10 @@ export const FilterBtn = styled.li`
   justify-content: center;
   align-items: center;
 
+  &:first-child {
+    pointer-events: none;
+  }
+
   &:not(:first-child) {
     margin-left: -1.5rem;
     flex-direction: row-reverse;
