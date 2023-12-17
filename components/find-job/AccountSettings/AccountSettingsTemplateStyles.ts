@@ -7,7 +7,7 @@ export const AccountSettingsSection = styled.section`
 
 export const AccountSettingsContainer = styled.div`
   padding: 2rem 1rem;
-  margin-top: 2.5rem;
+  margin-block: 2.5rem;
   margin-inline: auto;
   width: min(90%, 58.69rem);
 

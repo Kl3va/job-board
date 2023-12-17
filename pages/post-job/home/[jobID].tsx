@@ -15,6 +15,8 @@ const PostJobDetailPage = () => {
   )
 
   useEffect(() => {
+    let isMounted = true
+
     if (typeof jobID === 'string') {
       const token = localStorage.getItem('userToken')
 
@@ -28,14 +30,17 @@ const PostJobDetailPage = () => {
           })
       }
     }
+
+     return () => {
+       isMounted = false
+     }
+     
   }, [jobID])
 
   // console.log(jobDetails)
 
   return (
     <PostJobsLayout>
-      
-
       {Object.keys(jobDetails).length !== 0 ? ( // Check if jobDetails is not an empty object before rendering JobPostDetailTemplate
         <JobPostDetailTemplate jobDetails={jobDetails} />
       ) : (

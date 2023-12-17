@@ -15,6 +15,8 @@ const SavedJobsPage = (props: Props) => {
   //SingleJobTypes[]
 
   useEffect(() => {
+    let isMounted = true
+
     const token = localStorage.getItem('userToken')
 
     if (token) {
@@ -26,9 +28,11 @@ const SavedJobsPage = (props: Props) => {
           console.error('Error fetching data:', error)
         })
     }
-  }, [])
 
-  
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
     <FindJobLayout>

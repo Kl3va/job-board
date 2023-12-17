@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useAuth } from 'hooks/useAuthProvider'
 import { AnimatePresence } from 'framer-motion'
 import { faqToggleVariant } from 'styles/animations/variants/faqToggleVariant'
+import { UpdateJobSeekerProfileRequest } from 'api-requests/account-user'
+import { useCloudinaryUpload } from 'hooks/useCloudinaryUpload'
+import { PersonalformDatatypes } from 'components/find-job/PersonalProfile/PersonalProfileTemplate'
 
 import { CustomBtn } from 'styles/globalStyles'
 
@@ -11,6 +16,7 @@ import {
   PersonalInfoSettingsForm,
   PersonalInfoSettingsHeader,
 } from '../PersonalInformationSettings/PersonalInformationSettingsStyles'
+import { PdfWrapper } from 'components/find-job/PersonalProfile/Step/StepTwoP/StepTwoPStyles'
 
 import { StepInputWrapper } from 'components/find-job/PersonalProfile/Step/StepOneP/StepOnePStyles'
 import {
@@ -18,10 +24,104 @@ import {
   UploaderContent,
 } from 'components/find-job/PersonalProfile/Step/StepTwoP/StepTwoPStyles'
 
-type Props = {}
+interface Props {
+  formData: PersonalformDatatypes
+}
 
-const ProfessionalInformationSettings = (props: Props) => {
+const ProfessionalInformationSettings = ({ formData }: Props) => {
+  const router = useRouter()
+  const { showAlert, resetUser } = useAuth()
   const [toggleForm, setToggleForm] = useState(false)
+  const [ProfessionaInfoFormData, setProfessionalInfoFormData] = useState({
+    education: '',
+    currentPosition: '',
+    experience: '',
+    skills: '',
+    yearsOfExperience: '',
+    cvUrl: '',
+  })
+  const {
+    selectedFile,
+    fileInputRef,
+    handleFileChange,
+    handleButtonClick,
+    setSelectedFile,
+  } = useCloudinaryUpload()
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target
+    setProfessionalInfoFormData({
+      ...ProfessionaInfoFormData,
+      [name]: value,
+    })
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    // Exclude location field before sending data to API
+    const token = localStorage.getItem('userToken')
+
+    if (
+      ProfessionaInfoFormData.currentPosition &&
+      selectedFile &&
+      ProfessionaInfoFormData.education &&
+      ProfessionaInfoFormData.experience &&
+      ProfessionaInfoFormData.skills &&
+      !Number.isNaN(Number(ProfessionaInfoFormData.yearsOfExperience)) &&
+      token !== null
+    ) {
+      try {
+        //construct api data to be sent
+        const dataToSend = {
+          ...formData,
+          currentPosition: ProfessionaInfoFormData.currentPosition,
+          education: ProfessionaInfoFormData.education,
+          experience: ProfessionaInfoFormData.experience,
+          skills: ProfessionaInfoFormData.skills,
+          yearsOfExperience: Number(ProfessionaInfoFormData.yearsOfExperience),
+          cvUrl: selectedFile,
+        }
+
+        // Send dataToSend to your API
+        const data = await UpdateJobSeekerProfileRequest(dataToSend, token)
+        resetUser(data)
+        //console.log(dataToSend)
+        showAlert(true, 'Profile Updated!', 'success')
+        setProfessionalInfoFormData({
+          education: '',
+          currentPosition: '',
+          experience: '',
+          skills: '',
+          yearsOfExperience: '',
+          cvUrl: '',
+        })
+        handleFormToggle()
+
+        //Redirect on successful submission
+        router.push('/apply-for-job/home')
+      } catch (error: any) {
+        showAlert(true, error.message, 'failure')
+        // console.log(error.message)
+      }
+    }
+  }
+
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setProfessionalInfoFormData({
+      education: '',
+      currentPosition: '',
+      experience: '',
+      skills: '',
+      yearsOfExperience: '',
+      cvUrl: '',
+    })
+  }
 
   const handleFormToggle = () => {
     setToggleForm(!toggleForm)
@@ -43,6 +143,7 @@ const ProfessionalInformationSettings = (props: Props) => {
       </PersonalInfoSettingsHeader>
       <AnimatePresence>
         <PersonalInfoSettingsForm
+          onSubmit={handleSubmit}
           formToggle={!toggleForm}
           variants={faqToggleVariant()}
           initial={!toggleForm ? 'hidden' : 'initial'}
@@ -60,24 +161,26 @@ const ProfessionalInformationSettings = (props: Props) => {
             <label>Role</label>
             <input
               type='text'
-              name='role'
-              id='role'
-              placeholder='Enter Job role'
+              name='currentPosition'
+              id='currentPosition'
+              placeholder='Enter your current position'
+              value={ProfessionaInfoFormData.currentPosition}
+              onChange={handleInputChange}
               required
             />
           </StepInputWrapper>
 
           <StepInputWrapper>
-            <label>Summary</label>
-            <textarea
-              name='summary'
-              id='summary'
-              cols={20}
-              rows={4}
-              placeholder='Enter summary'
+            <label>Years of experience</label>
+            <input
+              type='number'
+              name='yearsOfExperience'
+              id='yearsOfExperience'
+              placeholder='Enter a valid number'
+              value={ProfessionaInfoFormData.yearsOfExperience}
+              onChange={handleInputChange}
               required
-            ></textarea>
-            <p>275 characters left</p>
+            />
           </StepInputWrapper>
 
           <StepInputWrapper>
@@ -87,48 +190,65 @@ const ProfessionalInformationSettings = (props: Props) => {
               id='experience'
               cols={20}
               rows={4}
-              placeholder='Enter experience'
+              placeholder='Enter Experience(Please separate with line breaks)'
+              value={ProfessionaInfoFormData.experience}
+              onChange={handleInputChange}
               required
             ></textarea>
-            <p>275 characters left</p>
           </StepInputWrapper>
 
           <StepInputWrapper>
             <label>Education</label>
-            <textarea
+            <input
+              type='text'
               name='education'
               id='education'
-              cols={20}
-              rows={4}
-              placeholder='Education'
+              placeholder='Enter your education info'
+              value={ProfessionaInfoFormData.education}
+              onChange={handleInputChange}
               required
-            ></textarea>
-            <p>275 characters left</p>
+            />
           </StepInputWrapper>
 
           <StepInputWrapper>
             <label>Skills</label>
-            <textarea
+            <input
+              type='text'
               name='skills'
               id='skills'
-              cols={20}
-              rows={4}
-              placeholder='Enter skills'
+              placeholder='Enter skills(seperate with commas)'
+              value={ProfessionaInfoFormData.skills}
+              onChange={handleInputChange}
               required
-            ></textarea>
-            <p>275 characters left</p>
+            />
           </StepInputWrapper>
 
           <StepInputWrapper>
             <label>Upload CV</label>
+            {selectedFile && (
+              <PdfWrapper>
+                <span>
+                  <i className='fa-regular fa-file'></i>
+                </span>
+                <div>
+                  <h3>CV pdf</h3>
+                  <p>100% uploaded</p>
+                </div>
+                <span onClick={() => setSelectedFile('')}>
+                  <i className='fa-regular fa-trash-can'></i>
+                </span>
+              </PdfWrapper>
+            )}
             <ImageUploadWrapper>
               <input
                 type='file'
+                ref={fileInputRef}
                 accept='.pdf' // Specify to accept only PDF files
                 style={{ display: 'none' }}
+                onChange={handleFileChange}
               />
 
-              <UploaderContent>
+              <UploaderContent onClick={handleButtonClick}>
                 <span>
                   <i className='fa-regular fa-cloud-arrow-up'></i>
                 </span>
@@ -145,6 +265,7 @@ const ProfessionalInformationSettings = (props: Props) => {
               type='submit'
               bgColor='var(--color-bg-100)'
               textColor='var(--color-font-400)'
+              onClick={handleCancel}
             >
               Cancel
             </CustomBtn>

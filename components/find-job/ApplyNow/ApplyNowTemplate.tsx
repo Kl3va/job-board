@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAuth } from 'hooks/useAuthProvider'
+import JobHubApplyProfile from '../JobHubProfile/JobHubApplyProfile'
 
 //DATA
 import { applyNowContentData } from 'data/find-job/applyNowContentData'
@@ -19,7 +20,7 @@ const ApplyNowTemplate = (props: Props) => {
       </section> */}
 
       {cvOption === 0 ? (
-        <JobHubProfile {...applyNowContentData} />
+        <JobHubApplyProfile {...applyNowContentData} />
       ) : (
         <section>
           <ApplyNowContents {...applyNowContentData} />

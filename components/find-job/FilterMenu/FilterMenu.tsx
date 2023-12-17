@@ -38,7 +38,7 @@ const FilterMenu = ({ location, page }: MenuTypes) => {
     <FilterMenuContainer ref={container}>
       {page.checkmark.map((box, index) => {
         return (
-          <label>
+          <label key={index}>
             <input
               type='checkbox'
               name={box.id}

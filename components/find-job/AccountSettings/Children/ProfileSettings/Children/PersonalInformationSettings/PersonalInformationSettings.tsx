@@ -4,6 +4,8 @@ import { faqToggleVariant } from 'styles/animations/variants/faqToggleVariant'
 import profileImage from 'public/images/jobhub-avatar.png'
 import { AnimatePresence } from 'framer-motion'
 import { CustomBtn } from 'styles/globalStyles'
+import { StepOneData } from 'components/find-job/PersonalProfile/PersonalProfileTemplate'
+import { useAuth } from 'hooks/useAuthProvider'
 
 //Reusable Styled-component
 import {
@@ -26,10 +28,67 @@ import {
   PersonalInfoSettingsSelectWrapper,
 } from './PersonalInformationSettingsStyles'
 
-type Props = {}
+interface Props {
+  updateFormData: (data: StepOneData) => void
+}
 
-const PersonalInformationSettings = (props: Props) => {
+const PersonalInformationSettings = ({ updateFormData }: Props) => {
   const [toggleForm, setToggleForm] = useState(false)
+  const { showAlert } = useAuth()
+  const [PersonalInfoFormData, setPersonalInfoFormData] = useState<StepOneData>(
+    {
+      phoneNumber: '',
+      bio: '',
+      dateOfBirth: '',
+      gender: 'male',
+      location: 'United-Kingdom',
+    }
+  )
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (
+      PersonalInfoFormData.bio &&
+      PersonalInfoFormData.phoneNumber &&
+      PersonalInfoFormData.dateOfBirth &&
+      PersonalInfoFormData.location &&
+      PersonalInfoFormData.gender
+    ) {
+      updateFormData(PersonalInfoFormData)
+      showAlert(true, 'Saved', 'success')
+      setPersonalInfoFormData({
+        phoneNumber: '',
+        bio: '',
+        dateOfBirth: '',
+        gender: 'male',
+        location: 'United-Kingdom',
+      })
+      handleFormToggle()
+    }
+  }
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target
+    setPersonalInfoFormData({
+      ...PersonalInfoFormData,
+      [name]: value,
+    })
+  }
+
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setPersonalInfoFormData({
+      phoneNumber: '',
+      bio: '',
+      dateOfBirth: '',
+      gender: 'male',
+      location: 'United-Kingdom',
+    })
+  }
 
   const handleFormToggle = () => {
     setToggleForm(!toggleForm)
@@ -51,6 +110,7 @@ const PersonalInformationSettings = (props: Props) => {
       </PersonalInfoSettingsHeader>
       <AnimatePresence>
         <PersonalInfoSettingsForm
+          onSubmit={handleFormSubmit}
           formToggle={toggleForm === false}
           variants={faqToggleVariant()}
           initial={toggleForm === false ? 'hidden' : 'initial'}
@@ -88,24 +148,29 @@ const PersonalInformationSettings = (props: Props) => {
           </PersonalInfoSettingsFormHeader>
 
           <StepInputWrapper>
-            <label>Full name</label>
-            <input
-              type='text'
-              name='fullName'
-              id='fullName'
-              placeholder='Enter Full name'
+            <label>Bio</label>
+            <textarea
+              name='bio'
+              id='bio'
+              cols={20}
+              rows={4}
+              placeholder='Enter Brief Summary'
+              value={PersonalInfoFormData.bio}
+              onChange={handleInputChange}
               required
-            />
+            ></textarea>
           </StepInputWrapper>
 
           <PersonalInfoSettingsSelectWrapper>
             <StepInputWrapper>
-              <label>Email</label>
+              <label>Date of Birth</label>
               <input
-                type='email'
-                name='email'
-                id='email'
-                placeholder='Enter Email'
+                type='date'
+                name='dateOfBirth'
+                id='dateOfBirth'
+                placeholder='Select date'
+                value={PersonalInfoFormData.dateOfBirth}
+                onChange={handleInputChange}
                 required
               />
             </StepInputWrapper>
@@ -114,9 +179,11 @@ const PersonalInformationSettings = (props: Props) => {
               <label>Phone Number</label>
               <input
                 type='number'
-                name='phone'
-                id='phone'
-                placeholder='Enter phone number'
+                name='phoneNumber'
+                id='phoneNumber'
+                placeholder='Must be 11 characters+'
+                value={PersonalInfoFormData.phoneNumber}
+                onChange={handleInputChange}
                 required
               />
             </StepInputWrapper>
@@ -125,8 +192,13 @@ const PersonalInformationSettings = (props: Props) => {
           <PersonalInfoSettingsSelectWrapper>
             <StepInputWrapper>
               <label>Gender</label>
-              <select name='gender' id='gender'>
-                <option value='select'>Select Gender</option>
+              <select
+                name='gender'
+                id='gender'
+                value={PersonalInfoFormData.gender}
+                onChange={handleInputChange}
+                required
+              >
                 <option value='male'>Male</option>
                 <option value='female'>Female</option>
                 <option value='others'>Others</option>
@@ -135,11 +207,14 @@ const PersonalInformationSettings = (props: Props) => {
 
             <StepInputWrapper>
               <label>Location</label>
-              <select name='location' id='location'>
-                <option value='select'>Select Location</option>
-                <option value='male'>Lagos, Nigeria</option>
-                <option value='female'>London, Uk</option>
-                <option value='others'>Abuja, Nigeria</option>
+              <select
+                name='location'
+                id='location'
+                value={PersonalInfoFormData.location}
+                onChange={handleInputChange}
+                required
+              >
+                <option value='United-kingdom'>United-Kingdom</option>
               </select>
             </StepInputWrapper>
           </PersonalInfoSettingsSelectWrapper>
@@ -149,6 +224,7 @@ const PersonalInformationSettings = (props: Props) => {
               type='submit'
               bgColor='var(--color-bg-100)'
               textColor='var(--color-font-400)'
+              onClick={handleCancel}
             >
               Cancel
             </CustomBtn>

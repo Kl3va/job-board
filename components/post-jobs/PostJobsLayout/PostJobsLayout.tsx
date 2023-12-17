@@ -18,7 +18,7 @@ const PostJobsLayout = ({ children }: PostJobLayoutProps) => {
     if (!user || userType !== 'employer') {
       router.push('/login') // Redirect to login page if not authenticated as an employer
     }
-  }, [user])
+  }, [user, userType, router])
 
   if (!user || userType !== 'employer') {
     return null // This won't render anything; the redirection will handle unauthorized access

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 
 //Data
 import { tabsData } from 'data/find-job/settingsHeaderData'
@@ -47,9 +48,9 @@ const AccountSettingsTemplate = (props: Props) => {
                 )
               })}
             </AccountSettingsTabsWrapper>
-            <a href={tabsData.preview_link.url}>
+            <Link href={tabsData.preview_link.url}>
               {tabsData.preview_link.label}
-            </a>
+            </Link>
           </AccountSettingsHeader>
           {formTabs[activeTab]}
         </AccountSettingsContainer>

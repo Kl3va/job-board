@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { useAuth } from 'hooks/useAuthProvider'
-import { User } from 'types/profileTypes'
 import { ApplyToJobRequest } from 'api-requests/job'
 import { applyNowContentData } from 'data/find-job/applyNowContentData'
 
@@ -20,12 +19,22 @@ import {
   JobHubProfileHeader,
   JobHubProfileSummary,
 } from './JobHubProfileStyles'
-import { useReducedMotion } from 'framer-motion'
 
 type Props = typeof applyNowContentData
 
-const JobHubProfile = ({ profile }: Props) => {
+const JobHubApplyProfile = ({ profile }: Props) => {
   const { activeJobId, token, showAlert, user } = useAuth()
+
+  const applyToJob = async () => {
+    if (token !== null) {
+      try {
+        const data = await ApplyToJobRequest(token, activeJobId)
+        showAlert(true, 'Job Application Sucessful!', 'success')
+      } catch (error: any) {
+        showAlert(true, error.message, 'failure')
+      }
+    }
+  }
 
   return (
     <JobHubProfileSection>
@@ -106,9 +115,21 @@ const JobHubProfile = ({ profile }: Props) => {
                 .map((line, index) => <li key={index}>{line}</li>)}
           </JobRoleUnorderedList>
         </JobRoleListContainer>
+        <MultiBtnsWrapper>
+          <CustomBtn
+            type='submit'
+            bgColor='var(--color-bg-100)'
+            textColor='var(--color-font-400)'
+          >
+            Cancel
+          </CustomBtn>
+          <CustomBtn type='button' onClick={applyToJob}>
+            Apply
+          </CustomBtn>
+        </MultiBtnsWrapper>
       </JobHubProfileContainer>
     </JobHubProfileSection>
   )
 }
 
-export default JobHubProfile
+export default JobHubApplyProfile

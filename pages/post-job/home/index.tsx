@@ -15,6 +15,8 @@ const PostJobHomePage = () => {
   //SingleJobTypes[]
 
   useEffect(() => {
+    let isMounted = true
+
     const token = localStorage.getItem('userToken')
 
     if (token) {
@@ -25,6 +27,10 @@ const PostJobHomePage = () => {
         .catch((error) => {
           console.error('Error fetching data:', error)
         })
+    }
+
+    return () => {
+      isMounted = false
     }
   }, [])
 

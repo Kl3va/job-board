@@ -23,7 +23,7 @@ import {
   PersonalProfileLine,
 } from './PersonalProfileStyles'
 
-interface StepOneData {
+export interface StepOneData {
   phoneNumber: string
   bio: string
   dateOfBirth: string
@@ -81,8 +81,6 @@ const PersonalProfileTemplate = (props: Props) => {
   const handlePrevStep = () => {
     setCurrentStep(currentStep - 1)
   }
-
-  console.log(formData)
 
   return (
     <MainPersonalProfile>

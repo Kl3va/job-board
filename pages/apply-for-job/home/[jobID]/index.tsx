@@ -19,6 +19,8 @@ const JobID = (props: Props) => {
   const { activePopup } = useAuth()
 
   useEffect(() => {
+    let isMounted = true
+
     if (typeof jobID === 'string') {
       const token = localStorage.getItem('userToken')
 
@@ -31,6 +33,10 @@ const JobID = (props: Props) => {
             console.error('Error fetching job details:', error)
           })
       }
+    }
+
+    return () => {
+      isMounted = false
     }
   }, [jobID])
 
