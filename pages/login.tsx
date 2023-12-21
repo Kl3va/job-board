@@ -1,15 +1,15 @@
-import React from 'react'
-import LoginForm from 'components/forms/login/LoginForm'
-import { useAuth } from 'hooks/useAuthProvider'
+import React from 'react';
+import LoginForm from 'components/forms/login/LoginForm';
+import { useAuth } from 'hooks/useAuthProvider';
 
-type Props = {}
+type Props = {};
 
 const LoginPage = (props: Props) => {
-  const { user, userType } = useAuth()
+  const { user, userType } = useAuth();
 
-  // console.log(user, userType)
+  console.log(user, userType);
 
-  return <LoginForm />
-}
+  return <LoginForm />;
+};
 
-export default LoginPage
+export default LoginPage;

@@ -1,7 +1,7 @@
 export const jobFilterData = [
   {
     icon: 'fa-regular fa-location-dot',
-    label: 'Lagos, Nigeria',
+    label: 'United Kingdom',
   },
   {
     icon: 'fa-solid fa-chevron-down',
@@ -19,7 +19,7 @@ export const jobFilterData = [
     icon: 'fa-solid fa-chevron-down',
     label: 'Experience level',
   },
-]
+];
 
 export const filterComponentData = [
   {
@@ -107,16 +107,16 @@ export const filterComponentData = [
       },
     ],
   },
-]
+];
 
 interface Checkmark {
-  value: string
-  label: string
-  id: string
+  value: string;
+  label: string;
+  id: string;
 }
 
 export interface FilterMethod {
-  type: string
+  type: string;
 
-  checkmark: Checkmark[]
+  checkmark: Checkmark[];
 }
