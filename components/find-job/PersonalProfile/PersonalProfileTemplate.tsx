@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { personalProfileData } from 'data/profile'
-
 import profileBg from 'public/images/personal-profile-bg.png'
 
 //COMPONENTS

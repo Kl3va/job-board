@@ -1,30 +1,33 @@
-import React, { useState, useRef, ChangeEvent } from 'react'
-import { useRouter } from 'next/router'
-import { CreateJobSeekerProfileRequest } from 'api-requests/account-user'
-import { useAuth } from 'hooks/useAuthProvider'
-import { PersonalformDatatypes } from '../../PersonalProfileTemplate'
+import React, { useState, useRef, ChangeEvent } from 'react';
+import { useRouter } from 'next/router';
+import { CreateJobSeekerProfileRequest } from 'api-requests/account-user';
+import { useAuth } from 'hooks/useAuthProvider';
+import { PersonalformDatatypes } from '../../PersonalProfileTemplate';
 
 //Styled-Component
-import { CustomBtn } from 'styles/globalStyles'
-import { StepFormContainer, StepInputWrapper } from '../StepOneP/StepOnePStyles'
+import { CustomBtn } from 'styles/globalStyles';
+import {
+  StepFormContainer,
+  StepInputWrapper,
+} from '../StepOneP/StepOnePStyles';
 import {
   UploaderContent,
   ImageUploadWrapper,
   UploaderBtnWrapper,
   PdfWrapper,
-} from './StepTwoPStyles'
+} from './StepTwoPStyles';
 
 interface Props {
-  onPrevStep: () => void
-  formData: PersonalformDatatypes
+  onPrevStep: () => void;
+  formData: PersonalformDatatypes;
 }
 
 const StepTwoForm = ({ onPrevStep, formData }: Props) => {
-  const router = useRouter()
-  const { showAlert, resetUser } = useAuth()
-  const [selectedFile, setSelectedFile] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const router = useRouter();
+  const { showAlert, resetUser } = useAuth();
+  const [selectedFile, setSelectedFile] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [stepTwoFormData, setStepTwoFormData] = useState({
     education: '',
     currentPosition: '',
@@ -32,89 +35,89 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
     skills: '',
     yearsOfExperience: '',
     cvUrl: '',
-  })
+  });
 
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setStepTwoFormData({
       ...stepTwoFormData,
       [name]: value,
-    })
-  }
+    });
+  };
 
   function readFileAsDataURL(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader()
+      const reader = new FileReader();
 
-      reader.onload = () => resolve(reader.result as string)
-      reader.onerror = () => reject(new Error('Error reading file'))
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = () => reject(new Error('Error reading file'));
 
-      reader.readAsDataURL(file)
-    })
+      reader.readAsDataURL(file);
+    });
   }
 
   // Upload image to cloudinary
   async function handleOnSubmit(file: File) {
-    setIsLoading(true)
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('upload_preset', 'u5frdhn4')
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'exmgpa2v');
 
     try {
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/dm9xasbad/image/upload`,
+        `https://api.cloudinary.com/v1_1/da1blr6bb/image/upload`,
         {
           method: 'POST',
           body: formData,
         }
-      )
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to upload to Cloudinary')
+        throw new Error('Failed to upload to Cloudinary');
       }
 
-      const data = await response.json()
-      setSelectedFile(data.secure_url)
-      stepTwoFormData.cvUrl = data.secure_url // Set the URL in state
+      const data = await response.json();
+      setSelectedFile(data.secure_url);
+      stepTwoFormData.cvUrl = data.secure_url; // Set the URL in state
     } catch (error) {
-      console.error('Upload Error:', error)
+      console.error('Upload Error:', error);
     } finally {
-      setIsLoading(false) // Set loading to false when upload completes (success or failure)
+      setIsLoading(false); // Set loading to false when upload completes (success or failure)
     }
   }
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
+    const file = event.target.files?.[0];
     if (file && file.type === 'application/pdf') {
       try {
-        const dataUrl = await readFileAsDataURL(file)
+        const dataUrl = await readFileAsDataURL(file);
 
-        await handleOnSubmit(file)
+        await handleOnSubmit(file);
       } catch (error) {
-        console.error('Error uploading file to Cloudinary:', error)
+        console.error('Error uploading file to Cloudinary:', error);
         // Handle error
       }
     }
-  }
+  };
 
   const handleButtonClick = () => {
-    fileInputRef.current?.click() // Trigger the click event of the file input
-  }
+    fileInputRef.current?.click(); // Trigger the click event of the file input
+  };
 
   const handlePrev = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    onPrevStep()
-  }
+    e.preventDefault();
+    onPrevStep();
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Exclude location field before sending data to API
-    const token = localStorage.getItem('userToken')
+    const token = localStorage.getItem('userToken');
 
     if (
       stepTwoFormData.currentPosition &&
@@ -135,13 +138,13 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
           skills: stepTwoFormData.skills,
           yearsOfExperience: Number(stepTwoFormData.yearsOfExperience),
           cvUrl: selectedFile,
-        }
+        };
 
         // Send dataToSend to your API
-        const data = await CreateJobSeekerProfileRequest(dataToSend, token)
-        resetUser(data)
+        const data = await CreateJobSeekerProfileRequest(dataToSend, token);
+        resetUser(data);
         //console.log(dataToSend)
-        showAlert(true, 'Profile Updated!', 'success')
+        showAlert(true, 'Profile Updated!', 'success');
         setStepTwoFormData({
           education: '',
           currentPosition: '',
@@ -149,16 +152,16 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
           skills: '',
           yearsOfExperience: '',
           cvUrl: '',
-        })
+        });
 
         //Redirect on successful submission
-        router.push('/apply-for-job/home')
+        router.push('/apply-for-job/home');
       } catch (error: any) {
-        showAlert(true, error.message, 'failure')
+        showAlert(true, error.message, 'failure');
         // console.log(error.message)
       }
     }
-  }
+  };
 
   // console.log(selectedFile, formData)
 
@@ -167,10 +170,10 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
       <StepInputWrapper>
         <label>Education</label>
         <input
-          type='text'
-          name='education'
-          id='education'
-          placeholder='Enter your education info'
+          type="text"
+          name="education"
+          id="education"
+          placeholder="Enter your education info"
           value={stepTwoFormData.education}
           onChange={handleInputChange}
           required
@@ -180,10 +183,10 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
       <StepInputWrapper>
         <label>Current Position</label>
         <input
-          type='text'
-          name='currentPosition'
-          id='currentPosition'
-          placeholder='Enter your current position'
+          type="text"
+          name="currentPosition"
+          id="currentPosition"
+          placeholder="Enter your current position"
           value={stepTwoFormData.currentPosition}
           onChange={handleInputChange}
           required
@@ -193,11 +196,11 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
       <StepInputWrapper>
         <label>Experience</label>
         <textarea
-          name='experience'
-          id='experience'
+          name="experience"
+          id="experience"
           cols={20}
           rows={4}
-          placeholder='Enter Experience(Please separate with line breaks)'
+          placeholder="Enter Experience(Please separate with line breaks)"
           value={stepTwoFormData.experience}
           onChange={handleInputChange}
           required
@@ -207,10 +210,10 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
       <StepInputWrapper>
         <label>Skills</label>
         <input
-          type='text'
-          name='skills'
-          id='skills'
-          placeholder='Enter skills(seperate with commas)'
+          type="text"
+          name="skills"
+          id="skills"
+          placeholder="Enter skills(seperate with commas)"
           value={stepTwoFormData.skills}
           onChange={handleInputChange}
           required
@@ -220,10 +223,10 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
       <StepInputWrapper>
         <label>Years of experience</label>
         <input
-          type='number'
-          name='yearsOfExperience'
-          id='yearsOfExperience'
-          placeholder='Enter a valid number'
+          type="number"
+          name="yearsOfExperience"
+          id="yearsOfExperience"
+          placeholder="Enter a valid number"
           value={stepTwoFormData.yearsOfExperience}
           onChange={handleInputChange}
           required
@@ -237,29 +240,29 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
         ) : selectedFile ? (
           <PdfWrapper>
             <span>
-              <i className='fa-regular fa-file'></i>
+              <i className="fa-regular fa-file"></i>
             </span>
             <div>
               <h3>CV pdf</h3>
               <p>100% uploaded</p>
             </div>
             <span onClick={() => setSelectedFile('')}>
-              <i className='fa-regular fa-trash-can'></i>
+              <i className="fa-regular fa-trash-can"></i>
             </span>
           </PdfWrapper>
         ) : (
           <ImageUploadWrapper>
             <input
-              type='file'
+              type="file"
               ref={fileInputRef}
-              accept='.pdf' // Specify to accept only PDF files
+              accept=".pdf" // Specify to accept only PDF files
               style={{ display: 'none' }}
               onChange={handleFileChange}
             />
 
             <UploaderContent onClick={handleButtonClick}>
               <span>
-                <i className='fa-regular fa-cloud-arrow-up'></i>
+                <i className="fa-regular fa-cloud-arrow-up"></i>
               </span>
               <p>
                 <span>Click to upload</span> or drag and drop PDF(max.800x400px)
@@ -271,17 +274,17 @@ const StepTwoForm = ({ onPrevStep, formData }: Props) => {
 
       <UploaderBtnWrapper>
         <CustomBtn
-          type='submit'
+          type="submit"
           onClick={handlePrev}
-          bgColor='var(--color-bg-100)'
-          textColor='var(--color-font-400)'
+          bgColor="var(--color-bg-100)"
+          textColor="var(--color-font-400)"
         >
           Back
         </CustomBtn>
-        <CustomBtn type='submit'>Proceed</CustomBtn>
+        <CustomBtn type="submit">Proceed</CustomBtn>
       </UploaderBtnWrapper>
     </StepFormContainer>
-  )
-}
+  );
+};
 
-export default StepTwoForm
+export default StepTwoForm;
