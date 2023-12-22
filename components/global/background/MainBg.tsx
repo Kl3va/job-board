@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useAuth } from 'hooks/useAuthProvider'
+import React from 'react';
+import styled from 'styled-components';
+import { useAuth } from 'hooks/useAuthProvider';
 
 export const BackgroundBlur = styled.aside`
   position: fixed;
@@ -10,18 +10,24 @@ export const BackgroundBlur = styled.aside`
   background: rgba(0, 0, 0, 0.35);
   z-index: 1050;
   display: block;
-`
+`;
 
-type Props = {}
+type Props = {};
 
 const MainBg = (props: Props) => {
-  const { handleActivePopup, activePopup } = useAuth()
+  const { handleActivePopup, activePopup } = useAuth();
 
   return (
-    activePopup && (
-      <BackgroundBlur onClick={() => handleActivePopup(null)}></BackgroundBlur>
-    )
-  )
-}
+    <>
+      {activePopup ? (
+        <BackgroundBlur
+          onClick={() => handleActivePopup(null)}
+        ></BackgroundBlur>
+      ) : (
+        <></>
+      )}
+    </>
+  );
+};
 
-export default MainBg
+export default MainBg;

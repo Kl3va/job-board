@@ -1,9 +1,9 @@
-import React from 'react'
-import Link from 'next/link'
-import styled from 'styled-components'
-import { useAuth } from 'hooks/useAuthProvider'
+import React from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
+import { useAuth } from 'hooks/useAuthProvider';
 
-import { jobseekerMenuData } from 'data/find-job/headerNavData'
+import { jobseekerMenuData } from 'data/find-job/headerNavData';
 
 const JobseekerMenuBar = styled.aside`
   position: fixed;
@@ -61,35 +61,39 @@ const JobseekerMenuBar = styled.aside`
     gap: 0.75rem;
     align-items: center;
   }
-`
+`;
 
 const JobseekerMenu = () => {
-  const { activePopup, handleActivePopup, handleLogout } = useAuth()
+  const { activePopup, handleActivePopup, handleLogout } = useAuth();
 
   return (
-    activePopup === 'jobseeker-menu' && (
-      <JobseekerMenuBar onClick={() => handleActivePopup(null)}>
-        <ul>
-          {jobseekerMenuData.map((data, index) => {
-            return (
-              <li key={index}>
-                <Link href={data.url}>
-                  <span>
-                    <i className={data.icon}></i>
-                    {data.title}
-                  </span>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <button type='button' onClick={handleLogout}>
-          <i className='fa-solid fa-arrow-right-from-bracket'></i>
-          Log out
-        </button>
-      </JobseekerMenuBar>
-    )
-  )
-}
+    <>
+      {activePopup === 'jobseeker-menu' ? (
+        <JobseekerMenuBar onClick={() => handleActivePopup(null)}>
+          <ul>
+            {jobseekerMenuData.map((data, index) => {
+              return (
+                <li key={index}>
+                  <Link href={data.url}>
+                    <span>
+                      <i className={data.icon}></i>
+                      {data.title}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <button type="button" onClick={handleLogout}>
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+            Log out
+          </button>
+        </JobseekerMenuBar>
+      ) : (
+        ''
+      )}
+    </>
+  );
+};
 
-export default JobseekerMenu
+export default JobseekerMenu;

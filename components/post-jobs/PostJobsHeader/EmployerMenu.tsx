@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useAuth } from 'hooks/useAuthProvider'
+import React from 'react';
+import styled from 'styled-components';
+import { useAuth } from 'hooks/useAuthProvider';
 
 const EmployerMenuBar = styled.aside`
   position: fixed;
@@ -33,21 +33,25 @@ const EmployerMenuBar = styled.aside`
     justify-items: start;
     align-items: center;
   }
-`
+`;
 
 const EmployerMenu = () => {
-  const { activePopup, handleActivePopup, handleLogout } = useAuth()
+  const { activePopup, handleActivePopup, handleLogout } = useAuth();
 
   return (
-    activePopup === 'employer-menu' && (
-      <EmployerMenuBar onClick={() => handleActivePopup(null)}>
-        <button type='button' onClick={handleLogout}>
-          <i className='fa-solid fa-arrow-right-from-bracket'></i>
-          Log out
-        </button>
-      </EmployerMenuBar>
-    )
-  )
-}
+    <>
+      {activePopup === 'employer-menu' ? (
+        <EmployerMenuBar onClick={() => handleActivePopup(null)}>
+          <button type="button" onClick={handleLogout}>
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+            Log out
+          </button>
+        </EmployerMenuBar>
+      ) : (
+        ''
+      )}
+    </>
+  );
+};
 
-export default EmployerMenu
+export default EmployerMenu;
