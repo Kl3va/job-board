@@ -1,24 +1,19 @@
-import React from 'react'
-import { useAuth } from 'hooks/useAuthProvider'
-import JobHubApplyProfile from '../JobHubProfile/JobHubApplyProfile'
+import React from 'react';
+import { useAuth } from 'hooks/useAuthProvider';
+import JobHubApplyProfile from '../JobHubProfile/JobHubApplyProfile';
 
 //DATA
-import { applyNowContentData } from 'data/find-job/applyNowContentData'
+import { applyNowContentData } from 'data/find-job/applyNowContentData';
 
 //COMPONENTS
-import ApplyNowContents from './Children/ApplyNowContents'
-import JobHubProfile from '../JobHubProfile/JobHubProfile'
+import ApplyNowContents from './Children/ApplyNowContents';
 
-type Props = {}
+type Props = {};
 
 const ApplyNowTemplate = (props: Props) => {
-  const {cvOption} = useAuth()
+  const { cvOption } = useAuth();
   return (
     <main>
-      {/* <section>
-       <ApplyNowContents {...applyNowContentData}/>
-      </section> */}
-
       {cvOption === 0 ? (
         <JobHubApplyProfile {...applyNowContentData} />
       ) : (
@@ -27,7 +22,7 @@ const ApplyNowTemplate = (props: Props) => {
         </section>
       )}
     </main>
-  )
-}
+  );
+};
 
-export default ApplyNowTemplate
+export default ApplyNowTemplate;

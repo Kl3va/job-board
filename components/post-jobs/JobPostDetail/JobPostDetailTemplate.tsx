@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { QUERIES } from 'styles/mediaQueries'
-import FindJobDetailMain from 'components/find-job/FindJobDetail/Children/FindJobDetailMain'
-import { SingleJobTypes } from 'types/jobTypes'
+import React from 'react';
+import styled from 'styled-components';
+import { QUERIES } from 'styles/mediaQueries';
+import FindJobDetailMain from 'components/find-job/FindJobDetail/Children/FindJobDetailMain';
+import { SingleJobTypes } from 'types/jobTypes';
 
 const PostJobDetailMain = styled.main`
   width: min(90%, 58.75rem);
@@ -23,10 +23,10 @@ const PostJobDetailMain = styled.main`
       padding: 2rem;
     }
   }
-`
+`;
 
 interface Props {
-  jobDetails: SingleJobTypes
+  jobDetails: SingleJobTypes;
 }
 
 const JobPostDetailTemplate = ({ jobDetails }: Props) => {
@@ -36,7 +36,7 @@ const JobPostDetailTemplate = ({ jobDetails }: Props) => {
         <FindJobDetailMain {...jobDetails} />
       </section>
     </PostJobDetailMain>
-  )
-}
+  );
+};
 
-export default JobPostDetailTemplate
+export default JobPostDetailTemplate;

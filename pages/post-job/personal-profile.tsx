@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react'
-import { useAuth } from 'hooks/useAuthProvider'
-import { useRouter } from 'next/router'
-import JobPostPersonalProfileTemplate from 'components/post-jobs/JobPostPersonalProfile/Children/JobPostPersonalProfileTemplate'
+import React from 'react';
+import { useAuth } from 'hooks/useAuthProvider';
+import JobPostPersonalProfileTemplate from 'components/post-jobs/JobPostPersonalProfile/Children/JobPostPersonalProfileTemplate';
 
-type Props = {}
+type Props = {};
 
 const CompanyProfileCreate = (props: Props) => {
-  const { userType } = useAuth()
-
-  const router = useRouter()
-
-  useEffect(() => {
-    if (userType !== 'employer') {
-      router.push('/login') // Redirect to login page if userType is not jobSeeker
-    }
-  }, [userType, router])
+  const { userType } = useAuth();
 
   // Render PersonalProfileTemplate if userType is jobSeeker
-  return userType === 'employer' && <JobPostPersonalProfileTemplate />
-}
+  return userType === 'employer' && <JobPostPersonalProfileTemplate />;
+};
 
-export default CompanyProfileCreate
+export default CompanyProfileCreate;

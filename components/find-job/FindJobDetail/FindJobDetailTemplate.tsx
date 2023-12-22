@@ -1,17 +1,16 @@
-import React from 'react'
-import { SingleJobTypes } from 'types/jobTypes'
+import React from 'react';
+import { SingleJobTypes } from 'types/jobTypes';
 //import BreadCrumbs from 'components/global/breadcrumbs/BreadCrumbs'
 
 //Components
-import FindJobDetailMain from './Children/FindJobDetailMain'
-import FindJobDetailApply from './Children/FindJobDetailApply'
-import FindJobDetailSimilar from './Children/FindJobDetailSimilar'
+import FindJobDetailMain from './Children/FindJobDetailMain';
+import FindJobDetailApply from './Children/FindJobDetailApply';
 
 //Styled-components
-import { FindJobDetailPageMain } from './FindJobDetailStyles'
+import { FindJobDetailPageMain } from './FindJobDetailStyles';
 
 interface Props {
-  jobDetails: SingleJobTypes
+  jobDetails: SingleJobTypes;
 }
 
 const FindJobDetailTemplate = ({ jobDetails }: Props) => {
@@ -23,11 +22,8 @@ const FindJobDetailTemplate = ({ jobDetails }: Props) => {
       <aside>
         <FindJobDetailApply jobSummary={jobDetails.jobSummary} />
       </aside>
-      {/* <aside>
-        <FindJobDetailSimilar data={similarJobsData} />
-      </aside> */}
     </FindJobDetailPageMain>
-  )
-}
+  );
+};
 
-export default FindJobDetailTemplate
+export default FindJobDetailTemplate;

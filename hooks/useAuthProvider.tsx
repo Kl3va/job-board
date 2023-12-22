@@ -71,6 +71,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     null
   );
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+  const [canChangeRoute, setCanChangeRoute] = useState(false);
 
   const [filters, setFilters] = useState<FiltersType>({
     workType: [],
@@ -142,7 +143,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       if (userData) {
-        console.log('Yes', userData);
         setUser(userData); // Set the user data in your context or state
       }
     } catch (error) {
@@ -150,20 +150,34 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // useEffect(() => {
-  //   // Check if the user token or userType exists in local storage
-  //   const storedToken = localStorage.getItem('userToken');
-  //   const storedUserType = localStorage.getItem('userType');
+  useEffect(() => {
+    // Check if the user token or userType exists in local storage
+    const storedToken = localStorage.getItem('userToken');
+    const storedUserType = localStorage.getItem('userType');
 
-  //   if (storedToken && storedUserType) {
-  //     setToken(storedToken);
-  //     setUserType(storedUserType as 'jobseeker' | 'employer');
+    if (storedToken && storedUserType) {
+      setToken(storedToken);
+      setUserType(storedUserType as 'jobseeker' | 'employer');
 
-  //     fetchUserProfile(storedToken, storedUserType);
-  //   }
-  // }, []);
+      fetchUserProfile(storedToken, storedUserType);
+    }
+  }, []);
 
-  console.log('auth user', user);
+  useEffect(() => {
+    if (userType !== 'employer') {
+      const redirectPage = setTimeout(() => {
+        setCanChangeRoute(true);
+      }, 5000);
+
+      return () => clearTimeout(redirectPage);
+    }
+  }, [userType, router]);
+
+  useEffect(() => {
+    if (canChangeRoute) {
+      router.push('/login');
+    }
+  }, [canChangeRoute]);
 
   return (
     <AuthContext.Provider

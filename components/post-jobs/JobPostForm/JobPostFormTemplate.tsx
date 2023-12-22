@@ -1,15 +1,15 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react'
-import { useRouter } from 'next/router'
-import { CreateJobRequest } from 'api-requests/job'
-import { CustomBtn } from 'styles/globalStyles'
-import { useAuth } from 'hooks/useAuthProvider'
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useRouter } from 'next/router';
+import { CreateJobRequest } from 'api-requests/job';
+import { CustomBtn } from 'styles/globalStyles';
+import { useAuth } from 'hooks/useAuthProvider';
 
 //Reusable styled-components
-import { StepInputWrapper } from 'components/find-job/PersonalProfile/Step/StepOneP/StepOnePStyles'
+import { StepInputWrapper } from 'components/find-job/PersonalProfile/Step/StepOneP/StepOnePStyles';
 import {
   PersonalInfoSettingsSelectWrapper,
   PersonalInfoSettingsBtnWrapper,
-} from 'components/find-job/AccountSettings/Children/ProfileSettings/Children/PersonalInformationSettings/PersonalInformationSettingsStyles'
+} from 'components/find-job/AccountSettings/Children/ProfileSettings/Children/PersonalInformationSettings/PersonalInformationSettingsStyles';
 
 //Component-based styled-component
 import {
@@ -17,13 +17,13 @@ import {
   JobPostFormHeader,
   JobPostMainFormContainer,
   JobPostFormInputs,
-} from './JobPostFormTemplateStyles'
+} from './JobPostFormTemplateStyles';
 
-type Props = {}
+type Props = {};
 
 const JobPostFormTemplate = (props: Props) => {
-  const router = useRouter()
-  const { showAlert } = useAuth()
+  const router = useRouter();
+  const { showAlert } = useAuth();
   const initialData = {
     jobRole: '',
     jobSummary: '',
@@ -37,36 +37,36 @@ const JobPostFormTemplate = (props: Props) => {
     softSkills: '',
     closingDate: '',
     openPositions: '',
-  }
+  };
 
-  const [formData, setFormData] = useState(initialData)
+  const [formData, setFormData] = useState(initialData);
 
   // Update form data on field changes
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     //Prevent default form behaviour
-    e.preventDefault()
+    e.preventDefault();
     // Exclude location field before sending data to API
-    const { jobRequirements, coreSkills, softSkills } = formData
+    const { jobRequirements, coreSkills, softSkills } = formData;
 
     // Handle the textarea inputs as an array of strings
     const jobReqArray = jobRequirements
       .split('\n')
-      .filter((text) => text.trim() !== '')
+      .filter((text) => text.trim() !== '');
     const coreSkillsArray = coreSkills
       .split('\n')
-      .filter((text) => text.trim() !== '')
+      .filter((text) => text.trim() !== '');
     const softSkillsArray = softSkills
       .split('\n')
-      .filter((text) => text.trim() !== '')
+      .filter((text) => text.trim() !== '');
 
-    const token = localStorage.getItem('userToken')
+    const token = localStorage.getItem('userToken');
 
     if (
       formData.jobRequirements &&
@@ -90,43 +90,40 @@ const JobPostFormTemplate = (props: Props) => {
           jobRequirements: jobReqArray,
           coreSkills: coreSkillsArray,
           softSkills: softSkillsArray,
-        }
+        };
 
         // Send dataToSend to your API
-        const data = await CreateJobRequest(dataToSend, token)
-        showAlert(true, 'Job Created', 'success')
+        const data = await CreateJobRequest(dataToSend, token);
+        showAlert(true, 'Job Created', 'success');
         //Reset data state
-        setFormData(initialData)
+        setFormData(initialData);
         //Redirect on successful submission
-        router.push('/post-job/home')
+        router.push('/post-job/home');
       } catch (error: any) {
-        showAlert(true, error.message, 'failure')
+        showAlert(true, error.message, 'failure');
       }
     }
-  }
+  };
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    setFormData(initialData)
-  }
+    e.preventDefault();
+    setFormData(initialData);
+  };
 
   return (
     <main>
       <section>
         <JobPostFormContainer>
-          <JobPostFormHeader>
-            <a href=''>Preview Job Post</a>
-          </JobPostFormHeader>
           <JobPostMainFormContainer>
             <h2>Job Post</h2>
             <JobPostFormInputs onSubmit={handleSubmit}>
               <StepInputWrapper>
                 <label>What's the Job Role</label>
                 <input
-                  type='text'
-                  name='jobRole'
-                  id='jobRole'
-                  placeholder='Enter Job role'
+                  type="text"
+                  name="jobRole"
+                  id="jobRole"
+                  placeholder="Enter Job role"
                   value={formData.jobRole}
                   onChange={handleChange}
                   required
@@ -135,11 +132,11 @@ const JobPostFormTemplate = (props: Props) => {
               <StepInputWrapper>
                 <label>Give summary of role</label>
                 <textarea
-                  name='jobSummary'
-                  id='jobSummary'
+                  name="jobSummary"
+                  id="jobSummary"
                   cols={20}
                   rows={4}
-                  placeholder='Enter Role summary'
+                  placeholder="Enter Role summary"
                   value={formData.jobSummary}
                   onChange={handleChange}
                   required
@@ -150,31 +147,31 @@ const JobPostFormTemplate = (props: Props) => {
                 <StepInputWrapper>
                   <label>What is the employment type</label>
                   <select
-                    name='employmentType'
-                    id='employmentType'
+                    name="employmentType"
+                    id="employmentType"
                     value={formData.employmentType}
                     onChange={handleChange}
                     required
                   >
-                    <option value='full-time'>Full-Time</option>
-                    <option value='part-time'>Part-Time</option>
-                    <option value='contract'>Contract</option>
-                    <option value='internship'>Internship</option>
+                    <option value="full-time">Full-Time</option>
+                    <option value="part-time">Part-Time</option>
+                    <option value="contract">Contract</option>
+                    <option value="internship">Internship</option>
                   </select>
                 </StepInputWrapper>
 
                 <StepInputWrapper>
                   <label>What is the Work Type?</label>
                   <select
-                    name='workType'
-                    id='workType'
+                    name="workType"
+                    id="workType"
                     value={formData.workType}
                     onChange={handleChange}
                     required
                   >
-                    <option value='onsite'>On-site</option>
-                    <option value='hybrid'>Hybrid</option>
-                    <option value='remote'>Remote</option>
+                    <option value="onsite">On-site</option>
+                    <option value="hybrid">Hybrid</option>
+                    <option value="remote">Remote</option>
                   </select>
                 </StepInputWrapper>
               </PersonalInfoSettingsSelectWrapper>
@@ -182,10 +179,10 @@ const JobPostFormTemplate = (props: Props) => {
                 <StepInputWrapper>
                   <label>What's the pay for this role</label>
                   <input
-                    type='number'
-                    name='pay'
-                    id='pay'
-                    placeholder='Enter valid number'
+                    type="number"
+                    name="pay"
+                    id="pay"
+                    placeholder="Enter valid number"
                     value={formData.pay}
                     onChange={handleChange}
                     required
@@ -195,16 +192,16 @@ const JobPostFormTemplate = (props: Props) => {
                 <StepInputWrapper>
                   <label>What is the experience level required</label>
                   <select
-                    name='experienceLevel'
-                    id='experienceLevel'
+                    name="experienceLevel"
+                    id="experienceLevel"
                     value={formData.experienceLevel}
                     onChange={handleChange}
                     required
                   >
-                    <option value='intern'>Intern</option>
-                    <option value='junior'>Entry/Junior Level</option>
-                    <option value='intermediate'>Mid/Intermediate Level</option>
-                    <option value='senior'>Advance/Senior Level</option>
+                    <option value="intern">Intern</option>
+                    <option value="junior">Entry/Junior Level</option>
+                    <option value="intermediate">Mid/Intermediate Level</option>
+                    <option value="senior">Advance/Senior Level</option>
                   </select>
                 </StepInputWrapper>
               </PersonalInfoSettingsSelectWrapper>
@@ -212,11 +209,11 @@ const JobPostFormTemplate = (props: Props) => {
               <StepInputWrapper>
                 <label>Job description/Responsibilities</label>
                 <textarea
-                  name='responsibilities'
-                  id='responsibilities'
+                  name="responsibilities"
+                  id="responsibilities"
                   cols={20}
                   rows={4}
-                  placeholder='Enter Description'
+                  placeholder="Enter Description"
                   value={formData.responsibilities}
                   onChange={handleChange}
                   required
@@ -227,11 +224,11 @@ const JobPostFormTemplate = (props: Props) => {
               <StepInputWrapper>
                 <label>Job Requirement</label>
                 <textarea
-                  name='jobRequirements'
-                  id='jobRequirements'
+                  name="jobRequirements"
+                  id="jobRequirements"
                   cols={20}
                   rows={4}
-                  placeholder='Enter Requirements(Please separate with line breaks)'
+                  placeholder="Enter Requirements(Please separate with line breaks)"
                   value={formData.jobRequirements}
                   onChange={handleChange}
                   required
@@ -242,11 +239,11 @@ const JobPostFormTemplate = (props: Props) => {
               <StepInputWrapper>
                 <label>Core Skills</label>
                 <textarea
-                  name='coreSkills'
-                  id='coreSkills'
+                  name="coreSkills"
+                  id="coreSkills"
                   cols={20}
                   rows={4}
-                  placeholder='Enter skills(Please separate with line breaks)'
+                  placeholder="Enter skills(Please separate with line breaks)"
                   value={formData.coreSkills}
                   onChange={handleChange}
                   required
@@ -257,11 +254,11 @@ const JobPostFormTemplate = (props: Props) => {
               <StepInputWrapper>
                 <label>Soft Skills</label>
                 <textarea
-                  name='softSkills'
-                  id='softSkills'
+                  name="softSkills"
+                  id="softSkills"
                   cols={20}
                   rows={4}
-                  placeholder='Enter skills(Please separate with line breaks)'
+                  placeholder="Enter skills(Please separate with line breaks)"
                   value={formData.softSkills}
                   onChange={handleChange}
                   required
@@ -272,10 +269,10 @@ const JobPostFormTemplate = (props: Props) => {
               <StepInputWrapper>
                 <label>What's the end date of job post?</label>
                 <input
-                  type='date'
-                  name='closingDate'
-                  id='closingDate'
-                  placeholder='Enter closing date'
+                  type="date"
+                  name="closingDate"
+                  id="closingDate"
+                  placeholder="Enter closing date"
                   value={formData.closingDate}
                   onChange={handleChange}
                   required
@@ -285,10 +282,10 @@ const JobPostFormTemplate = (props: Props) => {
               <StepInputWrapper>
                 <label>How many hires do you require?</label>
                 <input
-                  type='number'
-                  name='openPositions'
-                  id='openPositions'
-                  placeholder='Enter required(valid) number'
+                  type="number"
+                  name="openPositions"
+                  id="openPositions"
+                  placeholder="Enter required(valid) number"
                   value={formData.openPositions}
                   onChange={handleChange}
                   required
@@ -297,21 +294,21 @@ const JobPostFormTemplate = (props: Props) => {
 
               <PersonalInfoSettingsBtnWrapper>
                 <CustomBtn
-                  type='button'
-                  bgColor='var(--color-bg-100)'
-                  textColor='var(--color-font-400)'
+                  type="button"
+                  bgColor="var(--color-bg-100)"
+                  textColor="var(--color-font-400)"
                   onClick={handleCancel}
                 >
                   Cancel
                 </CustomBtn>
-                <CustomBtn type='submit'>Save</CustomBtn>
+                <CustomBtn type="submit">Save</CustomBtn>
               </PersonalInfoSettingsBtnWrapper>
             </JobPostFormInputs>
           </JobPostMainFormContainer>
         </JobPostFormContainer>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default JobPostFormTemplate
+export default JobPostFormTemplate;

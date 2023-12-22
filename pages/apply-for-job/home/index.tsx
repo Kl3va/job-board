@@ -1,38 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import FindJobLayout from 'components/find-job/FindJobLayout/FindJobLayout'
-import FindJobHomeTemplate from 'components/find-job/FindJobHome/FindJobHome'
-import { GetJobBySeekerRequest } from 'api-requests/job'
+import React, { useState, useEffect } from 'react';
+import FindJobLayout from 'components/find-job/FindJobLayout/FindJobLayout';
+import FindJobHomeTemplate from 'components/find-job/FindJobHome/FindJobHome';
+import { GetJobBySeekerRequest } from 'api-requests/job';
 
 //Types
+import { SingleJobTypes } from 'types/jobTypes';
 
-import { SingleJobTypes } from 'types/jobTypes'
-
-type Props = {}
+type Props = {};
 
 const ApplyJobHome = (props: Props) => {
-  const [jobsData, setJobsData] = useState<SingleJobTypes[] | null>(null)
-
-  //SingleJobTypes[]
+  const [jobsData, setJobsData] = useState<SingleJobTypes[] | null>(null);
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
 
-    const token = localStorage.getItem('userToken')
+    const token = localStorage.getItem('userToken');
 
     if (token) {
       GetJobBySeekerRequest(token)
         .then((data) => {
-          setJobsData(data)
+          setJobsData(data);
         })
         .catch((error) => {
-          console.error('Error fetching data:', error)
-        })
+          console.error('Error fetching data:', error);
+        });
     }
 
     return () => {
-      isMounted = false
-    }
-  }, [])
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <FindJobLayout>
@@ -42,7 +39,7 @@ const ApplyJobHome = (props: Props) => {
         <p>Loading...</p>
       )}
     </FindJobLayout>
-  )
-}
+  );
+};
 
-export default ApplyJobHome
+export default ApplyJobHome;

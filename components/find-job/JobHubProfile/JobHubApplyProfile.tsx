@@ -1,14 +1,15 @@
-import React from 'react'
-import Image from 'next/image'
-import { useAuth } from 'hooks/useAuthProvider'
-import { ApplyToJobRequest } from 'api-requests/job'
-import { applyNowContentData } from 'data/find-job/applyNowContentData'
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useAuth } from 'hooks/useAuthProvider';
+import { ApplyToJobRequest } from 'api-requests/job';
+import { applyNowContentData } from 'data/find-job/applyNowContentData';
 
 //Reusable Styled-components
-import { MultiBtnsWrapper } from '../ApplyNow/Children/ApplyNowContentStyles'
-import { CustomBtn } from 'styles/globalStyles'
-import { JobRoleListContainer } from '../FindJobDetail/Children/FindJobDetailMainStyles'
-import { JobRoleUnorderedList } from '../FindJobDetail/Children/FindJobDetailMainStyles'
+import { MultiBtnsWrapper } from '../ApplyNow/Children/ApplyNowContentStyles';
+import { CustomBtn } from 'styles/globalStyles';
+import { JobRoleListContainer } from '../FindJobDetail/Children/FindJobDetailMainStyles';
+import { JobRoleUnorderedList } from '../FindJobDetail/Children/FindJobDetailMainStyles';
 
 //Component-based Styled-components
 import {
@@ -18,30 +19,31 @@ import {
   JobRoleSpan,
   JobHubProfileHeader,
   JobHubProfileSummary,
-} from './JobHubProfileStyles'
+} from './JobHubProfileStyles';
 
-type Props = typeof applyNowContentData
+type Props = typeof applyNowContentData;
 
 const JobHubApplyProfile = ({ profile }: Props) => {
-  const { activeJobId, token, showAlert, user } = useAuth()
+  const { activeJobId, token, showAlert, user } = useAuth();
 
   const applyToJob = async () => {
     if (token !== null) {
       try {
-        const data = await ApplyToJobRequest(token, activeJobId)
-        showAlert(true, 'Job Application Sucessful!', 'success')
+        await ApplyToJobRequest(token, activeJobId);
+
+        showAlert(true, 'Job Application Sucessful!', 'success');
       } catch (error: any) {
-        showAlert(true, error.message, 'failure')
+        showAlert(true, error.message, 'failure');
       }
     }
-  }
+  };
 
   return (
     <JobHubProfileSection>
       <JobHubProfileContainer>
         <JobHubProfileInfo>
           <div>
-            <Image src={profile.image} alt='profile-image' />
+            <Image src={profile.image} alt="profile-image" />
           </div>
           <div>
             {user && 'fullName' in user && <p>{user.fullName}</p>}
@@ -116,20 +118,23 @@ const JobHubApplyProfile = ({ profile }: Props) => {
           </JobRoleUnorderedList>
         </JobRoleListContainer>
         <MultiBtnsWrapper>
-          <CustomBtn
-            type='submit'
-            bgColor='var(--color-bg-100)'
-            textColor='var(--color-font-400)'
-          >
-            Cancel
-          </CustomBtn>
-          <CustomBtn type='button' onClick={applyToJob}>
+          <Link href={'/apply-for-job/home'} passHref>
+            <CustomBtn
+              type="submit"
+              bgColor="var(--color-bg-100)"
+              textColor="var(--color-font-400)"
+            >
+              Cancel
+            </CustomBtn>
+          </Link>
+
+          <CustomBtn type="button" onClick={applyToJob}>
             Apply
           </CustomBtn>
         </MultiBtnsWrapper>
       </JobHubProfileContainer>
     </JobHubProfileSection>
-  )
-}
+  );
+};
 
-export default JobHubApplyProfile
+export default JobHubApplyProfile;

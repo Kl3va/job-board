@@ -1,14 +1,14 @@
-import React from 'react'
-import Image from 'next/image'
-import { jobDetailData } from 'data/find-job/jobDetailData'
-import { SingleJobTypes } from 'types/jobTypes'
+import React from 'react';
+import Image from 'next/image';
+import { jobDetailData } from 'data/find-job/jobDetailData';
+import { SingleJobTypes } from 'types/jobTypes';
 
 //helper
-import { formatDate } from 'helper'
+import { formatDate } from 'helper';
 
 //Default images
-import JobLogo from 'public/images/job-logo.png'
-import dotIcon from 'public/images/dot.png'
+import JobLogo from 'public/images/job-logo.png';
+import dotIcon from 'public/images/dot.png';
 
 //Styled-component
 import {
@@ -19,27 +19,7 @@ import {
   JobRoleListContainer,
   JobRoleUnorderedList,
   JobRoleCoreList,
-} from './FindJobDetailMainStyles'
-
-// {
-//   employerId: string
-//   jobRole: string
-//   jobSummary: string
-//   employmentType: string
-//   workType: string
-//   pay: number
-//   experienceLevel: string
-//   responsibilities: string
-//   jobRequirements: string[]
-//   coreSkills: string[]
-//   softSkills: string[]
-//   closingDate: string
-//   openPositions: number
-//   _id: string
-//   createdAt: string
-//   updatedAt: string
-//   __v: number
-// }
+} from './FindJobDetailMainStyles';
 
 const FindJobDetailMain = ({
   jobRequirements,
@@ -59,18 +39,18 @@ const FindJobDetailMain = ({
     <FindJobDetailJobRole>
       <JobRoleHeader>
         <div>
-          <Image src={JobLogo} alt='job-image' />
+          <Image src={JobLogo} alt="job-image" />
         </div>
         <div>
           <h3>{jobRole}</h3>
-          <p>{`Fast. United-Kingdom`}</p>
+          <p>{`United-Kingdom`}</p>
         </div>
       </JobRoleHeader>
 
       <p>{formatDate(closingDate)}</p>
 
       <span>
-        <i className='fa-regular fa-clock'></i>
+        <i className="fa-regular fa-clock"></i>
         {employmentType}
       </span>
 
@@ -96,8 +76,13 @@ const FindJobDetailMain = ({
       </JobRoleSpecifics>
 
       <JobRoleRenumeration>
-        <h3>Renumeration</h3>
-        <p>{pay}</p>
+        <h3>Renumeration:</h3>
+        <p>
+          <span>
+            <i className="fa-solid fa-sterling-sign"></i>
+          </span>
+          {pay.toLocaleString()}
+        </p>
       </JobRoleRenumeration>
 
       <JobRoleListContainer>
@@ -108,9 +93,6 @@ const FindJobDetailMain = ({
       <JobRoleListContainer>
         <h3>Job Description/Responsibilities</h3>
         <JobRoleUnorderedList>
-          {/* {job_responsibility.description.map((lists, index) => {
-            return <li key={index}>{lists}</li>
-          })} */}
           <li>{responsibilities}</li>
         </JobRoleUnorderedList>
       </JobRoleListContainer>
@@ -119,7 +101,7 @@ const FindJobDetailMain = ({
         <h3>Job Requirements</h3>
         <JobRoleUnorderedList>
           {jobRequirements.map((lists, index) => {
-            return <li key={index}>{lists}</li>
+            return <li key={index}>{lists}</li>;
           })}
         </JobRoleUnorderedList>
       </JobRoleListContainer>
@@ -128,7 +110,7 @@ const FindJobDetailMain = ({
         <h3>Core Skills</h3>
         <div>
           {coreSkills.map((skills, index) => {
-            return <span key={index}>{skills}</span>
+            return <span key={index}>{skills}</span>;
           })}
         </div>
       </JobRoleCoreList>
@@ -137,12 +119,12 @@ const FindJobDetailMain = ({
         <h3>Soft Skills</h3>
         <JobRoleUnorderedList>
           {softSkills.map((lists, index) => {
-            return <li key={index}>{lists}</li>
+            return <li key={index}>{lists}</li>;
           })}
         </JobRoleUnorderedList>
       </JobRoleListContainer>
     </FindJobDetailJobRole>
-  )
-}
+  );
+};
 
-export default FindJobDetailMain
+export default FindJobDetailMain;

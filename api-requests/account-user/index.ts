@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios';
 ///BASE URL
-const baseUrl = 'https://job-board.fly.dev'
+const baseUrl = 'https://job-board.fly.dev';
 
 //interface
 import {
@@ -8,9 +8,10 @@ import {
   EmployerProfileCreationResponse,
   JobSeekerProfileTypes,
   JobSeekerProfileResponse,
-} from 'types/profileTypes'
+} from 'types/profileTypes';
 
-////Create Employer Profile
+//Create Employer Profile
+
 export const CreateEmployerProfileRequest = async (
   userData: CreateEmployerProfileTypes,
   token: string
@@ -20,40 +21,42 @@ export const CreateEmployerProfileRequest = async (
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
-    }
+    };
 
     const response: AxiosResponse<any> = await axios.patch(
       `${baseUrl}/api/v1/account-users/employer/create-profile/`,
       userData,
       { headers: headers }
-    )
-    // return response.data.data.employer // Return the data received from the server
-    return response.data
+    );
+    // Return the data received from the server
+    return response.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to create profile') // Handle errors
+    // Handle errors
+    console.error('CreateEmployerProfileRequest error:', error);
+    return null; // or return some indicator of failure
   }
-}
+};
 
-////Get Employer Profile
+//Get Employer Profile
 export const GetEmployerProfileRequest = async (token: string) => {
   try {
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
-    }
+    };
 
     const response = await axios.get<EmployerProfileCreationResponse>(
       `${baseUrl}/api/v1/account-users/employer/profile/`,
       { headers: headers }
-    )
-    return response.data.data.employer // Return the data received from the server
+    );
+    return response.data.data.employer; // Return the data received from the server
   } catch (error: any) {
     throw new Error(
       error.response?.data?.message || 'Failed to get user profile'
-    ) // Handle errors
+    ); // Handle errors
   }
-}
+};
 
 ////Update Employer Profile
 export const UpdateEmployerProfileRequest = async (
@@ -65,18 +68,20 @@ export const UpdateEmployerProfileRequest = async (
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
-    }
+    };
 
     const response = await axios.patch<EmployerProfileCreationResponse>(
       `${baseUrl}/api/v1/account-users/employer/update-profile/`,
       userData,
       { headers: headers }
-    )
-    return response.data.data.employer // Return the data received from the server
+    );
+    return response.data.data.employer; // Return the data received from the server
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update profile') // Handle errors
+    throw new Error(
+      error.response?.data?.message || 'Failed to update profile'
+    ); // Handle errors
   }
-}
+};
 
 //////////////JOB-SEEKER
 ////
@@ -90,18 +95,20 @@ export const CreateJobSeekerProfileRequest = async (
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
-    }
+    };
 
     const response = await axios.patch<JobSeekerProfileResponse>(
       `${baseUrl}/api/v1/account-users/job-seeker/create-profile/`,
       userData,
       { headers: headers }
-    )
-    return response.data.data.jobSeeker // Return the data received from the server
+    );
+    return response.data.data.jobSeeker; // Return the data received from the server
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to create profile') // Handle errors
+    throw new Error(
+      error.response?.data?.message || 'Failed to create profile'
+    ); // Handle errors
   }
-}
+};
 
 ////Get JobSeeker Profile
 export const GetJobSeekerProfileRequest = async (token: string) => {
@@ -110,17 +117,17 @@ export const GetJobSeekerProfileRequest = async (token: string) => {
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
-    }
+    };
 
     const response = await axios.get<JobSeekerProfileResponse>(
       `${baseUrl}/api/v1/account-users/job-seeker/profile/`,
       { headers: headers }
-    )
-    return response.data.data.jobSeeker // Return the data received from the server
+    );
+    return response.data.data.jobSeeker; // Return the data received from the server
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to get profile') // Handle errors
+    throw new Error(error.response?.data?.message || 'Failed to get profile'); // Handle errors
   }
-}
+};
 
 ////Update Job seeker profile
 
@@ -133,15 +140,17 @@ export const UpdateJobSeekerProfileRequest = async (
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
-    }
+    };
 
     const response = await axios.patch<JobSeekerProfileResponse>(
       `${baseUrl}/api/v1/account-users/job-seeker/update-profile/`,
       userData,
       { headers: headers }
-    )
-    return response.data.data.jobSeeker // Return the data received from the server
+    );
+    return response.data.data.jobSeeker; // Return the data received from the server
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update profile') // Handle errors
+    throw new Error(
+      error.response?.data?.message || 'Failed to update profile'
+    ); // Handle errors
   }
-}
+};

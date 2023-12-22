@@ -1,38 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import { useAuth } from 'hooks/useAuthProvider'
-import PostJobsLayout from 'components/post-jobs/PostJobsLayout/PostJobsLayout'
-import PostJobsHomeTemplate from 'components/post-jobs/PostJobsHome/PostJobsHome'
-import { GetJobByEmployerRequest } from 'api-requests/job'
-import { SingleJobTypes } from 'types/jobTypes'
-
-// interface Props {
-//   jobsData: SingleJobTypes[]
-// }
+import React, { useEffect, useState } from 'react';
+import { useAuth } from 'hooks/useAuthProvider';
+import PostJobsLayout from 'components/post-jobs/PostJobsLayout/PostJobsLayout';
+import PostJobsHomeTemplate from 'components/post-jobs/PostJobsHome/PostJobsHome';
+import { GetJobByEmployerRequest } from 'api-requests/job';
+import { SingleJobTypes } from 'types/jobTypes';
 
 const PostJobHomePage = () => {
-  const [jobsData, setJobsData] = useState<SingleJobTypes[] | null>(null)
-
-  //SingleJobTypes[]
+  const [jobsData, setJobsData] = useState<SingleJobTypes[] | null>(null);
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
 
-    const token = localStorage.getItem('userToken')
+    const token = localStorage.getItem('userToken');
 
     if (token) {
       GetJobByEmployerRequest(token)
         .then((data) => {
-          setJobsData(data)
+          setJobsData(data);
         })
         .catch((error) => {
-          console.error('Error fetching data:', error)
-        })
+          console.error('Error fetching data:', error);
+        });
     }
 
     return () => {
-      isMounted = false
-    }
-  }, [])
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <PostJobsLayout>
@@ -42,7 +36,7 @@ const PostJobHomePage = () => {
         <p>Loading...</p>
       )}
     </PostJobsLayout>
-  )
-}
+  );
+};
 
-export default PostJobHomePage
+export default PostJobHomePage;

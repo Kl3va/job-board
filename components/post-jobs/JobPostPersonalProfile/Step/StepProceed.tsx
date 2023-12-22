@@ -1,24 +1,24 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react'
-import { useRouter } from 'next/router'
-import { useAuth } from 'hooks/useAuthProvider'
+import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from 'hooks/useAuthProvider';
 import {
   CreateEmployerProfileRequest,
   UpdateEmployerProfileRequest,
-} from 'api-requests/account-user'
+} from 'api-requests/account-user';
 
 //Styled-Component
-import { CustomBtn } from 'styles/globalStyles'
+import { CustomBtn } from 'styles/globalStyles';
 
 import {
   StepFormContainer,
   StepInputWrapper,
   StepSelectContainer,
   StepDoubleInputWrapper,
-} from 'components/find-job/PersonalProfile/Step/StepOneP/StepOnePStyles'
+} from 'components/find-job/PersonalProfile/Step/StepOneP/StepOnePStyles';
 
 const StepCompanyForm = () => {
-  const router = useRouter()
-  const { token, resetUser, showAlert } = useAuth()
+  const router = useRouter();
+  const { token, resetUser, showAlert, user } = useAuth();
 
   const [formData, setFormData] = useState({
     aboutCompany: '',
@@ -26,21 +26,21 @@ const StepCompanyForm = () => {
     companyWebsite: '',
     companySize: '',
     location: '',
-  })
+  });
 
   // Update form data on field changes
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Exclude location field before sending data to API
-    const { location, ...dataToSend } = formData
+    const { location, ...dataToSend } = formData;
 
     if (
       formData.aboutCompany &&
@@ -51,35 +51,46 @@ const StepCompanyForm = () => {
     ) {
       try {
         // Send dataToSend (without location) to your API
-        const data = await CreateEmployerProfileRequest(dataToSend, token)
-        showAlert(true, 'Profile Updated!', 'success')
-        resetUser(data.data.employer)
-        setFormData({
-          aboutCompany: '',
-          companyAddress: '',
-          companyWebsite: '',
-          companySize: '',
-          location: '',
-        })
+        const data = await CreateEmployerProfileRequest(dataToSend, token);
+
+        showAlert(true, 'Profile Updated!', 'success');
+
+        if (data) {
+          resetUser(data.data.employer);
+
+          setFormData({
+            aboutCompany: '',
+            companyAddress: '',
+            companyWebsite: '',
+            companySize: '',
+            location: '',
+          });
+        }
 
         //Redirect on successful submission
-        router.push('/post-job/home')
+        router.push('/post-job/home');
       } catch (error: any) {
-        showAlert(true, error.message, 'failure')
+        showAlert(true, error.message, 'failure');
       }
     }
-  }
+  };
+
+  useEffect(() => {
+    if (user?.hasOwnProperty('companyName')) {
+      router.push('/post-job/home');
+    }
+  }, [user]);
 
   return (
     <StepFormContainer onSubmit={handleSubmit}>
       <StepInputWrapper>
         <label>About company</label>
         <textarea
-          name='aboutCompany'
-          id='aboutCompany'
+          name="aboutCompany"
+          id="aboutCompany"
           cols={20}
           rows={4}
-          placeholder='Enter Brief Summary'
+          placeholder="Enter Brief Summary"
           value={formData.aboutCompany}
           onChange={handleChange}
           required
@@ -90,10 +101,10 @@ const StepCompanyForm = () => {
         <StepInputWrapper>
           <label>Address</label>
           <input
-            type='text'
-            name='companyAddress'
-            id='companyAddress'
-            placeholder='Enter Address'
+            type="text"
+            name="companyAddress"
+            id="companyAddress"
+            placeholder="Enter Address"
             value={formData.companyAddress}
             onChange={handleChange}
             required
@@ -103,10 +114,10 @@ const StepCompanyForm = () => {
         <StepInputWrapper>
           <label>City/Country</label>
           <input
-            type='text'
-            name='location'
-            id='location'
-            placeholder='Enter Location'
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Enter Location"
             value={formData.location}
             onChange={handleChange}
           />
@@ -116,10 +127,10 @@ const StepCompanyForm = () => {
       <StepInputWrapper>
         <label>Company's website</label>
         <input
-          type='text'
-          name='companyWebsite'
-          id='companyWebsite'
-          placeholder='Enter company website'
+          type="text"
+          name="companyWebsite"
+          id="companyWebsite"
+          placeholder="Enter company website"
           value={formData.companyWebsite}
           onChange={handleChange}
           required
@@ -129,19 +140,19 @@ const StepCompanyForm = () => {
       <StepInputWrapper>
         <label>Company's size</label>
         <input
-          type='number'
-          name='companySize'
-          id='companySize'
-          placeholder='Enter number of employees'
+          type="number"
+          name="companySize"
+          id="companySize"
+          placeholder="Enter number of employees"
           value={formData.companySize}
           onChange={handleChange}
           required
         />
       </StepInputWrapper>
 
-      <CustomBtn type='submit'>Proceed</CustomBtn>
+      <CustomBtn type="submit">Proceed</CustomBtn>
     </StepFormContainer>
-  )
-}
+  );
+};
 
-export default StepCompanyForm
+export default StepCompanyForm;

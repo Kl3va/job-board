@@ -2,7 +2,6 @@ import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { SignInRequest } from 'api-requests/authentication';
 import { useAuth } from 'hooks/useAuthProvider';
-import { JobSeekerProfileTypes } from 'types/profileTypes';
 
 //Styled components
 import { CustomBtn } from 'styles/globalStyles';
@@ -39,7 +38,6 @@ const LoginForm = () => {
     user: userData,
     userType,
     fetchUserProfile,
-    token,
   } = useAuth();
 
   const [user, setUser] = useState({
@@ -91,15 +89,6 @@ const LoginForm = () => {
         if (data?.data) {
           setLoginData(data?.data);
         }
-
-        // console.log('login data', data);
-
-        // //Store all values
-        // resetToken(data?.data?.token);
-        // handleSetUserType(data?.data?.userType);
-
-        // localStorage.setItem('userToken', data?.data?.token);
-        // localStorage.setItem('userType', data?.data?.userType);
       } catch (error: any) {
         console.error('Signin error:', error);
         showAlert(true, error.message, 'failure');
@@ -117,10 +106,8 @@ const LoginForm = () => {
       localStorage.setItem('userType', loginData.userType);
 
       fetchUserProfile(loginData.token, loginData.userType);
-
-      console.log('Heyy');
     }
-  }, [loginData, userData]);
+  }, [loginData]);
 
   // Handle redirect if user has already filled the signup form
   useEffect(() => {
@@ -131,16 +118,13 @@ const LoginForm = () => {
         router.push('/apply-for-job/personal-profile'); // Redirect to jobSeekerProfileSetUp
       }
     } else if (userType === 'employer') {
-      router.push('/post-job/personal-profile'); // Redirect to employeeProfileSetUp
+      if (userData?.hasOwnProperty('companyName')) {
+        router.push('/post-job/home');
+      } else {
+        router.push('/post-job/personal-profile'); // Redirect to employeeProfileSetUp
+      }
     }
-  }, [userType, userData, token]);
-
-  useEffect(() => {
-    if (token && userType) fetchUserProfile(token, userType);
-  }, [token, userType, userData]);
-
-  console.log('user data', userData, userType, token);
-  console.log('login data', loginData);
+  }, [userType, userData, userData?.hasOwnProperty('cvUrl')]);
 
   return (
     <SignUpContainer>

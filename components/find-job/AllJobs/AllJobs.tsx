@@ -1,15 +1,14 @@
-import React from 'react'
-import Image from 'next/image'
-import { JobDataTypes, SingleJobTypes } from 'types/jobTypes'
+import React from 'react';
+import Image from 'next/image';
+import { JobDataTypes, SingleJobTypes } from 'types/jobTypes';
 
 //Reusable Styled-components
-import { CustomBtn } from 'styles/globalStyles'
-import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
-import { formatDate } from 'helper'
+import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn';
+import { formatDate } from 'helper';
 
 //Default images
-import JobLogo from 'public/images/job-logo.png'
-import dotIcon from 'public/images/dot.png'
+import JobLogo from 'public/images/job-logo.png';
+import dotIcon from 'public/images/dot.png';
 
 //Component-based styled-components
 import {
@@ -18,10 +17,10 @@ import {
   JobAboutSecondary,
   JobHeader,
   JobWrapper,
-} from './AllJobsStyles'
+} from './AllJobsStyles';
 
 interface AllJobHomeTypes {
-  jobData: SingleJobTypes[]
+  jobData: SingleJobTypes[];
 }
 
 const AllJobs = ({ jobData }: AllJobHomeTypes) => {
@@ -32,7 +31,7 @@ const AllJobs = ({ jobData }: AllJobHomeTypes) => {
           <JobWrapper key={id}>
             <JobHeader>
               <div>
-                <Image src={JobLogo} alt='job-image' />
+                <Image src={JobLogo} alt="job-image" />
               </div>
               <div>
                 <h3>{data.jobRole}</h3>
@@ -40,18 +39,18 @@ const AllJobs = ({ jobData }: AllJobHomeTypes) => {
               </div>
               <div>
                 <span>
-                  <i className='fa-regular fa-bookmark'></i>
+                  <i className="fa-regular fa-bookmark"></i>
                 </span>
               </div>
             </JobHeader>
             <p>{data.jobSummary}</p>
             <JobAboutContainer>
               <span>
-                <i className='fa-regular fa-clock'></i>
+                <i className="fa-regular fa-clock"></i>
                 {data.employmentType}
               </span>
               <span>
-                <i className='fa-regular fa-dollar-sign'></i>
+                <i className="fa-regular fa-dollar-sign"></i>
                 {data.pay}
               </span>
             </JobAboutContainer>
@@ -84,15 +83,15 @@ const AllJobs = ({ jobData }: AllJobHomeTypes) => {
             {/* <CustomBtn type='submit'>View post</CustomBtn> */}
             <CustomLinkBtn
               href={`/apply-for-job/home/${data._id}`}
-              text='View Post'
-              bgColor='var(--color-accent-100)'
-              textColor='var(--color-bg-100)'
+              text="View Post"
+              bgColor="var(--color-accent-100)"
+              textColor="var(--color-bg-100)"
             />
           </JobWrapper>
-        )
+        );
       })}
     </JobsContainer>
-  )
-}
+  );
+};
 
-export default AllJobs
+export default AllJobs;

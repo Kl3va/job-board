@@ -1,8 +1,9 @@
-import React from 'react'
-import { useAuth } from 'hooks/useAuthProvider'
-import { useRouter } from 'next/router'
-import { CustomBtn } from 'styles/globalStyles'
-import styled from 'styled-components'
+import React from 'react';
+import { useAuth } from 'hooks/useAuthProvider';
+import { useRouter } from 'next/router';
+import { CustomBtn } from 'styles/globalStyles';
+import styled from 'styled-components';
+import { SavedJobRequest } from 'api-requests/job';
 
 export const FindJobDetailApplyNow = styled.div`
   display: grid;
@@ -33,42 +34,54 @@ export const FindJobDetailApplyNow = styled.div`
       font-size: 0.8rem;
     }
   }
-`
+`;
 
 interface ApplyJobProps {
-  jobSummary: string
+  jobSummary: string;
 }
 
 const FindJobDetailApply = ({ jobSummary }: ApplyJobProps) => {
-  const { setActiveJobId, handleActivePopup, activeJobId } = useAuth()
-  const router = useRouter()
-  const { jobID } = router.query
+  const { setActiveJobId, handleActivePopup, activeJobId, token, showAlert } =
+    useAuth();
+  const router = useRouter();
+  const { jobID } = router.query;
 
   const handleJobApply = () => {
-    handleActivePopup('apply-popup')
+    handleActivePopup('apply-popup');
     if (typeof jobID === 'string') {
-      setActiveJobId(jobID)
+      setActiveJobId(jobID);
     } else {
       // Handle the case where jobID is undefined or not a string
-      console.error('Invalid jobID:', jobID)
+      console.error('Invalid jobID:', jobID);
     }
-  }
-  console.log(activeJobId)
+  };
+
+  const saveJob = async () => {
+    if (token !== null) {
+      try {
+        await SavedJobRequest(token, jobID as string);
+
+        showAlert(true, 'Job Saved Sucessful!', 'success');
+      } catch (error: any) {
+        showAlert(true, error.message, 'failure');
+      }
+    }
+  };
 
   return (
     <FindJobDetailApplyNow>
       <div>
-        <h3>{`About: Wiki`}</h3>
-        <a href='#'>
-          <i className='fa-regular fa-arrow-up-right-from-square'></i>
+        <h3>{`About`}</h3>
+        <a href="#">
+          <i className="fa-regular fa-arrow-up-right-from-square"></i>
           Website
         </a>
       </div>
       <p>{jobSummary}</p>
       <CustomBtn onClick={handleJobApply}>Apply Now</CustomBtn>
-      <CustomBtn>Save Job</CustomBtn>
+      <CustomBtn onClick={saveJob}>Save Job</CustomBtn>
     </FindJobDetailApplyNow>
-  )
-}
+  );
+};
 
-export default FindJobDetailApply
+export default FindJobDetailApply;

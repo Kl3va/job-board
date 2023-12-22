@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
-import Image from 'next/image'
-import { JobDataTypes } from 'types/jobTypes'
-import { SingleJobTypes } from 'types/jobTypes'
-import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn'
-import { useAuth } from 'hooks/useAuthProvider'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Image from 'next/image';
+import { SingleJobTypes } from 'types/jobTypes';
+import CustomLinkBtn from 'components/global/buttons/CustomLinkBtn';
+import { useAuth } from 'hooks/useAuthProvider';
 
 //api request
-import { DeleteJobRequest } from 'api-requests/job'
+import { DeleteJobRequest } from 'api-requests/job';
 
 //Reusable Styled-components
-import { CustomBtn } from 'styles/globalStyles'
+import { CustomBtn } from 'styles/globalStyles';
 
 //Helepr function
-import { formatDate } from 'helper'
+import { formatDate } from 'helper';
 
 //Default images
-import JobLogo from 'public/images/job-logo.png'
-import dotIcon from 'public/images/dot.png'
+import JobLogo from 'public/images/job-logo.png';
+import dotIcon from 'public/images/dot.png';
 
 //Component-based styled-components
 import {
@@ -26,10 +25,10 @@ import {
   JobAboutSecondary,
   JobHeader,
   JobWrapper,
-} from 'components/find-job/AllJobs/AllJobsStyles'
+} from 'components/find-job/AllJobs/AllJobsStyles';
 
 interface Props {
-  jobsData: SingleJobTypes[]
+  jobsData: SingleJobTypes[];
 }
 
 const EllipsisSpan = styled.div`
@@ -41,7 +40,7 @@ const EllipsisSpan = styled.div`
   border-radius: 0.5rem;
   border: 1px solid var(--color-accent-200);
   background: #ffffff;
-`
+`;
 const PopupDiv = styled.span`
   position: absolute;
   top: 3.2rem;
@@ -60,34 +59,35 @@ const PopupDiv = styled.span`
 
   font-size: 0.875rem;
   color: var(--color-font-200);
-`
+`;
 
 const JobPostAllJobs = ({ jobsData }: Props) => {
   // const [activePopup, setActivePopup] = useState<number | null>(null)
 
-  const { activePopup, handleActivePopup, token, userType, showAlert } = useAuth()
+  const { activePopup, handleActivePopup, token, userType, showAlert } =
+    useAuth();
   const [updatedJobsData, setUpdatedJobsData] =
-    useState<SingleJobTypes[]>(jobsData)
+    useState<SingleJobTypes[]>(jobsData);
 
   useEffect(() => {
     // Update the component state when jobsData prop changes
-    setUpdatedJobsData(jobsData)
-  }, [jobsData]) // Re-run this effect whenever jobsData changes
+    setUpdatedJobsData(jobsData);
+  }, [jobsData]); // Re-run this effect whenever jobsData changes
 
   const deleteJobID = async (id: string) => {
     if (userType === 'employer' && token !== null) {
       try {
-        await DeleteJobRequest(token, id)
-        showAlert(true, 'Job Deleted!', 'success')
-        const updatedList = updatedJobsData.filter((job) => job._id !== id)
-        setUpdatedJobsData(updatedList)
-        handleActivePopup(null)
+        await DeleteJobRequest(token, id);
+        showAlert(true, 'Job Deleted!', 'success');
+        const updatedList = updatedJobsData.filter((job) => job._id !== id);
+        setUpdatedJobsData(updatedList);
+        handleActivePopup(null);
       } catch (error: any) {
         //Display alert message
-        showAlert(true, error.message, 'failure')
+        showAlert(true, error.message, 'failure');
       }
     }
-  }
+  };
 
   return (
     <JobsContainer>
@@ -96,15 +96,15 @@ const JobPostAllJobs = ({ jobsData }: Props) => {
           <JobWrapper key={data._id}>
             <JobHeader>
               <div>
-                <Image src={JobLogo} alt='job-image' />
+                <Image src={JobLogo} alt="job-image" />
               </div>
               <div>
                 <h3>{data.jobRole}</h3>
-                <p>{`Revolut. United-Kingdom`}</p>
+                <p>{`United-Kingdom`}</p>
               </div>
               <div>
                 <EllipsisSpan onClick={() => handleActivePopup(data._id)}>
-                  <i className='fa-regular fa-ellipsis-vertical'></i>
+                  <i className="fa-regular fa-ellipsis-vertical"></i>
                 </EllipsisSpan>
                 {activePopup === data._id && (
                   <PopupDiv onClick={() => deleteJobID(data._id)}>
@@ -116,12 +116,12 @@ const JobPostAllJobs = ({ jobsData }: Props) => {
             <p>{data.jobSummary}</p>
             <JobAboutContainer>
               <span>
-                <i className='fa-regular fa-clock'></i>
+                <i className="fa-regular fa-clock"></i>
                 {data.employmentType}
               </span>
               <span>
-                <i className='fa-regular fa-dollar-sign'></i>
-                {data.pay}
+                <i className="fa-solid fa-sterling-sign"></i>
+                {data.pay.toLocaleString()}
               </span>
             </JobAboutContainer>
             <JobAboutSecondary>
@@ -153,15 +153,15 @@ const JobPostAllJobs = ({ jobsData }: Props) => {
             {/* <CustomBtn type='submit'>View post</CustomBtn> */}
             <CustomLinkBtn
               href={`/post-job/home/${data._id}`}
-              text='View Post'
-              bgColor='var(--color-accent-100)'
-              textColor='var(--color-bg-100)'
+              text="View Post"
+              bgColor="var(--color-accent-100)"
+              textColor="var(--color-bg-100)"
             />
           </JobWrapper>
-        )
+        );
       })}
     </JobsContainer>
-  )
-}
+  );
+};
 
-export default JobPostAllJobs
+export default JobPostAllJobs;

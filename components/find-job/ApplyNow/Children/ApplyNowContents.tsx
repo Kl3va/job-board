@@ -1,22 +1,38 @@
-import React from 'react'
-import { applyNowContentData } from 'data/find-job/applyNowContentData'
+import React from 'react';
+import { applyNowContentData } from 'data/find-job/applyNowContentData';
+import Link from 'next/link';
+import { ApplyToJobRequest } from 'api-requests/job';
+import { useAuth } from 'hooks/useAuthProvider';
 
 //Styled-components
 import {
   ApplyNowContainer,
   ApplyNowHeader,
   MultiBtnsWrapper,
-} from './ApplyNowContentStyles'
+} from './ApplyNowContentStyles';
 import {
   JobRoleListContainer,
   JobRoleUnorderedList,
-} from 'components/find-job/FindJobDetail/Children/FindJobDetailMainStyles'
+} from 'components/find-job/FindJobDetail/Children/FindJobDetailMainStyles';
+import { CustomBtn } from 'styles/globalStyles';
 
-import { CustomBtn } from 'styles/globalStyles'
-
-type Props = typeof applyNowContentData
+type Props = typeof applyNowContentData;
 
 const ApplyNowContents = ({ header, summary, others }: Props) => {
+  const { activeJobId, token, showAlert, user } = useAuth();
+
+  const applyToJob = async () => {
+    if (token !== null) {
+      try {
+        const data = await ApplyToJobRequest(token, activeJobId);
+
+        showAlert(true, 'Job Application Sucessful!', 'success');
+      } catch (error: any) {
+        showAlert(true, error.message, 'failure');
+      }
+    }
+  };
+
   return (
     <ApplyNowContainer>
       <ApplyNowHeader>
@@ -43,24 +59,29 @@ const ApplyNowContents = ({ header, summary, others }: Props) => {
             <h3>{other.title}</h3>
             <JobRoleUnorderedList>
               {other.info.map((list, index) => {
-                return <li key={index}>{list}</li>
+                return <li key={index}>{list}</li>;
               })}
             </JobRoleUnorderedList>
           </JobRoleListContainer>
-        )
+        );
       })}
       <MultiBtnsWrapper>
-        <CustomBtn
-          type='submit'
-          bgColor='var(--color-bg-100)'
-          textColor='var(--color-font-400)'
-        >
-          Cancel
+        <Link href={'/apply-for-job/home'} passHref>
+          <CustomBtn
+            type="submit"
+            bgColor="var(--color-bg-100)"
+            textColor="var(--color-font-400)"
+          >
+            Cancel
+          </CustomBtn>
+        </Link>
+
+        <CustomBtn type="button" onClick={applyToJob}>
+          Apply
         </CustomBtn>
-        <CustomBtn type='submit'>Apply</CustomBtn>
       </MultiBtnsWrapper>
     </ApplyNowContainer>
-  )
-}
+  );
+};
 
-export default ApplyNowContents
+export default ApplyNowContents;

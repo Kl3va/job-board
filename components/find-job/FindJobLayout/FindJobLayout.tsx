@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { useAuth } from 'hooks/useAuthProvider'
-import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
-import FindJobHeader from '../FindJobHeader/FindJobHeader'
-import { findJobNavData } from 'data/find-job/headerNavData'
+import React, { useEffect, useState } from 'react';
+import { useAuth } from 'hooks/useAuthProvider';
+import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
+import FindJobHeader from '../FindJobHeader/FindJobHeader';
+import { findJobNavData } from 'data/find-job/headerNavData';
 
 interface FindJobLayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const FindJobLayout = ({ children }: FindJobLayoutProps) => {
-  const { user, userType } = useAuth()
-  const router = useRouter()
-  const [loading, setLoading] = useState(true)
-
-  // useEffect(() => {
-  //   if (!user || userType !== 'jobseeker') {
-  //     router.push('/login')
-  //   }
-  // }, [user])
-
-  // if (!user || userType !== 'jobseeker') {
-  //   return null
-  // }
+  const { user, userType } = useAuth();
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user && userType === 'jobseeker') {
-      setLoading(false)
+      setLoading(false);
     } else {
-      router.push('/login')
+      router.push('/login');
     }
-  }, [])
+  }, []);
 
   if (loading) {
     // Render loading state or placeholder while authentication is resolving
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   return (
@@ -42,7 +32,7 @@ const FindJobLayout = ({ children }: FindJobLayoutProps) => {
       <FindJobHeader {...findJobNavData} />
       {children}
     </>
-  )
-}
+  );
+};
 
-export default FindJobLayout
+export default FindJobLayout;
