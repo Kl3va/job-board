@@ -33,7 +33,12 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <link rel='icon' type='image/ico' sizes='32x32' href='/job-hut.ico' />
+          <link
+            rel='icon'
+            type='image/ico'
+            sizes='32x32'
+            href='/work-nest.ico'
+          />
           <meta name='theme-color' content='#000000' />
           <meta name='twitter:card' content='summary' key='twcard' />
           <meta name='twitter:creator' content={''} key='twhandle' />

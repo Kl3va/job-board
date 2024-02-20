@@ -33,7 +33,7 @@ const RoutePopup = () => {
       <RoutePopupHeader>
         <div>
           <h2>Select account type</h2>
-          <p>What would you like to do on job-board?</p>
+          <p>What would you like to do on WorkNest?</p>
         </div>
 
         <i className='fa-solid fa-xmark'></i>

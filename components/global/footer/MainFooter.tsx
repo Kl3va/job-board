@@ -22,7 +22,7 @@ const MainFooter = (props: Props) => {
             </span>
           </Link>
         </HeaderLogoContainer>
-        <span>© 2023 JobHub All rights reserved.</span>
+        <span>© 2023 WorkNest All rights reserved.</span>
       </HomeFooter>
     </footer>
   )

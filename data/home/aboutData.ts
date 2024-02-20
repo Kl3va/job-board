@@ -3,7 +3,7 @@ import iconSeamless from 'public/images/iconseam.png'
 import iconOut from 'public/images/iconout.png'
 
 export const aboutData = {
-  aboutText: 'Why Choose JobHub?',
+  aboutText: 'Why Choose WorkNest?',
   aboutHeading:
     ' Experience the best job-seeking and recruitment journey possible.',
   services: [

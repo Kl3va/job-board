@@ -10,6 +10,7 @@ import ServiceFaq from 'components/global/ServiceFaq/ServiceFaq'
 import CTASection from 'components/home/CallToAction/CtaSection'
 import MainFooter from 'components/global/footer/MainFooter'
 import RoutePopup from 'components/global/pop-ups/route-popup/RoutePopup'
+import CompaniesLogo from 'components/home/CompaniesSection/CompaniesLogo'
 
 //DATA
 import { menuData } from 'data/home/menuData'
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
       <Header data={menuData} />
       <Main>
         <HeroSection {...heroData} />
+        <CompaniesLogo />
         <AboutSection {...aboutData} />
         <ServiceFaq />
         <CTASection />

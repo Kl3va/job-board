@@ -11,26 +11,24 @@ const scrollAnimation = keyframes`
         transform: translateX(-20%);
     }
     
-    
-    
 `
 
 export const HeroMainSection = styled.section`
   margin-block: 4rem;
 
   @media ${QUERIES.tablet} {
-    margin-block: 6rem;
+    margin-block: 4.5rem;
   }
 `
 
 export const HeroContainer = styled.div`
   width: min(90%, var(--max-container));
   margin-inline: auto;
-  text-align: center;
   padding-bottom: 6rem;
   border-bottom: 1px solid var(--color-border-100);
 
   display: grid;
+
   justify-items: center;
 
   a {
@@ -38,25 +36,33 @@ export const HeroContainer = styled.div`
   }
 
   h1 {
-    margin-block: 1.5rem;
     max-width: 35ch;
     letter-spacing: -0.06rem;
+  }
+
+  @media ${QUERIES.tablet} {
+    grid-template-columns: 1fr 0.7fr;
+  }
+`
+
+export const HeroContainerText = styled.div`
+  padding-block: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+
+  @media ${QUERIES.tablet} {
+    text-align: left;
+    align-items: flex-start;
+    justify-content: center;
   }
 `
 
 export const HeroText = styled.p`
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   max-width: 60ch;
-`
-
-export const HeroBtnWrapper = styled.div`
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-
-  @media ${QUERIES.tablet} {
-    margin-bottom: 6rem;
-  }
 `
 
 export const HeroCompanyText = styled.p`
