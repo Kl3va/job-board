@@ -1,56 +1,58 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
-import { EmployerSignUpRequest } from 'api-requests/authentication';
-import { useRouter } from 'next/router';
-import { useAuth } from 'hooks/useAuthProvider';
+import React, { useState, FormEvent, ChangeEvent } from 'react'
+import { EmployerSignUpRequest } from 'api-requests/authentication'
+import { useRouter } from 'next/router'
+import { useAuth } from 'hooks/useAuthProvider'
 
 //Styled components
-import { CustomBtn } from 'styles/globalStyles';
+import { CustomBtn } from 'styles/globalStyles'
 import {
   SignUpContainer,
   HeaderWrapper,
   InputWrapper,
   InputType,
-} from '../sign-up/SignUpFormStyles';
+} from '../sign-up/SignUpFormStyles'
 
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
 //LOGO IMAGE
-import logo from 'public/images/Contentlogo-home.png';
+//import logo from 'public/images/Contentlogo-home.png';
+
+import logo from 'public/images/work-nest.png'
 
 export interface CompanySignUpTypes {
-  companyName: string;
-  companyRepresentative: string;
-  companyEmail: string;
-  password: string;
+  companyName: string
+  companyRepresentative: string
+  companyEmail: string
+  password: string
 }
 
 const EmployerSignUpForm = () => {
-  const router = useRouter();
-  const { showAlert } = useAuth();
+  const router = useRouter()
+  const { showAlert } = useAuth()
 
   const [user, setUser] = useState<CompanySignUpTypes>({
     companyName: '',
     companyRepresentative: '',
     companyEmail: '',
     password: '',
-  });
+  })
 
   const [touched, setTouched] = useState({
     companyName: false,
     companyRepresentative: false,
     companyEmail: false,
     password: false,
-  });
+  })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUser({ ...user, [name]: value });
-  };
+    const name = e.target.name
+    const value = e.target.value
+    setUser({ ...user, [name]: value })
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (
       user.companyName &&
       user.companyEmail &&
@@ -63,16 +65,16 @@ const EmployerSignUpForm = () => {
           companyEmail: user.companyEmail,
           password: user.password,
           companyRepresentative: user.companyRepresentative,
-        };
+        }
 
         // Call the handleSignUp function from your API passing user data
-        const signUpResponse = await EmployerSignUpRequest(userData);
+        const signUpResponse = await EmployerSignUpRequest(userData)
 
         //Handle successful signup response here
-        showAlert(true, 'SignUp successful!', 'success');
+        showAlert(true, 'SignUp successful!', 'success')
 
         //Move to login page
-        router.push('/login');
+        router.push('/login')
 
         // Reset form fields and touched state
         setUser({
@@ -80,26 +82,26 @@ const EmployerSignUpForm = () => {
           companyRepresentative: '',
           companyEmail: '',
           password: '',
-        });
+        })
 
         setTouched({
           companyName: false,
           companyRepresentative: false,
           companyEmail: false,
           password: false,
-        });
+        })
       } catch (error: any) {
-        showAlert(true, error.message, 'failure');
+        showAlert(true, error.message, 'failure')
         // Handle signup errors, show error messages, etc.
       }
     }
-  };
+  }
 
   return (
     <SignUpContainer>
       <HeaderWrapper>
         <Link href={'/'}>
-          <Image src={logo} alt="logo" width={50} height={50} />
+          <Image src={logo} alt='logo' width={50} height={50} />
         </Link>
 
         <h1>Create an account</h1>
@@ -108,10 +110,10 @@ const EmployerSignUpForm = () => {
         <InputWrapper>
           <label>Company's name</label>
           <InputType
-            type="text"
-            name="companyName"
-            id="companyName"
-            placeholder="Enter your Full name"
+            type='text'
+            name='companyName'
+            id='companyName'
+            placeholder='Enter your Full name'
             isTouched={touched.companyName}
             isUser={!user.companyName}
             onChange={handleChange}
@@ -127,10 +129,10 @@ const EmployerSignUpForm = () => {
         <InputWrapper>
           <label>Company's email</label>
           <InputType
-            type="email"
-            name="companyEmail"
-            id="companyEmail"
-            placeholder="Enter your email"
+            type='email'
+            name='companyEmail'
+            id='companyEmail'
+            placeholder='Enter your email'
             isTouched={touched.companyEmail}
             isUser={!user.companyEmail}
             onChange={handleChange}
@@ -146,10 +148,10 @@ const EmployerSignUpForm = () => {
         <InputWrapper>
           <label>Company's Representative</label>
           <InputType
-            type="text"
-            name="companyRepresentative"
-            id="companyRepresentative"
-            placeholder="Enter your Rep name"
+            type='text'
+            name='companyRepresentative'
+            id='companyRepresentative'
+            placeholder='Enter your Rep name'
             isTouched={touched.companyRepresentative}
             isUser={!user.companyRepresentative}
             onChange={handleChange}
@@ -167,10 +169,10 @@ const EmployerSignUpForm = () => {
         <InputWrapper>
           <label>Password</label>
           <InputType
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter a password"
+            type='password'
+            name='password'
+            id='password'
+            placeholder='Enter a password'
             isTouched={touched.password}
             isUser={!user.password}
             onChange={handleChange}
@@ -183,13 +185,13 @@ const EmployerSignUpForm = () => {
           ) : null}
         </InputWrapper>
 
-        <CustomBtn type="submit">Create account</CustomBtn>
+        <CustomBtn type='submit'>Create account</CustomBtn>
       </form>
       <span>
         Already have an account? <Link href={'/login'}>Login</Link>
       </span>
     </SignUpContainer>
-  );
-};
+  )
+}
 
-export default EmployerSignUpForm;
+export default EmployerSignUpForm

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { menuData } from 'data/home/menuData'
 
-import { HomeFooter } from './MainFooterStyles'
+import { HomeFooter, ContactContainer } from './MainFooterStyles'
 import { HeaderLogoContainer } from '../header/HeaderStyles'
 
 type Props = {}
@@ -22,7 +22,10 @@ const MainFooter = (props: Props) => {
             </span>
           </Link>
         </HeaderLogoContainer>
-        <span>© 2023 WorkNest All rights reserved.</span>
+        <ContactContainer>
+          <span>© 2023 WorkNest All rights reserved.</span>
+          <span>support@worknest.vercel.app</span>
+        </ContactContainer>
       </HomeFooter>
     </footer>
   )

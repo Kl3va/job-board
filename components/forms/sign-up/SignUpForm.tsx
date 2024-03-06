@@ -1,83 +1,83 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
-import { JobSeekerSignUpRequest } from 'api-requests/authentication';
-import { useRouter } from 'next/router';
-import { useAuth } from 'hooks/useAuthProvider';
+import React, { useState, FormEvent, ChangeEvent } from 'react'
+import { JobSeekerSignUpRequest } from 'api-requests/authentication'
+import { useRouter } from 'next/router'
+import { useAuth } from 'hooks/useAuthProvider'
 
 //Styled components
-import { CustomBtn } from 'styles/globalStyles';
+import { CustomBtn } from 'styles/globalStyles'
 import {
   SignUpContainer,
   HeaderWrapper,
   InputWrapper,
   InputType,
-} from './SignUpFormStyles';
+} from './SignUpFormStyles'
 
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
 //LOGO IMAGE
-import logo from 'public/images/Contentlogo-home.png';
+import logo from 'public/images/work-nest.png'
 
 export interface JobSeekerSignUpTypes {
-  fullName: string;
-  email: string;
-  password: string;
+  fullName: string
+  email: string
+  password: string
 }
 
 const SignUpForm = () => {
-  const router = useRouter();
-  const { showAlert } = useAuth();
+  const router = useRouter()
+  const { showAlert } = useAuth()
 
   const [user, setUser] = useState<JobSeekerSignUpTypes>({
     fullName: '',
     email: '',
     password: '',
-  });
+  })
 
   const [touched, setTouched] = useState({
     fullName: false,
     email: false,
     password: false,
-  });
+  })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUser({ ...user, [name]: value });
-  };
+    const name = e.target.name
+    const value = e.target.value
+    setUser({ ...user, [name]: value })
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (user.fullName && user.email && user.password) {
       try {
         // Call the handleSignUp function from your API passing user data
-        const signUpResponse = await JobSeekerSignUpRequest(user);
+        const signUpResponse = await JobSeekerSignUpRequest(user)
 
         //Handle successful signup response here
-        showAlert(true, 'SignUp successful!', 'success');
-        router.push('/login');
+        showAlert(true, 'SignUp successful!', 'success')
+        router.push('/login')
 
         setUser({
           fullName: '',
           email: '',
           password: '',
-        });
+        })
         setTouched({
           fullName: false,
           email: false,
           password: false,
-        });
+        })
       } catch (error: any) {
-        showAlert(true, error.message, 'failure');
+        showAlert(true, error.message, 'failure')
       }
     }
-  };
+  }
 
   return (
     <SignUpContainer>
       <HeaderWrapper>
         <Link href={'/'}>
-          <Image src={logo} alt="logo" width={50} height={50} />
+          <Image src={logo} alt='logo' width={50} height={50} />
         </Link>
 
         <h1>Create an account</h1>
@@ -86,10 +86,10 @@ const SignUpForm = () => {
         <InputWrapper>
           <label>Full name</label>
           <InputType
-            type="text"
-            name="fullName"
-            id="fullName"
-            placeholder="Enter your Full name"
+            type='text'
+            name='fullName'
+            id='fullName'
+            placeholder='Enter your Full name'
             isTouched={touched.fullName}
             isUser={!user.fullName}
             onChange={handleChange}
@@ -105,10 +105,10 @@ const SignUpForm = () => {
         <InputWrapper>
           <label>Email</label>
           <InputType
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
+            type='email'
+            name='email'
+            id='email'
+            placeholder='Enter your email'
             isTouched={touched.email}
             isUser={!user.email}
             onChange={handleChange}
@@ -124,10 +124,10 @@ const SignUpForm = () => {
         <InputWrapper>
           <label>Password</label>
           <InputType
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter a password"
+            type='password'
+            name='password'
+            id='password'
+            placeholder='Enter a password'
             isTouched={touched.password}
             isUser={!user.password}
             onChange={handleChange}
@@ -140,13 +140,13 @@ const SignUpForm = () => {
           ) : null}
         </InputWrapper>
 
-        <CustomBtn type="submit">Create account</CustomBtn>
+        <CustomBtn type='submit'>Create account</CustomBtn>
       </form>
       <span>
         Already have an account? <Link href={'/login'}>Login</Link>
       </span>
     </SignUpContainer>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm

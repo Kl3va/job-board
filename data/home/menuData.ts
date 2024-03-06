@@ -13,11 +13,5 @@ export const menuData = {
       link: '/',
       subMenu: [],
     },
-    {
-      id: 2,
-      title: 'Contact Us',
-      link: '/contact',
-      subMenu: [],
-    },
   ],
 }

@@ -17,3 +17,9 @@ export const HomeFooter = styled.div`
     gap: none;
   }
 `
+
+export const ContactContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+`
