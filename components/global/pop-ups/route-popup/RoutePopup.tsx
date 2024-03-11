@@ -1,5 +1,6 @@
 import React from 'react'
-import navImg from 'public/images/Contentlogo-home.png'
+//import navImg from 'public/images/Contentlogo-home.png'
+import navImg from 'public/images/work-nest.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from 'hooks/useAuthProvider'
