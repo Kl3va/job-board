@@ -64,6 +64,7 @@ export const SignInRequest = async (userData: {
     )
     return response.data // Return the data received from the server
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to Log in') // Handle errors
+    //console.log(error)
+    // throw new Error(error.response?.data?.message || 'Failed to Log in') // Handle errors
   }
 }

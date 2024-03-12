@@ -1,9 +1,9 @@
-import jobHubAvatar from 'public/images/jobhub-avatar.png'
+import workNestAvatar from 'public/images/jobhub-avatar.png'
 import dotIcon from 'public/images/dot.png'
 
 export const applyNowContentData = {
   profile: {
-    image: jobHubAvatar,
+    image: workNestAvatar,
     role: 'UI/UX Designer',
     icon: dotIcon
   },
