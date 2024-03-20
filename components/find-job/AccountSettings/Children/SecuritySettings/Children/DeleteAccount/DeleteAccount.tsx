@@ -15,7 +15,7 @@ import {
 type Props = {}
 
 const DeleteAccount = (props: Props) => {
-  const [toggleForm, setToggleForm] = useState(false)
+  const [toggleForm, setToggleForm] = useState(true)
 
   const handleFormToggle = () => {
     setToggleForm(!toggleForm)
@@ -51,7 +51,9 @@ const DeleteAccount = (props: Props) => {
           }}
         >
           <DeleteAccountBtnWrapper>
-            <button type='submit'>Delete account</button>
+            <button type='submit' disabled={true}>
+              Delete account
+            </button>
           </DeleteAccountBtnWrapper>
         </PersonalInfoSettingsForm>
       </AnimatePresence>

@@ -16,7 +16,7 @@ StepInputWrapper
 type Props = {}
 
 const ChangePassword = (props: Props) => {
-  const [toggleForm, setToggleForm] = useState(false)
+  const [toggleForm, setToggleForm] = useState(true)
 
   const handleFormToggle = () => {
     setToggleForm(!toggleForm)
@@ -79,10 +79,13 @@ const ChangePassword = (props: Props) => {
               type='submit'
               bgColor='var(--color-bg-100)'
               textColor='var(--color-font-400)'
+              disabled={true}
             >
               Cancel
             </CustomBtn>
-            <CustomBtn type='submit'>Save</CustomBtn>
+            <CustomBtn type='submit' disabled={true}>
+              Save
+            </CustomBtn>
           </PersonalInfoSettingsBtnWrapper>
         </PersonalInfoSettingsForm>
       </AnimatePresence>
