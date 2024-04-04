@@ -11,6 +11,8 @@ type Props = {}
 const MainFooter = (props: Props) => {
   const { logo } = menuData
 
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer>
       <HomeFooter>
@@ -23,7 +25,7 @@ const MainFooter = (props: Props) => {
           </Link>
         </HeaderLogoContainer>
         <ContactContainer>
-          <span>© 2023 WorkNest All rights reserved.</span>
+          <span>{`©${currentYear} WorkNest All rights reserved.`}</span>
           <span>support@work-nest.vercel.app</span>
         </ContactContainer>
       </HomeFooter>
