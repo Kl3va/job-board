@@ -24,7 +24,7 @@ const MainFooter = (props: Props) => {
         </HeaderLogoContainer>
         <ContactContainer>
           <span>© 2023 WorkNest All rights reserved.</span>
-          <span>support@worknest.vercel.app</span>
+          <span>support@work-nest.vercel.app</span>
         </ContactContainer>
       </HomeFooter>
     </footer>
